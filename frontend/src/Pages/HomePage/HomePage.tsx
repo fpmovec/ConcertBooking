@@ -1,10 +1,12 @@
-import { ClassicsList, OpenAirsList, PartysList } from "../../Components/Concert/ConcertList";
-import { Page } from "../../Page/Page";
-import { PageTitle } from "../../Page/PageTitle";
+import {
+  ClassicsList,
+  OpenAirsList,
+  PartysList,
+} from "../../Components/Concert/ConcertList";
 import { classics, openAirs, partys } from "../../Models/MockData";
 import { TypeCheckbox } from "../../Components/SortPanel/SortPanel";
 import { useState } from "react";
-import styles from './HomePage.module.css'
+import styles from "./HomePage.module.css";
 
 export interface IConcertType {
   classics: boolean;
@@ -13,42 +15,45 @@ export interface IConcertType {
 }
 
 export const HomePage = () => {
-  const [party, setParty] = useState<boolean>(false);
-  const [classic, setClassic] = useState<boolean>(false);
-  const [openAir, setOpenAir] = useState<boolean>(false);
 
-  const handleClassicChange = () => {
-    setClassic(!classic);
-  };
-
-  const handlePartyChange = () => setParty(!party);
-  const handleOpenAirChange = () => setOpenAir(!openAir);
+  const [concertType, setConcertType] = useState<IConcertType>({
+    classics: true,
+    partys: true,
+    openAirs: true,
+  });
 
   return (
     <>
       <div className={styles.checkboxes}>
         <TypeCheckbox
-          value={classic}
+          value={concertType.classics}
           label="Classics"
-          handleChange={handleClassicChange}
-          
+          handleChange={(e) =>
+            setConcertType((prev) => ({ ...prev, classics: !prev.classics }))
+          }
         />
-         <TypeCheckbox
-          value={party}
+        <TypeCheckbox
+          value={concertType.partys}
           label="Partys"
-          handleChange={handlePartyChange}
+          handleChange={(e) =>
+            setConcertType((prev) => ({ ...prev, partys: !prev.partys }))
+          }
         />
-         <TypeCheckbox
-          value={openAir}
+        <TypeCheckbox
+          value={concertType.openAirs}
           label="OpenAirs"
-          handleChange={handleOpenAirChange}
+          handleChange={(e) =>
+            setConcertType((prev) => ({ ...prev, openAirs: !prev.openAirs }))
+          }
         />
       </div>
       <div>
-        { party && <PartysList data={partys} />}
-        { classic && <ClassicsList data={classics} />}
-        { openAir && <OpenAirsList data={openAirs}/>}
-        
+        {!(concertType.classics || concertType.openAirs || concertType.partys) && (
+          <div className={styles.notFound}>Nothing found 😔</div>
+        )}
+        {concertType.partys && <PartysList data={partys} />}
+        {concertType.classics && <ClassicsList data={classics} />}
+        {concertType.openAirs && <OpenAirsList data={openAirs} />}
       </div>
     </>
   );

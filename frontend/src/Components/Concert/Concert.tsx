@@ -18,7 +18,7 @@ interface PropsP {
 export const ClassicConcert = ({ data }: PropsC) => (
   <div className={styles.concert}>
   <div>
-    <Link to={`/concerts/classics/${data.concertId}`} className={styles.title}>
+    <Link to={`/concerts/${data.concertId}`} className={styles.title}>
       {data.performer}
     </Link>
     <div className={styles.description}>
@@ -41,7 +41,7 @@ export const OpenAirConcert = ({ data }: PropsO) => (
   <div className={styles.concert}>
     <div>
       <Link
-        to={`/concerts/openAirs/${data.concertId}`}
+        to={`/concerts/${data.concertId}`}
         className={styles.title}
       >
         {data.performer}
@@ -65,7 +65,7 @@ export const OpenAirConcert = ({ data }: PropsO) => (
 export const PartyConcert = ({ data }: PropsP) => (
   <div className={styles.concert}>
     <div>
-      <Link to={`/concerts/partys/${data.concertId}`} className={styles.title}>
+      <Link to={`/concerts/${data.concertId}`} className={styles.title}>
         {data.performer}
       </Link>
       <div className={styles.description}>
@@ -84,29 +84,3 @@ export const PartyConcert = ({ data }: PropsP) => (
   </div>
 );
 
-/*interface Props<TConcert> {
-  data: TConcert;
-}
-
-function Concert({ data }: Props<Classic | Party | OpenAir>) {
-  return (
-    <>
-      <Link to={`/concerts/${data.concertId}`}>{data.performer}</Link>
-    </>
-  );
-}
-
-const Pr: Props<Classic | Party | OpenAir> = {
-  data: {
-    concertId: 6,
-    performer: "performer2",
-    ticketsCount: 20,
-    concertDate: new Date("2023-10-10T17:00"),
-    location: "Minsk",
-    concertType: "classic",
-    voiceType: "type2",
-    concertName: "name2",
-    composer: "composer2",
-  },
-};
-*/

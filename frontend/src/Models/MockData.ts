@@ -66,5 +66,17 @@ export const classics: Classic[] = [
     voiceType: "type2",
     concertName: "name2",
     composer: "composer2",
-  }
+  },
 ];
+
+export const getConcert = (
+  concertId: number
+): Party | Classic | OpenAir => {
+  const party = partys.filter((c) => c.concertId === concertId);
+  const openAir = openAirs.filter((c) => c.concertId === concertId);
+  const classic = classics.filter((c) => c.concertId === concertId);
+  if (party !== null) return party[0];
+  else if (openAir !== null) return openAir[0];
+  else return classic[0];
+
+};

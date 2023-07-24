@@ -18,7 +18,7 @@ export const PartysList = ({ data }: PropsP) => {
   return (
     <ul className={styles.ul}>
       {data.map((concert) => (
-        <li className={styles.li}>
+        <li className={styles.li} key={concert.concertId}>
           <PartyConcert data={concert} />
         </li>
       ))}
@@ -30,7 +30,7 @@ export const OpenAirsList = ({ data }: PropsO) => {
   return (
     <ul className={styles.ul}>
       {data.map((concert) => (
-        <li className={styles.li}>
+        <li className={styles.li} key={concert.concertId}>
           <OpenAirConcert data={concert} />
         </li>
       ))}
@@ -42,7 +42,7 @@ export const ClassicsList = ({ data }: PropsC) => {
   return (
     <ul className={styles.ul}>
       {data.map((concert) => (
-        <li className={styles.li}>
+        <li className={styles.li} key={concert.concertId}>
           <ClassicConcert data={concert} />
         </li>
       ))}

@@ -1,10 +1,8 @@
-import { Dispatch } from 'react'
-import { SetStateAction, useState } from "react";
-import { IConcertType } from "../../Pages/HomePage/HomePage";
+
 
 interface Props {
   value: boolean;
-  handleChange: () => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label: string;
 }
 

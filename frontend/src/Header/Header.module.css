@@ -40,7 +40,7 @@
 }
 
 .title {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     text-decoration: none;
     font-family: 'Kanit', sans-serif;
@@ -51,5 +51,6 @@
     font-weight: bold;
     text-decoration: none;
     font-family: 'Kanit', sans-serif;
+    font-size: 20px;
     color: #257985;
 }
