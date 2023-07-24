@@ -1,4 +1,5 @@
 export interface Classic {
+    concertId: number;
     performer: string;
     ticketsCount: number;
     concertDate: Date;
@@ -10,6 +11,7 @@ export interface Classic {
 }
 
 export interface OpenAir {
+    concertId: number;
     performer: string;
     ticketsCount: number;
     concertDate: Date;
@@ -20,10 +22,17 @@ export interface OpenAir {
 }
 
 export interface Party {
+    concertId: number;
     performer: string;
     ticketsCount: number;
     concertDate: Date;
     location: string;
     concertType: string;
     ageLimit: number;
+}
+
+export interface Concerts {
+    partys: Party[];
+    openAirs: OpenAir[];
+    classics: Classic[];
 }
