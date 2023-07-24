@@ -4,6 +4,7 @@ import { PageTitle } from "../../Page/PageTitle";
 import { classics, openAirs, partys } from "../../Models/MockData";
 import { TypeCheckbox } from "../../Components/SortPanel/SortPanel";
 import { useState } from "react";
+import styles from './HomePage.module.css'
 
 export interface IConcertType {
   classics: boolean;
@@ -25,11 +26,12 @@ export const HomePage = () => {
 
   return (
     <>
-      <div>
+      <div className={styles.checkboxes}>
         <TypeCheckbox
           value={classic}
           label="Classics"
           handleChange={handleClassicChange}
+          
         />
          <TypeCheckbox
           value={party}

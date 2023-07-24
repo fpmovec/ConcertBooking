@@ -1,0 +1,10 @@
+.checkboxes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+  font-size: 20px;
+  padding-bottom: 7px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.16);
+  border-top: 3px solid #5ea8a7;
+}

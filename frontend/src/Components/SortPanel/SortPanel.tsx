@@ -12,7 +12,7 @@ export const TypeCheckbox = ({ value, label, handleChange }: Props) => {
   return (
     <>
       <label>
-        <input type="checkbox" checked={value} onChange={handleChange} />
+        <input style={{ marginRight: 5}}type="checkbox" checked={value} onChange={handleChange} />
         {label}
       </label>
     </>
