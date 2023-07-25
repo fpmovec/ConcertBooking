@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { gettingConcert, gotConcert } from "../../Redux/Slices";
+import { ConcertInfo } from "./ConcertInfo";
 import { getConcert } from "../../Models/MockData";
+import styles from './ConcertPage.module.css'
 import React from "react";
 
 export const ConcertPage = () => {
@@ -9,22 +11,19 @@ export const ConcertPage = () => {
   const concert = useAppSelector((state) => state.concerts.viewing);
   const loading = useAppSelector((state) => state.concerts.loading);
 
-
   const { concertId } = useParams();
 
   React.useEffect(() => {
     dispath(gettingConcert());
     const foundConcert = getConcert(Number(concertId));
     dispath(gotConcert(foundConcert));
-  }, [concertId]);
-
-  
+  }, [concertId, dispath]);
 
   return loading ? (
     <h2>Loading...</h2>
   ) : (
-    <h2>
-      Concert with id {concertId} and {concert?.concertType} type
-    </h2>
+    <div className={styles.concertInfo}>
+      <ConcertInfo data={concert}/>
+    </div>
   );
 };

@@ -55,33 +55,33 @@ export const concerts: Concert[] = [
 export const ConcertCoordinates: Coordinates[] = [
   {
     concertId: 1,
-    longitude: "1",
-    latitude: "2",
+    longitude: 53.889077,
+    latitude: 27.571535,
   },
   {
     concertId: 2,
-    longitude: "1",
-    latitude: "2",
+    longitude: 53.889077,
+    latitude: 27.571535,
   },
   {
     concertId: 3,
-    longitude: "1",
-    latitude: "2",
+    longitude: 53.889077,
+    latitude: 27.571535,
   },
   {
     concertId: 4,
-    longitude: "1",
-    latitude: "2",
+    longitude: 53.889077,
+    latitude: 27.571535,
   },
   {
     concertId: 5,
-    longitude: "1",
-    latitude: "2",
+    longitude: 53.889077,
+    latitude: 27.571535,
   },
   {
     concertId: 6,
-    longitude: "1",
-    latitude: "2",
+    longitude: 53.889077,
+    latitude: 27.571535,
   },
 ];
 

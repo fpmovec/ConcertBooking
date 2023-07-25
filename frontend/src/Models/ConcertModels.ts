@@ -9,8 +9,8 @@ export interface Concert {
 
 export interface Coordinates {
   concertId: number;
-  longitude: string;
-  latitude: string;
+  longitude: number;
+  latitude: number;
 }
 export interface Classic {
     concertId: number;

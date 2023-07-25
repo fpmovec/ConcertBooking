@@ -1,0 +1,45 @@
+.concertInfo {
+  box-sizing: border-box;
+  border: 1px solid #5ea8a741;
+  border-top: 3px solid #5ea8a7;
+  box-shadow: 5px 4px 5px #5ea8a790;
+  width: 75%;
+  margin-left: 15%;
+  padding: 10px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 40px;
+  border-bottom: 1px solid #5ea8a7;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title button {
+  margin-right: 20px;
+}
+.description {
+  font-weight: 200;
+  font-size: 23px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+}
+
+.block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin: 15px 0px;
+}
+
+.map {
+  border: 2px solid #5ea8a790;
+  width: 500px;
+}

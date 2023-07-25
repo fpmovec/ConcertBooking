@@ -1,0 +1,17 @@
+.notFound {
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+}
+
+.errorNumber {
+    font-weight: 400;
+    font-size: 60px
+}
+
+.description {
+    font-size: 45px;
+    font-weight: 200;
+    margin-bottom: 20px;
+}
