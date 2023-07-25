@@ -7,14 +7,24 @@ import React from "react";
 export const ConcertPage = () => {
   const dispath = useAppDispatch();
   const concert = useAppSelector((state) => state.concerts.viewing);
-const loading = useAppSelector((state) => state.concerts.loading);
+  const loading = useAppSelector((state) => state.concerts.loading);
 
-  const {concertId} = useParams();
+
+  const { concertId } = useParams();
 
   React.useEffect(() => {
     dispath(gettingConcert());
-    const concert = getConcert(Number(concertId));
-   dispath(gotConcert(concert));
+    const foundConcert = getConcert(Number(concertId));
+    dispath(gotConcert(foundConcert));
   }, [concertId]);
-  return (loading ? <h2>Loading...</h2> : <h2>Concert with id {concertId} and {concert?.concertType} type</h2>);
+
+  
+
+  return loading ? (
+    <h2>Loading...</h2>
+  ) : (
+    <h2>
+      Concert with id {concertId} and {concert?.concertType} type
+    </h2>
+  );
 };

@@ -1,9 +1,5 @@
-import {
-  ClassicsList,
-  OpenAirsList,
-  PartysList,
-} from "../../Components/Concert/ConcertList";
-import { classics, openAirs, partys } from "../../Models/MockData";
+import { ConcertList } from "../../Components/Concert/ConcertList";
+import { concerts } from "../../Models/MockData";
 import { TypeCheckbox } from "../../Components/SortPanel/SortPanel";
 import { useState } from "react";
 import styles from "./HomePage.module.css";
@@ -15,12 +11,13 @@ export interface IConcertType {
 }
 
 export const HomePage = () => {
-
   const [concertType, setConcertType] = useState<IConcertType>({
     classics: true,
     partys: true,
     openAirs: true,
   });
+
+  const typeFilter = (arg: string) => concerts.filter(c => c.concertType === arg);
 
   return (
     <>
@@ -48,12 +45,14 @@ export const HomePage = () => {
         />
       </div>
       <div>
-        {!(concertType.classics || concertType.openAirs || concertType.partys) && (
-          <div className={styles.notFound}>Nothing found 😔</div>
-        )}
-        {concertType.partys && <PartysList data={partys} />}
-        {concertType.classics && <ClassicsList data={classics} />}
-        {concertType.openAirs && <OpenAirsList data={openAirs} />}
+        {!(
+          concertType.classics ||
+          concertType.openAirs ||
+          concertType.partys
+        ) && <div className={styles.notFound}>Nothing found 😔</div>}
+        {concertType.classics && <ConcertList data={typeFilter("Classic")}/>}
+        {concertType.partys && <ConcertList data={typeFilter("Party")}/>}
+        {concertType.openAirs && <ConcertList data={typeFilter("OpenAir")}/>}
       </div>
     </>
   );

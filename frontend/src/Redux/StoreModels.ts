@@ -1,8 +1,8 @@
-import { Party, Classic, OpenAir } from "../Models/ConcertModels";
+import { Concert } from "../Models/ConcertModels";
 
 interface ConcertsState {
   readonly loading: boolean;
-  readonly viewing: Party | Classic | OpenAir | null;
+  readonly viewing: Concert | null;
 }
 
 export interface AppState {

@@ -1,22 +1,97 @@
 import { Classic, OpenAir, Party } from "./ConcertModels";
+import type { Concert, Coordinates } from "./ConcertModels";
+
+export const concerts: Concert[] = [
+  {
+    Id: 1,
+    performer: "Dj Rav",
+    ticketsCount: 20,
+    concertDate: "26.07.2023 17:00",
+    location: "Minsk",
+    concertType: "Party",
+  },
+  {
+    Id: 2,
+    performer: "Dj Rav",
+    ticketsCount: 20,
+    concertDate: "26.07.2023 17:00",
+    location: "Minsk",
+    concertType: "Party",
+  },
+  {
+    Id: 3,
+    performer: "performer1",
+    ticketsCount: 20,
+    concertDate: "27.07.2023 15:00",
+    location: "Minsk",
+    concertType: "OpenAir",
+  },
+  {
+    Id: 4,
+    performer: "performer2",
+    ticketsCount: 20,
+    concertDate: "30.07.2023 18:00",
+    location: "Minsk",
+    concertType: "OpenAir",
+  },
+  {
+    Id: 5,
+    performer: "performer1",
+    ticketsCount: 20,
+    concertDate: "25.07.2023 13:00",
+    location: "Minsk",
+    concertType: "Classic",
+  },
+  {
+    Id: 6,
+    performer: "performer2",
+    ticketsCount: 20,
+    concertDate: "26.07.2023 13:00",
+    location: "Minsk",
+    concertType: "Classic",
+  },
+];
+
+export const ConcertCoordinates: Coordinates[] = [
+  {
+    concertId: 1,
+    longitude: "1",
+    latitude: "2",
+  },
+  {
+    concertId: 2,
+    longitude: "1",
+    latitude: "2",
+  },
+  {
+    concertId: 3,
+    longitude: "1",
+    latitude: "2",
+  },
+  {
+    concertId: 4,
+    longitude: "1",
+    latitude: "2",
+  },
+  {
+    concertId: 5,
+    longitude: "1",
+    latitude: "2",
+  },
+  {
+    concertId: 6,
+    longitude: "1",
+    latitude: "2",
+  },
+];
 
 export const partys: Party[] = [
   {
     concertId: 1,
-    performer: "Dj Rave",
-    ticketsCount: 20,
-    concertDate: new Date(),
-    location: "Minsk",
-    concertType: "party",
     ageLimit: 18,
   },
   {
     concertId: 2,
-    performer: "Dj Rav",
-    ticketsCount: 20,
-    concertDate: new Date(),
-    location: "Minsk",
-    concertType: "party",
     ageLimit: 18,
   },
 ];
@@ -24,21 +99,11 @@ export const partys: Party[] = [
 export const openAirs: OpenAir[] = [
   {
     concertId: 3,
-    performer: "performer1",
-    ticketsCount: 20,
-    concertDate: new Date("2023-10-28T17:00"),
-    location: "Minsk",
-    concertType: "openAir",
     headliner: "headliner1",
     journey: "journey1",
   },
   {
     concertId: 4,
-    performer: "performer2",
-    ticketsCount: 20,
-    concertDate: new Date("2023-10-30T17:00"),
-    location: "Minsk",
-    concertType: "openAir",
     headliner: "headliner2",
     journey: "journey2",
   },
@@ -47,36 +112,23 @@ export const openAirs: OpenAir[] = [
 export const classics: Classic[] = [
   {
     concertId: 5,
-    performer: "performer1",
-    ticketsCount: 20,
-    concertDate: new Date("2023-10-10T17:00"),
-    location: "Minsk",
-    concertType: "classic",
     voiceType: "type1",
     concertName: "name1",
     composer: "composer1",
   },
   {
     concertId: 6,
-    performer: "performer2",
-    ticketsCount: 20,
-    concertDate: new Date("2023-10-10T17:00"),
-    location: "Minsk",
-    concertType: "classic",
     voiceType: "type2",
     concertName: "name2",
     composer: "composer2",
   },
 ];
 
-export const getConcert = (
-  concertId: number
-): Party | Classic | OpenAir => {
-  const party = partys.filter((c) => c.concertId === concertId);
-  const openAir = openAirs.filter((c) => c.concertId === concertId);
-  const classic = classics.filter((c) => c.concertId === concertId);
-  if (party !== null) return party[0];
-  else if (openAir !== null) return openAir[0];
-  else return classic[0];
+export const getConcert = (concertId: number): Concert | null => {
+  const foundConcert = concerts.filter((c) => c.Id === concertId)
 
+  if (foundConcert.length !== 0)
+    return foundConcert[0];
+  
+  return null;
 };

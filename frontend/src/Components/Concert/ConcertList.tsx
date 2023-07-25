@@ -1,51 +1,20 @@
 import styles from "./ConcertList.module.css";
-import { ClassicConcert, OpenAirConcert, PartyConcert } from "./Concert";
-import { Classic, OpenAir, Party } from "../../Models/ConcertModels";
+import { ConcertComponent } from "./Concert";
+import { Concert } from "../../Models/ConcertModels";
 
-interface PropsP {
-  data: Party[];
+interface Props {
+  data: Concert[];
 }
 
-interface PropsO {
-  data: OpenAir[];
-}
-
-interface PropsC {
-  data: Classic[];
-}
-
-export const PartysList = ({ data }: PropsP) => {
+export const ConcertList = ({ data }: Props) => {
   return (
     <ul className={styles.ul}>
       {data.map((concert) => (
-        <li className={styles.li} key={concert.concertId}>
-          <PartyConcert data={concert} />
+        <li className={styles.li} key={concert.Id}>
+          <ConcertComponent data={concert}/>
         </li>
       ))}
     </ul>
   );
-};
+}
 
-export const OpenAirsList = ({ data }: PropsO) => {
-  return (
-    <ul className={styles.ul}>
-      {data.map((concert) => (
-        <li className={styles.li} key={concert.concertId}>
-          <OpenAirConcert data={concert} />
-        </li>
-      ))}
-    </ul>
-  );
-};
-
-export const ClassicsList = ({ data }: PropsC) => {
-  return (
-    <ul className={styles.ul}>
-      {data.map((concert) => (
-        <li className={styles.li} key={concert.concertId}>
-          <ClassicConcert data={concert} />
-        </li>
-      ))}
-    </ul>
-  );
-};

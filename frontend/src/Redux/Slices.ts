@@ -1,17 +1,17 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { initialConcertsState } from "./StoreModels";
-import { Classic, Party, OpenAir } from "../Models/ConcertModels";
+import { Concert } from "../Models/ConcertModels";
 
 const concertSlice = createSlice({
   name: "concerts",
   initialState: initialConcertsState,
   reducers: {
-    gettingConcert(state, action: PayloadAction<void>) {
+    gettingConcert(state) {
       state.loading = true;
       state.viewing = null;
     },
 
-    gotConcert(state, action: PayloadAction<Party | Classic | OpenAir | null>) {
+    gotConcert(state, action: PayloadAction<Concert | null>) {
       state.loading = false;
       state.viewing = action.payload;
     },
