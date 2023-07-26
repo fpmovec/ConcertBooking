@@ -31,14 +31,14 @@ export const Header = () => {
           <input
             {...register("search")}
             type="text"
-            placeholder="Search concert..."
+            placeholder="Search concert🔍"
             defaultValue={criteria}
           />
           <button type="submit"style={{ margin: 5 }}>Search</button>
         </form>
       </div>
       <Link to="./signin" className={styles.signIn}>
-        Sign In
+      🧑 Sign In
       </Link>
     </div>
   );

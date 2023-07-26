@@ -62,7 +62,8 @@ gap: 30px;
 }
 
 .list li:before {
-  content: "-";
+  /*content: "➖";*/
+  content: "◽";
   position: relative;
   left: -5px;
 }

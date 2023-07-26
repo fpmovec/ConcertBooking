@@ -47,10 +47,10 @@ export const ConcertInfo = ({ data }: Props) => {
       <div className={styles.block}>
         <div className={styles.description}>
           <div>
-            When: <span>{data.concertDate}</span>
+            ◽When: <span>{data.concertDate}</span>
           </div>
           <div>
-            Where: <span>{data.location}</span>
+            ◽Where: <span>{data.location}</span>
           </div>
         </div>
         <div className={styles.map}>
@@ -77,14 +77,17 @@ export const ConcertInfo = ({ data }: Props) => {
           </ul>
         )}
         {isOpenAir && (
-           <ul className={styles.list}>
-           <li>
-             Headliner: <span className={styles.date}>{getMoreOpenAirInfo().headliner}</span>
-           </li>
-           <li>
-             Journey: <span>{getMoreOpenAirInfo().journey}</span>
-           </li>
-         </ul>
+          <ul className={styles.list}>
+            <li>
+              Headliner:{" "}
+              <span className={styles.date}>
+                {getMoreOpenAirInfo().headliner}
+              </span>
+            </li>
+            <li>
+              Journey: <span>{getMoreOpenAirInfo().journey}</span>
+            </li>
+          </ul>
         )}
       </div>
     </div>
