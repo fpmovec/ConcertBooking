@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { gettingConcert, gotConcert } from "../../Redux/Slices";
 import { ConcertInfo } from "./ConcertInfo";
-import { getConcert } from "../../Models/MockData";
+import { getConcert } from "../../Models/ConcertFunctions";
 import styles from './ConcertPage.module.css'
 import React from "react";
 

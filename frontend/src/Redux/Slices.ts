@@ -15,10 +15,24 @@ const concertSlice = createSlice({
       state.loading = false;
       state.viewing = action.payload;
     },
+
+    searchingConcerts(state) {
+      state.loading = true;
+      state.searching = [];
+    },
+
+    searchedConcerts(state, action: PayloadAction<Concert[]>) {
+      state.loading = false;
+      state.searching = action.payload;
+    },
   },
 });
 
-
-export const { gettingConcert, gotConcert } = concertSlice.actions;
+export const {
+  gettingConcert,
+  gotConcert,
+  searchingConcerts,
+  searchedConcerts,
+} = concertSlice.actions;
 
 export default concertSlice.reducer;

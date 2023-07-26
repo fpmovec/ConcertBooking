@@ -124,11 +124,3 @@ export const classics: Classic[] = [
   },
 ];
 
-export const getConcert = (concertId: number): Concert | null => {
-  const foundConcert = concerts.filter((c) => c.Id === concertId)
-
-  if (foundConcert.length !== 0)
-    return foundConcert[0];
-  
-  return null;
-};
