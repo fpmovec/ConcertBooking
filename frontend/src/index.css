@@ -10,7 +10,7 @@ button {
    font-family: 'Kanit', sans-serif;
    border: none;
    border-radius: 5px;
-   width: 100px;
+   width: auto;
    height: 30px;
 }
 

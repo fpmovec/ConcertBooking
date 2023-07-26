@@ -9,14 +9,22 @@ import { Classic, Party, OpenAir } from "../../Models/ConcertModels";
 import { Concert } from "../../Models/ConcertModels";
 import { NotFound } from "../NotFoundPage/NotFoundPage";
 import { MapComponent } from "../../Components/Maps/Map";
+import { useNavigate } from "react-router-dom";
 import styles from "./ConcertPage.module.css";
+import { Currency } from "../../Components/Currency/Currency";
 
 interface Props {
   data: Concert | null;
 }
 
 export const ConcertInfo = ({ data }: Props) => {
+  
+  const navigate = useNavigate();
+
+  const navToBooking = () => navigate(`/booking/${data!.Id}`)
+
   if (data === null) return <NotFound />;
+   
 
   const isParty = data.concertType === "Party";
   const isOpenAir = data.concertType === "OpenAir";
@@ -38,11 +46,11 @@ export const ConcertInfo = ({ data }: Props) => {
     <div>
       <div className={styles.title}>
         {data.performer}
-        <button>Buy ticket</button>
+        <button onClick={navToBooking}>Book a ticket</button>
       </div>
       <div style={{ marginLeft: 10, fontWeight: 200, fontSize: 20 }}>
         Do you want to get to this event? Then buy tickets right now! The number
-        of tickets is limited. Tickets left: {data.ticketsCount}
+        of tickets is limited. <span style={{fontWeight: 400}}>Tickets left: {data.ticketsCount}</span>
       </div>
       <div className={styles.block}>
         <div className={styles.description}>
@@ -51,6 +59,9 @@ export const ConcertInfo = ({ data }: Props) => {
           </div>
           <div>
             ◽Where: <span>{data.location}</span>
+          </div>
+          <div>
+          ◽Ticket price: <span><Currency currency={data.price}/></span>
           </div>
         </div>
         <div className={styles.map}>
@@ -69,7 +80,7 @@ export const ConcertInfo = ({ data }: Props) => {
               Composer: <span>{getMoreClassicInfo().composer}</span>
             </li>
             <li>
-              Voice Type: <span>{getMoreClassicInfo().concertName}</span>
+              Voice Type: <span>{getMoreClassicInfo().voiceType}</span>
             </li>
             <li>
               Concert Name: <span>{getMoreClassicInfo().concertName}</span>

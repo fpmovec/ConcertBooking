@@ -5,6 +5,7 @@ export interface Concert {
   concertDate: string;
   location: string;
   concertType: string;
+  price: number;
 }
 
 export interface Coordinates {

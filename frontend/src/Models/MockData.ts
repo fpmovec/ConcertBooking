@@ -9,6 +9,7 @@ export const concerts: Concert[] = [
     concertDate: "26.07.2023 17:00",
     location: "Minsk",
     concertType: "Party",
+    price: 10.5
   },
   {
     Id: 2,
@@ -17,6 +18,7 @@ export const concerts: Concert[] = [
     concertDate: "26.07.2023 17:00",
     location: "Minsk",
     concertType: "Party",
+    price: 11
   },
   {
     Id: 3,
@@ -25,6 +27,7 @@ export const concerts: Concert[] = [
     concertDate: "27.07.2023 15:00",
     location: "Minsk",
     concertType: "OpenAir",
+    price: 20.4
   },
   {
     Id: 4,
@@ -33,6 +36,7 @@ export const concerts: Concert[] = [
     concertDate: "30.07.2023 18:00",
     location: "Minsk",
     concertType: "OpenAir",
+    price: 9
   },
   {
     Id: 5,
@@ -41,6 +45,7 @@ export const concerts: Concert[] = [
     concertDate: "25.07.2023 13:00",
     location: "Minsk",
     concertType: "Classic",
+    price: 9
   },
   {
     Id: 6,
@@ -49,6 +54,7 @@ export const concerts: Concert[] = [
     concertDate: "26.07.2023 13:00",
     location: "Minsk",
     concertType: "Classic",
+    price: 17
   },
 ];
 
