@@ -40,17 +40,17 @@ export const ConcertInfo = ({ data }: Props) => {
         {data.performer}
         <button>Buy ticket</button>
       </div>
-      <div style={{ fontWeight: 200, fontSize: 20 }}>
+      <div style={{ marginLeft: 10, fontWeight: 200, fontSize: 20 }}>
         Do you want to get to this event? Then buy tickets right now! The number
-        of tickets is limited
+        of tickets is limited. Tickets left: {data.ticketsCount}
       </div>
       <div className={styles.block}>
         <div className={styles.description}>
           <div>
-            When: <span style={{ fontWeight: 400 }}>{data.concertDate}</span>
+            When: <span>{data.concertDate}</span>
           </div>
           <div>
-            Where: <span style={{ fontWeight: 400 }}>{data.location}</span>
+            Where: <span>{data.location}</span>
           </div>
         </div>
         <div className={styles.map}>
@@ -62,6 +62,29 @@ export const ConcertInfo = ({ data }: Props) => {
           <div>
             <h2>🔞Age Limit: {getMorePartyInfo().ageLimit}</h2>
           </div>
+        )}
+        {isClassic && (
+          <ul className={styles.list}>
+            <li>
+              Composer: <span>{getMoreClassicInfo().composer}</span>
+            </li>
+            <li>
+              Voice Type: <span>{getMoreClassicInfo().concertName}</span>
+            </li>
+            <li>
+              Concert Name: <span>{getMoreClassicInfo().concertName}</span>
+            </li>
+          </ul>
+        )}
+        {isOpenAir && (
+           <ul className={styles.list}>
+           <li>
+             Headliner: <span className={styles.date}>{getMoreOpenAirInfo().headliner}</span>
+           </li>
+           <li>
+             Journey: <span>{getMoreOpenAirInfo().journey}</span>
+           </li>
+         </ul>
         )}
       </div>
     </div>

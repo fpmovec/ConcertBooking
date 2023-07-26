@@ -31,6 +31,10 @@
   gap: 40px;
 }
 
+.description div span {
+  font-weight: 400;
+}
+
 .block {
   display: flex;
   justify-content: center;
@@ -43,3 +47,27 @@
   border: 2px solid #5ea8a790;
   width: 500px;
 }
+
+.list {
+font-size: 23px;
+margin: 10px 10px;
+list-style-type:none;
+display: flex;
+justify-content: center;
+gap: 30px;
+}
+
+.list li {
+  font-weight: 200;
+}
+
+.list li:before {
+  content: "-";
+  position: relative;
+  left: -5px;
+}
+
+.list li span {
+  font-weight: 400;
+}
+

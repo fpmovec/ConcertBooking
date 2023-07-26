@@ -4,7 +4,7 @@ import type { Concert, Coordinates } from "./ConcertModels";
 export const concerts: Concert[] = [
   {
     Id: 1,
-    performer: "Dj Rav",
+    performer: "Dj Rave",
     ticketsCount: 20,
     concertDate: "26.07.2023 17:00",
     location: "Minsk",
