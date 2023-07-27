@@ -1,0 +1,1 @@
+export const Thanks = () => <h2>Thank you for the booking!</h2>

@@ -1,14 +1,4 @@
-.main {
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
-  border: 1px solid #5ea8a741;
-  border-top: 3px solid #5ea8a7;
-  box-shadow: 5px 4px 5px #5ea8a790;
-  width: 75%;
-  margin-left: 15%;
-  list-style-type: none;
-}
+
 
 .ul {
   

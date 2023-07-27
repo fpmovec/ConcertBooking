@@ -8,6 +8,7 @@ import { SearchPage } from "./Pages/SearchPage/SearchPage";
 import { BookingPage } from "./Pages/BookingPage/BookingPage";
 import { Provider } from "react-redux";
 import store from "./Redux/Store";
+import { Thanks } from "./Pages/Thanks/Thanks";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/concerts/:concertId" element={<ConcertPage />} />
           <Route path="/booking/:concertId" element={<BookingPage />} />
+          <Route path="/thanks" element={<Thanks />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

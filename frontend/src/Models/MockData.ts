@@ -1,5 +1,6 @@
 import { Classic, OpenAir, Party } from "./ConcertModels";
 import type { Concert, Coordinates } from "./ConcertModels";
+import { Promocode } from "./Promocode";
 
 export const concerts: Concert[] = [
   {
@@ -129,4 +130,25 @@ export const classics: Classic[] = [
     composer: "composer2",
   },
 ];
+
+export const promocodes: Promocode[] = [{
+  code: "CENTAUREA",
+  total: 0.9
+},
+{
+  code: "CENT19",
+  total: 0.9
+},
+{
+  code: "INTERSHIP",
+  total: 0.85
+},
+{
+  code: "CENTTRAINEE",
+  total: 0.8
+},
+{
+  code: "CENTSOFT",
+  total: 0.95
+}];
 
