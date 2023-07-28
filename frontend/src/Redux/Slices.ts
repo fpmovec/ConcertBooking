@@ -34,6 +34,10 @@ const concertSlice = createSlice({
     setCurrentBookingId(state, action: PayloadAction<number>) {
       state.currentBookingId = action.payload;
     },
+
+    setBookings(state, action: PayloadAction<Booking[]>) {
+      state.booking = action.payload;
+    }
   },
 });
 
@@ -43,7 +47,8 @@ export const {
   searchingConcerts,
   searchedConcerts,
   bookedConcert,
-  setCurrentBookingId
+  setCurrentBookingId,
+  setBookings
 } = concertSlice.actions;
 
 export default concertSlice.reducer;

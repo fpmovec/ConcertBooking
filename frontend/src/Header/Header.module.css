@@ -1,56 +1,68 @@
 .header {
-    box-sizing: border-box;
-    padding: 10px 20px;
-    border-bottom: 1px solid #5EA8A7;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    box-shadow: 0px -3px 10px #5EA8A7;
-    margin-bottom: 30px;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  border-bottom: 1px solid #5ea8a7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-shadow: 0px -3px 10px #5ea8a7;
+  margin-bottom: 30px;
 }
 
 .inputGroup {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .inputGroup button {
-   background-color: #257985;
-   color: #FFFFFF;
-   font-size: 16px;
-   font-family: 'Kanit', sans-serif;
-   border: none;
-   border-radius: 5px;
-   width: 100px;
-   height: 30px;
+  background-color: #257985;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: "Kanit", sans-serif;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 30px;
 }
 
 .inputGroup button:hover {
-    background-color: #257885e4;
-    cursor: pointer;
+  background-color: #257885e4;
+  cursor: pointer;
 }
 
 .inputGroup input {
-    height: 25px;
-    width: auto;
-    border-radius: 5px;
-
+  height: 25px;
+  width: auto;
+  border-radius: 5px;
 }
 
 .title {
-    font-size: 25px;
-    font-weight: bold;
-    text-decoration: none;
-    font-family: 'Kanit', sans-serif;
-    color: #257985;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: "Kanit", sans-serif;
+  color: #257985;
 }
 
 .signIn {
-    font-weight: bold;
-    text-decoration: none;
-    font-family: 'Kanit', sans-serif;
-    font-size: 20px;
-    color: #257985;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: "Kanit", sans-serif;
+  font-size: 20px;
+  color: #257985;
+}
+
+.bookedButton {
+  font-size: 20px;
+  font-weight: 400;
+  background-color: transparent;
+  color: black;
+  text-decoration: underline;
+}
+
+.bookedButton:hover {
+  cursor: pointer;
+  background-color: transparent;
 }

@@ -49,7 +49,7 @@ export const HomePage = () => {
           concertType.classics ||
           concertType.openAirs ||
           concertType.partys
-        ) && <div className={styles.notFound}>Nothing found 😔</div>}
+        ) && <div className="notFound">Nothing found 😔</div>}
         {concertType.classics && <ConcertList data={typeFilter("Classic")}/>}
         {concertType.partys && <ConcertList data={typeFilter("Party")}/>}
         {concertType.openAirs && <ConcertList data={typeFilter("OpenAir")}/>}

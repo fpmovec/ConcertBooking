@@ -9,6 +9,8 @@ import { BookingPage } from "./Pages/BookingPage/BookingPage";
 import { Provider } from "react-redux";
 import store from "./Redux/Store";
 import { Thanks } from "./Pages/Thanks/Thanks";
+import Footer from "./Components/Footer/Footer";
+import { BookedPage } from "./Pages/BookedPage/BookedPage";
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path="/concerts/:concertId" element={<ConcertPage />} />
           <Route path="/booking/:concertId" element={<BookingPage />} />
           <Route path="/thanks" element={<Thanks />} />
+          <Route path="/booked" element={<BookedPage />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

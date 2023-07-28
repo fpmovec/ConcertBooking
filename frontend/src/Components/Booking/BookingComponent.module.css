@@ -1,0 +1,47 @@
+.booking {
+
+}
+
+.title {
+    font-weight: 400;
+  font-size: 30px;
+  border-bottom: 1px solid #5ea8a7;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+    font-weight: 200;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 40px;
+}
+
+.description span {
+    font-weight: 400;
+}
+
+.link {
+    color: black;
+}
+
+.remove {
+    background-color: transparent;
+    border: 1px solid #257985;
+    scale: 1.5;
+    margin-right: 20px;
+}
+
+.remove:hover {
+    background-color: transparent;
+}
+
+.block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

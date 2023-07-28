@@ -34,9 +34,10 @@ export const Header = () => {
             placeholder="Search concert🔍"
             defaultValue={criteria}
           />
-          <button type="submit"style={{ margin: 5 }}>Search</button>
+          <button type="submit" style={{ margin: 5 }}>Search</button>
         </form>
       </div>
+      <button onClick={() => navigate('/booked')} className={styles.bookedButton}>🎫 Booked tickets</button>
       <Link to="./signin" className={styles.signIn}>
       🧑 Sign In
       </Link>
