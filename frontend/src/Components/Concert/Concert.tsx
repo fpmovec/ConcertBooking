@@ -10,7 +10,7 @@ interface Props {
 
 export const ConcertComponent = ({ data }: Props) => {
   const navigate = useNavigate();
-  const navigateToBooking = () => navigate(`booking/${data.Id}`);
+  const navigateToBooking = () => navigate(`/booking/${data.Id}`);
 
   return (
     <div className={styles.concert}>

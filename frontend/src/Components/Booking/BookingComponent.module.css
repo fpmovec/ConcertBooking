@@ -37,7 +37,7 @@
 }
 
 .remove:hover {
-    background-color: transparent;
+    background-color: rgb(223, 221, 221);
 }
 
 .block {
