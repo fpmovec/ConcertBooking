@@ -54,7 +54,8 @@ export const AddPromocodePage = () => {
             <input
               id="disc"
               type="number"
-              {...register("discount", { required: true, min: 3, max: 25 })}
+              {...register("discount", { required: true, min: 3, max: 30 })}
+              defaultValue={3}
             />
             {errors.discount && errors.discount.type === "required" && (
               <ErrorField data="Enter the discount" />
@@ -66,9 +67,9 @@ export const AddPromocodePage = () => {
               <ErrorField data="The discount should not exceed 25%" />
             )}
           </div>
-          <div>
+
             <button type="submit">Add the promocode</button>
-          </div>
+
         </form>
       </div>
     </div>

@@ -19,7 +19,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:start;
+  align-items: start;
   margin-left: 100px;
 }
 
@@ -40,5 +40,5 @@
 
 .form button {
   scale: 1.3;
-  margin: 5px;
+  margin: 10px;
 }
