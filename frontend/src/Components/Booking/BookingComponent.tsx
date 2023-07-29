@@ -1,7 +1,7 @@
 import { Booking } from "../../Models/BookingModels";
 import { Currency } from "../Currency/Currency";
 import styles from "./BookingComponent.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { DeleteElement } from "../../Models/ConcertFunctions";
 import { setBookings } from "../../Redux/Slices";
@@ -13,20 +13,17 @@ interface Props {
 }
 
 export const BookingComponent = ({ booking, concertPerformer }: Props) => {
+  const dispatch = useAppDispatch();
+  const allBookings = useAppSelector((state) => state.concerts.booking);
+  let currentBookings = allBookings;
+  const navigate = useNavigate();
 
-const dispatch = useAppDispatch();
-const allBookings = useAppSelector(state => state.concerts.booking);
-let currentBookings = allBookings;
+  const handleClick = () => {
+    currentBookings = DeleteElement(booking, allBookings);
+    dispatch(setBookings(currentBookings));
+  };
 
-React.useEffect(() => {
-dispatch(setBookings(currentBookings))
-}, [currentBookings, dispatch]);
-
-const handleClick = () => {
-  console.log(booking)
-   currentBookings = DeleteElement(booking, allBookings);
-   console.log(currentBookings);
-}
+  const payClick = () => navigate(`/pay/${booking.id}`)
 
   return (
     <div className={styles.booking}>
@@ -58,8 +55,13 @@ const handleClick = () => {
             🎫 Ticket quantity: {booking.ticketQuantity}
           </div>
         </div>
-        <div>
-          <button onClick={handleClick} className={styles.remove}>🗑️</button>
+        <div className={styles.buttonsBlock}>
+          <div>
+            <button onClick={payClick} className={styles.remove}>💸 Pay</button>
+          </div>
+          <button onClick={handleClick} className={styles.remove}>
+            🗑️ Remove
+          </button>
         </div>
       </div>
     </div>

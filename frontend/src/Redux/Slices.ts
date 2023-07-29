@@ -37,7 +37,8 @@ const concertSlice = createSlice({
 
     setBookings(state, action: PayloadAction<Booking[]>) {
       state.booking = action.payload;
-    }
+    },
+
   },
 });
 

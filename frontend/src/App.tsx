@@ -11,6 +11,10 @@ import store from "./Redux/Store";
 import { Thanks } from "./Pages/Thanks/Thanks";
 import Footer from "./Components/Footer/Footer";
 import { BookedPage } from "./Pages/BookedPage/BookedPage";
+import { Pay } from "./Pages/PayPage/Pay";
+import { AddConcertPage } from "./Pages/Admin/AddConcertPage/AddConcertPage";
+import { MainAdminPage } from "./Pages/Admin/MainPage/MainAdminPage";
+import { AddPromocodePage } from "./Pages/Admin/AddPromocodePage/AddPromocodePage";
 
 function App() {
   return (
@@ -25,6 +29,10 @@ function App() {
           <Route path="/booking/:concertId" element={<BookingPage />} />
           <Route path="/thanks" element={<Thanks />} />
           <Route path="/booked" element={<BookedPage />}/>
+          <Route path="/pay/:bookingId" element={<Pay />}/>
+          <Route path="/admin/addConcert" element={<AddConcertPage />}/>
+          <Route path="/admin/addPromocode" element={<AddPromocodePage />} />
+          <Route path="/admin" element={<MainAdminPage />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

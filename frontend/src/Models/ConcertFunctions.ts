@@ -19,11 +19,5 @@ export const getConcertsByCriteria = (criteria: string | null): Concert[] => {
 };
 
 export function DeleteElement(element: Booking, array: Booking[]): Booking[] {
-  array.forEach((item, index) => {
-    if (item === element) {
-      console.log([...array].splice(index, 1));
-      return [...array].splice(index, 1);
-    }
-  });
-  return array;
+  return array.filter(b => b.id !== element.id)
 }

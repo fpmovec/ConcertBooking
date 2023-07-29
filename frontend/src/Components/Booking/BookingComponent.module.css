@@ -1,9 +1,8 @@
 .booking {
-
 }
 
 .title {
-    font-weight: 400;
+  font-weight: 400;
   font-size: 30px;
   border-bottom: 1px solid #5ea8a7;
   margin-bottom: 20px;
@@ -13,35 +12,43 @@
 }
 
 .description {
-    font-weight: 200;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 40px;
+  font-weight: 200;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
 }
 
 .description span {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .link {
-    color: black;
+  color: black;
 }
 
 .remove {
-    background-color: transparent;
-    border: 1px solid #257985;
-    scale: 1.5;
-    margin-right: 20px;
+  background-color: transparent;
+  border: 1px solid #257985;
+  scale: 1.5;
+  margin-right: 20px;
+  color:black
 }
 
 .remove:hover {
-    background-color: rgb(223, 221, 221);
+  background-color: rgb(223, 221, 221);
 }
 
 .block {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttonsBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
 }
