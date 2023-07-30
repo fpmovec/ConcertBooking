@@ -1,0 +1,17 @@
+.remove {
+    background-color: transparent;
+    border: 1px solid #257985;
+    scale: 1.2;
+    margin-right: 20px;
+    color:black
+  }
+  
+  .remove:hover {
+    background-color: rgb(223, 221, 221);
+  }
+
+  .block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

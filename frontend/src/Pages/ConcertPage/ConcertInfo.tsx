@@ -71,7 +71,7 @@ export const ConcertInfo = ({ data }: Props) => {
       <div>
         {isParty && (
           <div>
-            <h2>🔞Age Limit: {getMorePartyInfo().ageLimit}</h2>
+            <h2>🔞Age Limit: {getMorePartyInfo().ageLimit}+</h2>
           </div>
         )}
         {isClassic && (

@@ -131,7 +131,7 @@ export const classics: Classic[] = [
   },
 ];
 
-export const promocodes: Promocode[] = [{
+/*export const promocodes: Promocode[] = [{
   code: "CENTAUREA",
   total: 0.9
 },
@@ -150,5 +150,5 @@ export const promocodes: Promocode[] = [{
 {
   code: "CENTSOFT",
   total: 0.95
-}];
+}];*/
 

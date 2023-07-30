@@ -12,7 +12,7 @@ export const MainAdminPage = () => {
            <button onClick={() => navigate("/admin/addConcert")}>➕ Add a concert</button>
            <button>📚 Show all concerts</button>
            <button onClick={() => navigate("/admin/addPromocode")}>➕ Add a promocode</button>
-           <button>📚 Show all promocodes</button>
+           <button onClick={() => navigate("/admin/promocodes")}>📚 Show all promocodes</button>
         </div>
     </div>
   );

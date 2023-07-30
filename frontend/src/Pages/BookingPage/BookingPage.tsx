@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form";
 import { bookedConcert, setCurrentBookingId } from "../../Redux/Slices";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ErrorField } from "../../Components/SuccesErrorFields/ErrorField";
-import { concerts, promocodes } from "../../Models/MockData";
+import { concerts } from "../../Models/MockData";
 import { Thanks } from "../Thanks/Thanks";
 import { Currency } from "../../Components/Currency/Currency";
 import styles from "./BookingPage.module.css";
 import React from "react";
+import { setPromocodes } from "../../Redux/Slices";
 
 type FormData = {
   firstName: string;
@@ -20,6 +21,9 @@ type FormData = {
 };
 
 export const BookingPage = () => {
+
+const promocodes = useAppSelector(state => state.concerts.promocodes);
+
   const IsPromo = (data: string): boolean => {
     const code = promocodes.filter((pc) => pc.code === data);
     if (code.length !== 0) {

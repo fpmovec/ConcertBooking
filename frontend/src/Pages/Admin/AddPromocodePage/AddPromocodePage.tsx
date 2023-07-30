@@ -1,8 +1,10 @@
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import styles from "./AddPromocodePage.module.css";
 import { useForm } from "react-hook-form";
-import { promocodes } from "../../../Models/MockData";
+import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import { Promocode } from "../../../Models/Promocode";
+import { setPromocodes } from "../../../Redux/Slices";
+import React from "react";
 
 type PromocodeData = {
   code: string;
@@ -10,6 +12,9 @@ type PromocodeData = {
 };
 
 export const AddPromocodePage = () => {
+  const [isSucces, setIsSuccess] = React.useState(false);
+  const dispath = useAppDispatch();
+  const promocodes = useAppSelector((state) => state.concerts.promocodes);
   const {
     register,
     handleSubmit,
@@ -24,7 +29,7 @@ export const AddPromocodePage = () => {
       total: 1 - data.discount * 0.01,
     };
     console.log(promo);
-    promocodes.push(promo);
+    dispath(setPromocodes([...promocodes, promo]));
   };
 
   return (
@@ -68,8 +73,14 @@ export const AddPromocodePage = () => {
             )}
           </div>
 
-            <button type="submit">Add the promocode</button>
-
+          <button onClick={() => setIsSuccess(true)} type="submit">
+            Add the promocode
+          </button>
+          {isSucces && (
+            <div style={{ color: "green" }}>
+              The promocode is successfully added
+            </div>
+          )}
         </form>
       </div>
     </div>

@@ -93,5 +93,14 @@
 
   .block {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-left: -25px;
+  }
+
+  .success {
+    color: rgb(9, 207, 9);
+  }
+
+  .failure {
+    color: red;
   }

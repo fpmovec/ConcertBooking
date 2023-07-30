@@ -9,7 +9,7 @@ import { BookingPage } from "./Pages/BookingPage/BookingPage";
 import { Provider } from "react-redux";
 import store from "./Redux/Store";
 import { Thanks } from "./Pages/Thanks/Thanks";
-import Footer from "./Components/Footer/Footer";
+import { PromocodesPage } from "./Pages/Admin/PromocodesPage/PromocodesPage";
 import { BookedPage } from "./Pages/BookedPage/BookedPage";
 import { Pay } from "./Pages/PayPage/Pay";
 import { AddConcertPage } from "./Pages/Admin/AddConcertPage/AddConcertPage";
@@ -32,6 +32,7 @@ function App() {
           <Route path="/pay/:bookingId" element={<Pay />}/>
           <Route path="/admin/addConcert" element={<AddConcertPage />}/>
           <Route path="/admin/addPromocode" element={<AddPromocodePage />} />
+          <Route path="/admin/promocodes" element={<PromocodesPage />} />
           <Route path="/admin" element={<MainAdminPage />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>

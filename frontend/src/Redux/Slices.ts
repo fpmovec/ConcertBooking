@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { initialConcertsState } from "./StoreModels";
 import { Booking } from "../Models/BookingModels";
 import { Concert } from "../Models/ConcertModels";
+import { Promocode } from "../Models/Promocode";
 
 const concertSlice = createSlice({
   name: "concerts",
@@ -39,6 +40,9 @@ const concertSlice = createSlice({
       state.booking = action.payload;
     },
 
+    setPromocodes(state, action: PayloadAction<Promocode[]>) {
+      state.promocodes = action.payload;
+    }
   },
 });
 
@@ -49,7 +53,8 @@ export const {
   searchedConcerts,
   bookedConcert,
   setCurrentBookingId,
-  setBookings
+  setBookings,
+  setPromocodes
 } = concertSlice.actions;
 
 export default concertSlice.reducer;

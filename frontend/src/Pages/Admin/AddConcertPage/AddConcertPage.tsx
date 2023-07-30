@@ -9,10 +9,10 @@ import { PartyProps } from "./PartyProps";
 import { ConcertCoordinates } from "../../../Models/MockData";
 
 type FormData = {
-  performer: string; //*
-  ticketsCount: number; //*
-  concertDate: Date; //*
-  location: string; //*
+  performer: string;
+  ticketsCount: number;
+  concertDate: Date;
+  location: string;
   concertType: string;
   price: number;
   longitude: number;
@@ -50,9 +50,9 @@ export const AddConcertPage = () => {
       price: data.price,
     });
     ConcertCoordinates.push({
-        concertId: currentId,
-        longitude: data.longitude,
-        latitude: data.latitude
+      concertId: currentId,
+      longitude: data.longitude,
+      latitude: data.latitude,
     });
     setIsContinue(true);
     console.log(concerts);
@@ -149,7 +149,6 @@ export const AddConcertPage = () => {
                   {...register("longitude", { required: true })}
                   defaultValue={53.902284}
                 />
-
               </div>
               <div>
                 <label htmlFor="lat">Latitude: </label>
@@ -159,7 +158,6 @@ export const AddConcertPage = () => {
                   {...register("latitude", { required: true })}
                   defaultValue={27.561831}
                 />
-
               </div>
             </fieldset>
           </div>

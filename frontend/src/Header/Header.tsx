@@ -38,7 +38,7 @@ export const Header = () => {
         </form>
       </div>
       <button onClick={() => navigate('/booked')} className={styles.bookedButton}>🎫 Booked tickets</button>
-      <Link to="./signin" className={styles.signIn}>
+      <Link to="./admin" className={styles.signIn}>
       🧑 Sign In
       </Link>
     </div>

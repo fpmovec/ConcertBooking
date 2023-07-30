@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import styles from "./AddConcertPage.module.css";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import { classics } from "../../../Models/MockData";
+import { useState } from "react";
 
 interface Props {
   concertId: number;
@@ -19,8 +20,10 @@ export const ClassicProps = ({ concertId }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    mode: "all",
+    mode: "onBlur",
   });
+
+  const [isSuccessfully, setIsSuccessfully] = useState(false);
 
   const submitForm = (data: FormData) => {
     classics.push({
@@ -30,6 +33,7 @@ export const ClassicProps = ({ concertId }: Props) => {
       composer: data.composer,
     });
     console.log(classics);
+    setIsSuccessfully(true);
   };
 
   return (
@@ -82,6 +86,7 @@ export const ClassicProps = ({ concertId }: Props) => {
         )}
       </div>
       <button type="submit">Add concert</button>
+      {isSuccessfully && <div className={styles.success}>The concert is successfully added</div>}
     </form>
   );
 };

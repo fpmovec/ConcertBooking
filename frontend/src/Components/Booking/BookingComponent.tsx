@@ -3,7 +3,7 @@ import { Currency } from "../Currency/Currency";
 import styles from "./BookingComponent.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
-import { DeleteElement } from "../../Models/ConcertFunctions";
+import { DeleteBooking } from "../../Models/ConcertFunctions";
 import { setBookings } from "../../Redux/Slices";
 import React from "react";
 
@@ -19,11 +19,11 @@ export const BookingComponent = ({ booking, concertPerformer }: Props) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    currentBookings = DeleteElement(booking, allBookings);
+    currentBookings = DeleteBooking(booking, allBookings);
     dispatch(setBookings(currentBookings));
   };
 
-  const payClick = () => navigate(`/pay/${booking.id}`)
+  const payClick = () => navigate(`/pay/${booking.id}`);
 
   return (
     <div className={styles.booking}>
@@ -57,7 +57,9 @@ export const BookingComponent = ({ booking, concertPerformer }: Props) => {
         </div>
         <div className={styles.buttonsBlock}>
           <div>
-            <button onClick={payClick} className={styles.remove}>💸 Pay</button>
+            <button onClick={payClick} className={styles.remove}>
+              💸 Pay
+            </button>
           </div>
           <button onClick={handleClick} className={styles.remove}>
             🗑️ Remove
