@@ -131,6 +131,29 @@ export const classics: Classic[] = [
   },
 ];
 
+export const getInitialPromocodes = (): Promocode[] => {
+  return [{
+    code: "CENTAUREA",
+    total: 0.9
+  },
+  {
+    code: "CENT19",
+    total: 0.9
+  },
+  {
+    code: "INTERSHIP",
+    total: 0.85
+  },
+  {
+    code: "CENTTRAINEE",
+    total: 0.8
+  },
+  {
+    code: "CENTSOFT",
+    total: 0.95
+  }]
+}
+
 /*export const promocodes: Promocode[] = [{
   code: "CENTAUREA",
   total: 0.9

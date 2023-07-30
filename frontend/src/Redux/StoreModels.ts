@@ -1,6 +1,7 @@
 import { Concert } from "../Models/ConcertModels";
 import { Booking } from "../Models/BookingModels";
 import { Promocode } from "../Models/Promocode";
+import { getInitialPromocodes } from "../Models/MockData";
 
 interface ConcertsState {
   readonly loading: boolean;
@@ -21,24 +22,5 @@ export const initialConcertsState: ConcertsState = {
   searching: [],
   booking: [],
   currentBookingId: 1,
-  promocodes: [{
-    code: "CENTAUREA",
-    total: 0.9
-  },
-  {
-    code: "CENT19",
-    total: 0.9
-  },
-  {
-    code: "INTERSHIP",
-    total: 0.85
-  },
-  {
-    code: "CENTTRAINEE",
-    total: 0.8
-  },
-  {
-    code: "CENTSOFT",
-    total: 0.95
-  }]
+  promocodes: getInitialPromocodes()
 };
