@@ -1,0 +1,25 @@
+.main {
+    box-sizing: border-box;
+  border: 1px solid #5ea8a741;
+  border-top: 3px solid #5ea8a7;
+  box-shadow: 5px 4px 5px #5ea8a790;
+  width: 60%;
+  margin-left: 15%;
+  padding: 10px;
+
+ 
+}
+
+
+.title {
+    font-weight: 400;
+    font-size: 40px;
+    border-bottom: 1px solid #5ea8a7;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    width: 450px;
+    margin: 20px auto 20px auto;
+
+}
