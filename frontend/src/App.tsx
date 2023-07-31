@@ -15,6 +15,7 @@ import { Pay } from "./Pages/PayPage/Pay";
 import { AddConcertPage } from "./Pages/Admin/AddConcertPage/AddConcertPage";
 import { MainAdminPage } from "./Pages/Admin/MainPage/MainAdminPage";
 import { AddPromocodePage } from "./Pages/Admin/AddPromocodePage/AddPromocodePage";
+import { PurchasedPage } from "./Pages/PurchasedPage/PurchasedPage";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/booking/:concertId" element={<BookingPage />} />
           <Route path="/thanks" element={<Thanks />} />
           <Route path="/booked" element={<BookedPage />}/>
+          <Route path="/purchased" element={<PurchasedPage />}/>
           <Route path="/pay/:bookingId" element={<Pay />}/>
           <Route path="/admin/addConcert" element={<AddConcertPage />}/>
           <Route path="/admin/addPromocode" element={<AddPromocodePage />} />

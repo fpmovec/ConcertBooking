@@ -59,6 +59,9 @@
   font-weight: 400;
   background-color: transparent;
   color: black;
+}
+
+.bookedButton span {
   text-decoration: underline;
 }
 

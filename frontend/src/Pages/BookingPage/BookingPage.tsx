@@ -21,8 +21,7 @@ type FormData = {
 };
 
 export const BookingPage = () => {
-
-const promocodes = useAppSelector(state => state.concerts.promocodes);
+  const promocodes = useAppSelector((state) => state.concerts.promocodes);
 
   const IsPromo = (data: string): boolean => {
     const code = promocodes.filter((pc) => pc.code === data);
@@ -74,7 +73,7 @@ const promocodes = useAppSelector(state => state.concerts.promocodes);
     );
     currentBookingId = currentBookingId + 1;
     dispatch(setCurrentBookingId(currentBookingId));
-    navigate("/thanks");
+    navigate("/thanks?status=booking");
   };
 
   return (

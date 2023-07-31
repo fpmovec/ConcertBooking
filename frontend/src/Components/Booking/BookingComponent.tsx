@@ -55,16 +55,17 @@ export const BookingComponent = ({ booking, concertPerformer }: Props) => {
             🎫 Ticket quantity: {booking.ticketQuantity}
           </div>
         </div>
-        <div className={styles.buttonsBlock}>
-          <div>
-            <button onClick={payClick} className={styles.remove}>
-              💸 Pay
-            </button>
-          </div>
-          <button onClick={handleClick} className={styles.remove}>
-            🗑️ Remove
-          </button>
-        </div>
+       
+            <div className={styles.buttonsBlock}>
+              <div>
+                <button onClick={payClick} className={styles.remove}>
+                  💸 Pay
+                </button>
+              </div>
+              <button onClick={handleClick} className={styles.remove}>
+                🗑️ Remove
+              </button>
+            </div>
       </div>
     </div>
   );

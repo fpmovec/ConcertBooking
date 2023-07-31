@@ -1,8 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useAppSelector } from "../../Redux/Hooks"; 
+import { useAppSelector, useAppDispatch } from "../../Redux/Hooks";
 import styles from "./Pay.module.css";
-import { bookedConcert } from "../../Redux/Slices";
+import { addPurchase, setBookings } from "../../Redux/Slices";
+import { useDispatch } from "react-redux";
+import { DeleteBooking } from "../../Models/ConcertFunctions";
 
 const initialOptions = {
   clientId:
@@ -13,11 +15,14 @@ const initialOptions = {
 
 export const Pay = () => {
   const { bookingId } = useParams();
+  const navigate = useNavigate();
+  const allBookings = useAppSelector((state) => state.concerts.booking);
+  const dispatch = useDispatch();
+  const currentBooking = [...allBookings].filter(
+    (b) => b.id === Number(bookingId)
+  )[0];
+  let currBookings = allBookings;
 
-  const allBookings = useAppSelector(state => state.concerts.booking);
-  console.log(allBookings);
-  const currentBooking = [...allBookings].filter(b => b.id === Number(bookingId))[0];
-  console.log(currentBooking);
   return (
     <div className={styles.main}>
       <div className={styles.buttons}>
@@ -37,9 +42,12 @@ export const Pay = () => {
             onApprove={(data, actions) => {
               return actions.order!.capture().then(function (details) {
                 console.log(
-                  "Transaction completed by " + 
-                  details.payer.name!.given_name!
+                  "Transaction completed by " + details.payer.name!.given_name!
                 );
+                currBookings = DeleteBooking(currentBooking, allBookings);
+                dispatch(setBookings(currBookings));
+                dispatch(addPurchase(currentBooking));
+                navigate(`/thanks?status=purchase`);
               });
             }}
           />

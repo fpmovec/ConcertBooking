@@ -42,7 +42,11 @@ const concertSlice = createSlice({
 
     setPromocodes(state, action: PayloadAction<Promocode[]>) {
       state.promocodes = action.payload;
-    }
+    },
+
+    addPurchase(state, action: PayloadAction<Booking>) {
+      state.purchased.push(action.payload);
+    },
   },
 });
 
@@ -54,7 +58,8 @@ export const {
   bookedConcert,
   setCurrentBookingId,
   setBookings,
-  setPromocodes
+  setPromocodes,
+  addPurchase
 } = concertSlice.actions;
 
 export default concertSlice.reducer;

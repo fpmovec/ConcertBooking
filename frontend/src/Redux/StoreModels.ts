@@ -10,6 +10,7 @@ interface ConcertsState {
   readonly booking: Booking[];
   readonly currentBookingId: number;
   readonly promocodes: Promocode[];
+  readonly purchased: Booking[];
 }
 
 export interface AppState {
@@ -22,5 +23,6 @@ export const initialConcertsState: ConcertsState = {
   searching: [],
   booking: [],
   currentBookingId: 1,
-  promocodes: getInitialPromocodes()
+  promocodes: getInitialPromocodes(),
+  purchased: [],
 };

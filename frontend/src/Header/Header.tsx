@@ -27,19 +27,35 @@ export const Header = () => {
         ConcertBooking
       </Link>
       <div className={styles.inputGroup}>
-        <form onSubmit={event => void handleSubmit(submitForm)(event)}>
+        <form onSubmit={(event) => void handleSubmit(submitForm)(event)}>
           <input
             {...register("search")}
             type="text"
             placeholder="Search concert🔍"
             defaultValue={criteria}
           />
-          <button type="submit" style={{ margin: 5 }}>Search</button>
+          <button type="submit" style={{ margin: 5 }}>
+            Search
+          </button>
         </form>
       </div>
-      <button onClick={() => navigate('/booked')} className={styles.bookedButton}>🎫 Booked tickets</button>
+      <div>
+        <button
+          onClick={() => navigate("/booked")}
+          className={styles.bookedButton}
+        >
+          🎫 <span>Booked tickets</span>{" "}
+        </button>
+        <button
+          onClick={() => navigate("/purchased")}
+          className={styles.bookedButton}
+        >
+          🎫 <span>Purchased tickets</span>
+        </button>
+      </div>
+
       <Link to="./admin" className={styles.signIn}>
-      🧑 Sign In
+        🧑 Sign In
       </Link>
     </div>
   );
