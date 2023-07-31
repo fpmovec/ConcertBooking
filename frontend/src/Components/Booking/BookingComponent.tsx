@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { DeleteBooking } from "../../Models/ConcertFunctions";
 import { setBookings } from "../../Redux/Slices";
-import React from "react";
+
 
 interface Props {
   booking: Booking;

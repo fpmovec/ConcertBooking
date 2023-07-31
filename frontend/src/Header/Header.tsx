@@ -2,7 +2,6 @@ import {
   Link,
   useSearchParams,
   useNavigate,
-  useParams,
 } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styles from "./Header.module.css";

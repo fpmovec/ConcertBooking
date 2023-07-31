@@ -1,5 +1,4 @@
 import { useAppSelector } from "../../Redux/Hooks";
-import { ConcertList } from "../../Components/Concert/ConcertList";
 import { getConcert } from "../../Models/ConcertFunctions";
 import { BookingComponent } from "../../Components/Booking/BookingComponent";
 import styles from "./BookedPage.module.css";

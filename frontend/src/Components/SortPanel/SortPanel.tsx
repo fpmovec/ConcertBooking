@@ -1,4 +1,4 @@
-
+import styles from './SortPanel.module.css'
 
 interface Props {
   value: boolean;
@@ -10,7 +10,7 @@ export const TypeCheckbox = ({ value, label, handleChange }: Props) => {
   return (
     <>
       <label>
-        <input style={{ marginRight: 5}}type="checkbox" checked={value} onChange={handleChange} />
+        <input className={styles.checkbox} type="checkbox" checked={value} onChange={handleChange} />
         {label}
       </label>
     </>

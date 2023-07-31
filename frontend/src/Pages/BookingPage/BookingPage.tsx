@@ -4,11 +4,9 @@ import { bookedConcert, setCurrentBookingId } from "../../Redux/Slices";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ErrorField } from "../../Components/SuccesErrorFields/ErrorField";
 import { concerts } from "../../Models/MockData";
-import { Thanks } from "../Thanks/Thanks";
 import { Currency } from "../../Components/Currency/Currency";
 import styles from "./BookingPage.module.css";
 import React from "react";
-import { setPromocodes } from "../../Redux/Slices";
 
 type FormData = {
   firstName: string;

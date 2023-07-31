@@ -12,7 +12,7 @@ export const PurchasedComponent = ({ booking, concertPerformer}: Props) => {
     return (
         <div className={styles.booking}>
           <div className={styles.title}>
-            <div>Booking Id: {booking.id}</div>
+            <div>Purchase Id: {booking.id}</div>
             <div>
               <span style={{ fontWeight: 200 }}>Total price: </span>{" "}
               <Currency currency={booking.purchaseAmount} />

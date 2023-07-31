@@ -1,4 +1,3 @@
-import { BookingComponent } from "../../Components/Booking/BookingComponent";
 import { PurchasedComponent } from "../../Components/Booking/PurchasedComponent";
 import { getConcert } from "../../Models/ConcertFunctions";
 import { useAppSelector } from "../../Redux/Hooks";

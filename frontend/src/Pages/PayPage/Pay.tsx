@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { useAppSelector, useAppDispatch } from "../../Redux/Hooks";
+import { useAppSelector } from "../../Redux/Hooks";
 import styles from "./Pay.module.css";
 import { addPurchase, setBookings } from "../../Redux/Slices";
 import { useDispatch } from "react-redux";
