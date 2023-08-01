@@ -25,21 +25,21 @@ const concerts = useAppSelector(state => state.concerts.allConcerts);
         <TypeCheckbox
           value={concertType.classics}
           label="Classics"
-          handleChange={(e) =>
+          handleChange={() =>
             setConcertType((prev) => ({ ...prev, classics: !prev.classics }))
           }
         />
         <TypeCheckbox
           value={concertType.partys}
           label="Partys"
-          handleChange={(e) =>
+          handleChange={() =>
             setConcertType((prev) => ({ ...prev, partys: !prev.partys }))
           }
         />
         <TypeCheckbox
           value={concertType.openAirs}
           label="OpenAirs"
-          handleChange={(e) =>
+          handleChange={() =>
             setConcertType((prev) => ({ ...prev, openAirs: !prev.openAirs }))
           }
         />

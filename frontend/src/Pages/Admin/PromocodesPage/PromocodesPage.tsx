@@ -1,9 +1,6 @@
-import React from "react";
-import { setPromocodes } from "../../../Redux/Slices";
-import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
+import { useAppSelector } from "../../../Redux/Hooks";
 import { PromocodeComponent } from "../Components/Promocode/Promocode";
 import styles from "./PromocodesPage.module.css";
-import { DeletePromocode } from "../../../Models/ConcertFunctions";
 
 export const PromocodesPage = () => {
   const promocodes = useAppSelector((state) => state.concerts.promocodes);

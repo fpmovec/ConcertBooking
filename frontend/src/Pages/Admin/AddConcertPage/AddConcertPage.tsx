@@ -22,7 +22,6 @@ type FormData = {
 
 export const AddConcertPage = () => {
   const dispatch = useAppDispatch();
-  const ConcertCoordinates = useAppSelector(state => state.concerts.allCoordinates);
   const [selectedType, setSelectedType] = useState("Classic");
   const isRadioSelected = (value: string): boolean => selectedType === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {

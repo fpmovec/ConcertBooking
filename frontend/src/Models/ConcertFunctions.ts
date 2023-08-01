@@ -1,6 +1,5 @@
 import { Booking } from "./BookingModels";
 import { Classic, Concert, Coordinates, OpenAir, Party } from "./ConcertModels";
-import { useAppSelector } from "../Redux/Hooks";
 import { Promocode } from "./Promocode";
 
 export const GetConcert = (

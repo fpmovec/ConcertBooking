@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import styles from "./AddConcertPage.module.css";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
-import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
+import { useAppDispatch } from "../../../Redux/Hooks";
 import { addClassic } from "../../../Redux/Slices";
 import { useState } from "react";
 

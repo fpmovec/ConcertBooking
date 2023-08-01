@@ -1,5 +1,4 @@
 import { useAppSelector } from "../../Redux/Hooks";
-import { Classic, Party, OpenAir } from "../../Models/ConcertModels";
 import { Concert } from "../../Models/ConcertModels";
 import { NotFound } from "../NotFoundPage/NotFoundPage";
 import { MapComponent } from "../../Components/Maps/Map";

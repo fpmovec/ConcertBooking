@@ -1,6 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Currency } from "../../../Components/Currency/Currency";
-import { Concert, Party } from "../../../Models/ConcertModels";
+import { Concert } from "../../../Models/ConcertModels";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import {
   setClassics,
@@ -15,6 +15,7 @@ import {
   DeleteConcert,
   DeleteCoordinates,
   DeleteOpenAir,
+  DeleteParty,
 } from "../../../Models/ConcertFunctions";
 
 interface Props {
@@ -22,7 +23,6 @@ interface Props {
 }
 
 export const ConcertComponent = ({ concert }: Props) => {
-  const navigate = useNavigate();
   const dispath = useAppDispatch();
 
   let currentConcerts = useAppSelector((state) => state.concerts.allConcerts);
@@ -88,9 +88,3 @@ export const ConcertComponent = ({ concert }: Props) => {
     </div>
   );
 };
-function DeleteParty(
-  party: Party,
-  currentPartys: import("../../../Models/ConcertModels").Party[]
-): import("../../../Models/ConcertModels").Party[] {
-  throw new Error("Function not implemented.");
-}
