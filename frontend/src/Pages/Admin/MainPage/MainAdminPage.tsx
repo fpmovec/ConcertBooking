@@ -10,7 +10,7 @@ export const MainAdminPage = () => {
         <div className={styles.title}>😎 Admin panel</div>
         <div className={styles.functions}>
            <button onClick={() => navigate("/admin/addConcert")}>➕ Add a concert</button>
-           <button>📚 Show all concerts</button>
+           <button onClick={() => navigate("/admin/concerts")}>📚 Show all concerts</button>
            <button onClick={() => navigate("/admin/addPromocode")}>➕ Add a promocode</button>
            <button onClick={() => navigate("/admin/promocodes")}>📚 Show all promocodes</button>
         </div>

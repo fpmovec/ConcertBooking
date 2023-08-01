@@ -1,10 +1,4 @@
-import {
-  concerts,
-  partys,
-  openAirs,
-  classics,
-  ConcertCoordinates,
-} from "../../Models/MockData";
+import { useAppSelector } from "../../Redux/Hooks";
 import { Classic, Party, OpenAir } from "../../Models/ConcertModels";
 import { Concert } from "../../Models/ConcertModels";
 import { NotFound } from "../NotFoundPage/NotFoundPage";
@@ -18,13 +12,16 @@ interface Props {
 }
 
 export const ConcertInfo = ({ data }: Props) => {
-  
   const navigate = useNavigate();
-
-  const navToBooking = () => navigate(`/booking/${data!.Id}`)
+  const partys = useAppSelector((state) => state.concerts.allPartys);
+  const classics = useAppSelector((state) => state.concerts.allClassics);
+  const openAirs = useAppSelector((state) => state.concerts.allOpenAirs);
+  const ConcertCoordinates = useAppSelector(
+    (state) => state.concerts.allCoordinates
+  );
+  const navToBooking = () => navigate(`/booking/${data!.Id}`);
 
   if (data === null) return <NotFound />;
-   
 
   const isParty = data.concertType === "Party";
   const isOpenAir = data.concertType === "OpenAir";
@@ -50,7 +47,10 @@ export const ConcertInfo = ({ data }: Props) => {
       </div>
       <div style={{ marginLeft: 10, fontWeight: 200, fontSize: 20 }}>
         Do you want to get to this event? Then buy tickets right now! The number
-        of tickets is limited. <span style={{fontWeight: 400}}>Tickets left: {data.ticketsCount}</span>
+        of tickets is limited.{" "}
+        <span style={{ fontWeight: 400 }}>
+          Tickets left: {data.ticketsCount}
+        </span>
       </div>
       <div className={styles.block}>
         <div className={styles.description}>
@@ -61,7 +61,10 @@ export const ConcertInfo = ({ data }: Props) => {
             ◽Where: <span>{data.location}</span>
           </div>
           <div>
-          ◽Ticket price: <span><Currency currency={data.price}/></span>
+            ◽Ticket price:{" "}
+            <span>
+              <Currency currency={data.price} />
+            </span>
           </div>
         </div>
         <div className={styles.map}>

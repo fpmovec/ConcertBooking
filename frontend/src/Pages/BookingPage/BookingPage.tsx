@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { bookedConcert, setCurrentBookingId } from "../../Redux/Slices";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ErrorField } from "../../Components/SuccesErrorFields/ErrorField";
-import { concerts } from "../../Models/MockData";
+
 import { Currency } from "../../Components/Currency/Currency";
 import styles from "./BookingPage.module.css";
 import React from "react";
@@ -20,7 +20,7 @@ type FormData = {
 
 export const BookingPage = () => {
   const promocodes = useAppSelector((state) => state.concerts.promocodes);
-
+const concerts = useAppSelector(state => state.concerts.allConcerts);
   const IsPromo = (data: string): boolean => {
     const code = promocodes.filter((pc) => pc.code === data);
     if (code.length !== 0) {

@@ -1,5 +1,5 @@
 import { ConcertList } from "../../Components/Concert/ConcertList";
-import { concerts } from "../../Models/MockData";
+import { useAppSelector } from "../../Redux/Hooks";
 import { TypeCheckbox } from "../../Components/SortPanel/SortPanel";
 import { useState } from "react";
 import styles from "./HomePage.module.css";
@@ -16,7 +16,7 @@ export const HomePage = () => {
     partys: true,
     openAirs: true,
   });
-
+const concerts = useAppSelector(state => state.concerts.allConcerts);
   const typeFilter = (arg: string) => concerts.filter(c => c.concertType === arg);
 
   return (

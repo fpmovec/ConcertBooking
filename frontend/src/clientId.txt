@@ -1,2 +1,10 @@
 CAD: AQugftnJIH51SU1UJbVP-J0g9BKCA6ltLl9ZeGN3wWhrapWzvZofFcg3CECgYm21CAes39i_FEiqKW-v
 USD: AWNjTVENcpaNZkUd75U1rv8HTKM3mLRmjIDMOj3fDGVrC3N8LBo0AE5cBIc6iv1CHbmnoIZwGeWyGeru
+
+Test Personal:
+     Email: sb-kd947526925916@personal.example.com
+     Password: @dr?U7+y
+
+Test Business:
+     Email: sb-vuayy26641158@business.example.com
+     Password: 1eR*Ngi2

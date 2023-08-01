@@ -16,6 +16,7 @@ import { AddConcertPage } from "./Pages/Admin/AddConcertPage/AddConcertPage";
 import { MainAdminPage } from "./Pages/Admin/MainPage/MainAdminPage";
 import { AddPromocodePage } from "./Pages/Admin/AddPromocodePage/AddPromocodePage";
 import { PurchasedPage } from "./Pages/PurchasedPage/PurchasedPage";
+import { ConcertsPage } from "./Pages/Admin/ConcertsPage/ConcertsPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
           <Route path="/admin/addConcert" element={<AddConcertPage />}/>
           <Route path="/admin/addPromocode" element={<AddPromocodePage />} />
           <Route path="/admin/promocodes" element={<PromocodesPage />} />
+          <Route path="/admin/concerts" element={<ConcertsPage />}/>
           <Route path="/admin" element={<MainAdminPage />}/>
           <Route path="*" element={<NotFound />} />
         </Routes>

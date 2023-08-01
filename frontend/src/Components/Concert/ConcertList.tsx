@@ -7,14 +7,15 @@ interface Props {
 }
 
 export const ConcertList = ({ data }: Props) => {
-  return (
+  return data.length > 0 ? (
     <ul className={styles.ul}>
       {data.map((concert) => (
         <li className={styles.li} key={concert.Id}>
-          <ConcertComponent data={concert}/>
+          <ConcertComponent data={concert} />
         </li>
       ))}
     </ul>
+  ) : (
+    <></>
   );
-}
-
+};

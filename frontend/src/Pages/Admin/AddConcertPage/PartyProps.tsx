@@ -1,8 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { partys } from "../../../Models/MockData";
+import { useAppDispatch } from "../../../Redux/Hooks";
 import  styles  from "./AddConcertPage.module.css"
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
+import { addParty } from "../../../Redux/Slices";
 
 interface Props {
   concertId: number;
@@ -13,6 +14,7 @@ type FormData = {
 };
 
 export const PartyProps = ({ concertId }: Props) => {
+  const dispatch = useAppDispatch();
   const [isSuccessfully, setIsSuccessfully] = React.useState(false);
   const {
     register,
@@ -23,10 +25,10 @@ export const PartyProps = ({ concertId }: Props) => {
   });
 
   const submitForm = (data: FormData) => {
-    partys.push({
+   dispatch(addParty({
       concertId: concertId,
       ageLimit: data.ageLimit,
-    });
+    }));
     setIsSuccessfully(true)
   };
 

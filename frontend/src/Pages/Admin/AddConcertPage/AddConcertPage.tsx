@@ -2,11 +2,12 @@ import { useState } from "react";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import styles from "./AddConcertPage.module.css";
 import { useForm } from "react-hook-form";
-import { concerts } from "../../../Models/MockData";
+import { useAppSelector, useAppDispatch } from "../../../Redux/Hooks";
+import { addCoordinates, addConcert } from "../../../Redux/Slices";
 import { ClassicProps } from "./ClassicProps";
 import { OpenAitProps } from "./OpenAirProps";
 import { PartyProps } from "./PartyProps";
-import { ConcertCoordinates } from "../../../Models/MockData";
+
 
 type FormData = {
   performer: string;
@@ -20,11 +21,14 @@ type FormData = {
 };
 
 export const AddConcertPage = () => {
+  const dispatch = useAppDispatch();
+  const ConcertCoordinates = useAppSelector(state => state.concerts.allCoordinates);
   const [selectedType, setSelectedType] = useState("Classic");
   const isRadioSelected = (value: string): boolean => selectedType === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSelectedType(e.target.value);
   };
+  const concerts = useAppSelector(state => state.concerts.allConcerts);
   const getCurrentConcertId = () => Math.max(...concerts.map((c) => c.Id)) + 1;
   const currentConcertId = getCurrentConcertId();
   const [isContinue, setIsContinue] = useState(false);
@@ -40,7 +44,7 @@ export const AddConcertPage = () => {
 
   const submitForm = (data: FormData) => {
     setCurrentId(Math.max(...concerts.map((c) => c.Id)) + 1);
-    concerts.push({
+    dispatch(addConcert({
       Id: currentId,
       performer: data.performer,
       ticketsCount: data.ticketsCount,
@@ -48,12 +52,12 @@ export const AddConcertPage = () => {
       location: data.location,
       concertType: selectedType,
       price: data.price,
-    });
-    ConcertCoordinates.push({
+    }));
+    dispatch(addCoordinates({
       concertId: currentId,
       longitude: data.longitude,
       latitude: data.latitude,
-    });
+    }));
     setIsContinue(true);
     console.log(concerts);
   };

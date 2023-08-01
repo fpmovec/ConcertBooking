@@ -1,10 +1,11 @@
 import { PurchasedComponent } from "../../Components/Booking/PurchasedComponent";
-import { getConcert } from "../../Models/ConcertFunctions";
+import { GetConcert } from "../../Models/ConcertFunctions";
 import { useAppSelector } from "../../Redux/Hooks";
-import styles from './Purchased.module.css'
+import styles from "./Purchased.module.css";
 
 export const PurchasedPage = () => {
-    const purchasedTickets = useAppSelector((state) => state.concerts.purchased);
+  const purchasedTickets = useAppSelector((state) => state.concerts.purchased);
+  const concerts = useAppSelector(state => state.concerts.allConcerts)
   console.log(purchasedTickets);
   return purchasedTickets.length === 0 ? (
     <div className="notFound">You haven't purchased any tickets yet 🙄</div>
@@ -14,10 +15,10 @@ export const PurchasedPage = () => {
         <li className={styles.li} key={b.id}>
           <PurchasedComponent
             booking={b}
-            concertPerformer={getConcert(b.concertId)?.performer}
+            concertPerformer={GetConcert(b.concertId, concerts)?.performer}
           />
         </li>
       ))}
     </ul>
   );
-}
+};

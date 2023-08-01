@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import styles from "./AddConcertPage.module.css";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
-import { classics } from "../../../Models/MockData";
+import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
+import { addClassic } from "../../../Redux/Slices";
 import { useState } from "react";
 
 interface Props {
@@ -15,6 +16,8 @@ type FormData = {
 };
 
 export const ClassicProps = ({ concertId }: Props) => {
+
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -26,13 +29,12 @@ export const ClassicProps = ({ concertId }: Props) => {
   const [isSuccessfully, setIsSuccessfully] = useState(false);
 
   const submitForm = (data: FormData) => {
-    classics.push({
+    dispatch(addClassic({
       concertId: concertId,
       voiceType: data.voiceType,
       concertName: data.concertName,
       composer: data.composer,
-    });
-    console.log(classics);
+    }));
     setIsSuccessfully(true);
   };
 
