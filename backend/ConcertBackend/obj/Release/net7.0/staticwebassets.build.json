@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "+cB4hW07jlpFgpnXafO2jkjZwEt8PUCjHd49gSzZfy8=",
+  "Source": "ConcertBackend",
+  "BasePath": "_content/ConcertBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
