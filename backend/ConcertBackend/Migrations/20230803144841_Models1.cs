@@ -5,7 +5,7 @@
 namespace ConcertBackend.Migrations
 {
     /// <inheritdoc />
-    public partial class Models : Migration
+    public partial class Models1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

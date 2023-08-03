@@ -11,9 +11,8 @@ namespace ConcertBackend.Context
         {
             modelBuilder.Entity<Concert>()
                 .HasOne(c => c.Coordinates)
-                .WithOne(e => e.Concert)
-                .HasForeignKey<Coordinates>(co => co.ConcertId)
-                .IsRequired();
+                .WithOne()
+                .HasForeignKey<Coordinates>(co => co.ConcertId);
         }
 
         public DbSet<Concert> Concerts { get; set; }

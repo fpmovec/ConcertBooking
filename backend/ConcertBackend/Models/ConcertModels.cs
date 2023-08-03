@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ConcertBackend.Models
 {
-    public abstract class Concert
+    public class Concert
     {
         public int Id { get; set; }
         public required string Performer { get; set; }
@@ -43,6 +44,6 @@ namespace ConcertBackend.Models
         public int ConcertId { get; set; }
         public float Longitude { get; set; }
         public float Latitude { get; set; }
-        public Concert? Concert { get; set; }
+
     }
 }

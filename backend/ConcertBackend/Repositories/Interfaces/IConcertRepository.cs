@@ -4,10 +4,14 @@ namespace ConcertBackend.Repositories.Interfaces
 {
     public interface IConcertRepository
     {
-        Task<List<Concert>> GetConcerts();
-        Task<List<Classic>> GetClassics();
-        Task<List<Party>> GetParties();
-        Task<List<OpenAir>> GetOpenAirs();
-        Task<Concert> GetConcertById(int id);
+        Task<List<Concert>> GetConcertsAsync();
+        Task<List<Classic>> GetClassicsAsync();
+        Task<List<Party>> GetPartiesAsync();
+        Task<List<OpenAir>> GetOpenAirsAsync();
+        Task<Concert> GetConcertByIdAsync(int id);
+        Task<List<Concert>> GetConcertByCriteriaAsync(string? criteria);
+        Task<Coordinates> GetCoordinatesByConcertIdAsync(int id);
+        Task AddClassicAsync(Classic classic);
+        Task<Coordinates?> AddCoordinatesAsync(Coordinates coordinates);
     }
 }

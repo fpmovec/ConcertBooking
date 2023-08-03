@@ -144,13 +144,11 @@ namespace ConcertBackend.Migrations
 
             modelBuilder.Entity("ConcertBackend.Models.Coordinates", b =>
                 {
-                    b.HasOne("ConcertBackend.Models.Concert", "Concert")
+                    b.HasOne("ConcertBackend.Models.Concert", null)
                         .WithOne("Coordinates")
                         .HasForeignKey("ConcertBackend.Models.Coordinates", "ConcertId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Concert");
                 });
 
             modelBuilder.Entity("ConcertBackend.Models.Classic", b =>

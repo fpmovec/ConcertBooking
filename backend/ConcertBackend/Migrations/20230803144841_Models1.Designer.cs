@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConcertBackend.Migrations
 {
     [DbContext(typeof(ConcertsDbContext))]
-    [Migration("20230803083514_Models")]
-    partial class Models
+    [Migration("20230803144841_Models1")]
+    partial class Models1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -147,13 +147,11 @@ namespace ConcertBackend.Migrations
 
             modelBuilder.Entity("ConcertBackend.Models.Coordinates", b =>
                 {
-                    b.HasOne("ConcertBackend.Models.Concert", "Concert")
+                    b.HasOne("ConcertBackend.Models.Concert", null)
                         .WithOne("Coordinates")
                         .HasForeignKey("ConcertBackend.Models.Coordinates", "ConcertId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Concert");
                 });
 
             modelBuilder.Entity("ConcertBackend.Models.Classic", b =>
