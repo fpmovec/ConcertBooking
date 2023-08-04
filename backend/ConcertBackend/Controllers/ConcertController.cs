@@ -1,6 +1,7 @@
 ﻿using ConcertBackend.Models;
 using ConcertBackend.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ConcertBackend.Controllers
 {
@@ -11,7 +12,7 @@ namespace ConcertBackend.Controllers
         private readonly IConcertRepository _concertRepository;
         public ConcertController(IConcertRepository repository)
         {
-                _concertRepository = repository;
+            _concertRepository = repository;
         }
 
         [HttpGet]
@@ -22,12 +23,12 @@ namespace ConcertBackend.Controllers
             {
                 return NotFound();
             }
-  
+
             return Ok(concerts);
         }
 
         [HttpGet("classic")]
-        public async Task<ActionResult<List<Classic>>> GetAllClassics() { 
+        public async Task<ActionResult<List<Classic>>> GetAllClassics() {
             var classics = await _concertRepository.GetClassicsAsync();
 
             if (classics == null)
@@ -76,9 +77,40 @@ namespace ConcertBackend.Controllers
             return Ok(coordinates);
         }
 
+        [HttpGet("classic/{id}")]
+        public async Task<ActionResult<Classic>> GetClassicById(int id)
+        {
+            var concert = await _concertRepository.GetClassicAsync(id);
 
+            if (concert == null)
+                return NotFound();
 
-        [HttpPost]
+            return Ok(concert);
+        }
+
+        [HttpGet("party/{id}")]
+        public async Task<ActionResult<Party>> GetPartyById(int id)
+        {
+            var concert = await _concertRepository.GetPartyAsync(id);
+
+            if (concert == null)
+                return NotFound();
+
+            return Ok(concert);
+        }
+
+        [HttpGet("openair/{id}")]
+        public async Task<ActionResult<OpenAir>> GetOpenAirById(int id)
+        {
+            var concert = await _concertRepository.GetOpenAirAsync(id);
+
+            if (concert == null)
+                return NotFound();
+
+            return Ok(concert);
+        }
+
+        [HttpPost("classic")]
         public async Task<ActionResult> AddClassic([FromBody] ClassicDto concert)
         {
             if (concert == null)
@@ -101,6 +133,50 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
+        [HttpPost("party")]
+        public async Task<ActionResult> AddParty(PartyDto partyDto)
+        {
+            if (partyDto == null)
+                return BadRequest();
+
+            var party = new Party()
+            {
+                Performer = partyDto.Performer,
+                TicketsCount = partyDto.TicketsCount,
+                ConcertDate = partyDto.ConcertDate,
+                Location = partyDto.Location,
+                ConcertType = "Party",
+                Price = partyDto.Price,
+                AgeLimit = partyDto.AgeLimit,
+            };
+
+            await _concertRepository.AddPartyAsync(party);
+            return Ok();
+
+        }
+
+        [HttpPost("openair")]
+        public async Task<ActionResult> AddOpenAir(OpenAirDto openairDto)
+        {
+            if (openairDto == null)
+                return BadRequest();
+
+            var openair = new OpenAir()
+            {
+                Performer = openairDto.Performer,
+                TicketsCount = openairDto.TicketsCount,
+                ConcertDate = openairDto.ConcertDate,
+                Location = openairDto.Location,
+                ConcertType = "OpenAir",
+                Price = openairDto.Price,
+                Journey = openairDto.Journey,
+                Headliner = openairDto.Headliner,
+            };
+
+            await _concertRepository.AddOpenAirAsync(openair);
+            return Ok();
+        }
+
         [HttpPost("coordinates")]
         public async Task<ActionResult> AddCoordinatesAsync([FromBody] CoordinatesDto coordinatesDto)
         {
@@ -115,6 +191,47 @@ namespace ConcertBackend.Controllers
             if (concert == null)
                 return NotFound();
 
+            return Ok();
+        }
+
+
+        [HttpDelete("classic/{id}")]
+        public async Task<ActionResult> DeleteClassic(int id)
+        {
+            var concert = await _concertRepository.GetClassicAsync(id);
+            if (concert == null) return NotFound();
+
+            await _concertRepository.DeleteClassicAsync(concert);
+            return Ok();
+        }
+
+        [HttpDelete("party/{id}")]
+        public async Task<ActionResult> DeleteParty(int id)
+        {
+            var concert = await _concertRepository.GetPartyAsync(id);
+            if (concert == null) return NotFound();
+
+            await _concertRepository.DeletePartyAsync(concert);
+            return Ok();
+        }
+
+        [HttpDelete("openair/{id}")]
+        public async Task<ActionResult> DeleteOpenAir(int id)
+        {
+            var concert = await _concertRepository.GetOpenAirAsync(id);
+            if (concert == null) return NotFound();
+
+            await _concertRepository.DeleteOpenAirAsync(concert);
+            return Ok();
+        }
+
+        [HttpDelete("coordinates/{id}")]
+        public async Task<ActionResult> DeleteCoordinates(int id)
+        {
+            var coordinates = await _concertRepository.GetCoordinatesByConcertIdAsync(id);
+            if (coordinates == null) return NotFound();
+
+            await _concertRepository.DeleteCoordinatesAsync(coordinates);
             return Ok();
         }
     }

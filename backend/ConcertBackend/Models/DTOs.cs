@@ -12,6 +12,27 @@
         public string? Composer { get; set; }
     }
 
+    public class PartyDto
+    {
+        public required string Performer { get; set; }
+        public int TicketsCount { get; set; }
+        public required string ConcertDate { get; set; }
+        public required string Location { get; set; }
+        public float Price { get; set; }
+        public int AgeLimit { get; set; }
+    }
+
+    public class OpenAirDto
+    {
+        public required string Performer { get; set; }
+        public int TicketsCount { get; set; }
+        public required string ConcertDate { get; set; }
+        public required string Location { get; set; }
+        public float Price { get; set; }
+        public string Journey { get; set; } = string.Empty;
+        public string Headliner { get; set; } = string.Empty;
+    }
+
     public class CoordinatesDto
     {
         public int ConcertId { get; set; }

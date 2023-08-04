@@ -1,7 +1,6 @@
 ﻿using ConcertBackend.Context;
 using ConcertBackend.Models;
 using ConcertBackend.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -31,9 +30,72 @@ namespace ConcertBackend.Repositories.Classes
             return coordinates;
         }
 
+        public async Task AddOpenAirAsync(OpenAir openAir)
+        {
+            _context.OpenAirs.Add(openAir);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddPartyAsync(Party party)
+        {
+            _context.Parties.Add(party);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteClassicAsync(Classic classic)
+        {
+            if (classic != null)
+               _context.Remove(classic);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteCoordinatesAsync(Coordinates coordinates)
+        {
+                _context.Remove(coordinates);
+                await _context.SaveChangesAsync();
+         
+        }
+
+        public async Task DeleteOpenAirAsync(OpenAir openAir)
+        {
+            //var coordinates = _context.Coordinates.Where(c => c.ConcertId == openAir.Id);
+            //if (coordinates != null)
+            //{
+            //    _context.Remove(coordinates);
+            //}
+            if (openAir != null)
+                _context.Remove(openAir);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeletePartyAsync(Party party)
+        {
+            //var coordinates = _context.Coordinates.Where(c => c.ConcertId == party.Id);
+            //if (coordinates != null)
+            //{
+            //    _context.Remove(coordinates);
+            //}
+            if (party != null)
+                _context.Remove(party);
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Classic?> GetClassicAsync(int id)
+        {
+            return await _context.Classics
+                .Where(c => c.Id == id)
+                .Include(c => c.Coordinates)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<List<Classic>> GetClassicsAsync()
         {
-            return await _context.Classics.ToListAsync();
+            return await _context.Classics
+                .Include(c => c.Coordinates)
+                .ToListAsync();
         }
 
         public async Task<List<Concert>> GetConcertByCriteriaAsync(string? criteria)
@@ -67,6 +129,14 @@ namespace ConcertBackend.Repositories.Classes
             return coordinates;
         }
 
+        public async Task<OpenAir?> GetOpenAirAsync(int id)
+        {
+            return await _context.OpenAirs
+                 .Where(c => c.Id == id)
+                 .Include(co => co.Coordinates)
+                 .FirstOrDefaultAsync();
+        }
+
         public async Task<List<OpenAir>> GetOpenAirsAsync()
         {
             return await _context.OpenAirs.ToListAsync();
@@ -76,5 +146,15 @@ namespace ConcertBackend.Repositories.Classes
         {
             return await _context.Parties.ToListAsync();
         }
+
+        public async Task<Party?> GetPartyAsync(int id)
+        {
+            return await _context.Parties
+                .Where(c => c.Id == id)
+                .Include(co => co.Coordinates)
+                .FirstOrDefaultAsync();
+        }
     }
+
+
 }
