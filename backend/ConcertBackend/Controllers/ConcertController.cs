@@ -15,7 +15,7 @@ namespace ConcertBackend.Controllers
             _concertRepository = repository;
         }
 
-        [HttpGet]
+        [HttpGet("concerts")]
         public async Task<ActionResult<List<Concert>>> GetAllConcerts()
         {
             var concerts = await _concertRepository.GetConcertsAsync();

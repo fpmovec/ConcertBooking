@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ConcertBackend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BookingController : ControllerBase
     {

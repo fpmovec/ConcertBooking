@@ -13,7 +13,7 @@ namespace ConcertBackend.Models
         public required string Location { get; set; }
         public required string ConcertType { get; set; }
         public float Price { get; set; }
-
+        public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
         public Coordinates? Coordinates { get; set; }
     }
 

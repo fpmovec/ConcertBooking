@@ -59,11 +59,6 @@ namespace ConcertBackend.Repositories.Classes
 
         public async Task DeleteOpenAirAsync(OpenAir openAir)
         {
-            //var coordinates = _context.Coordinates.Where(c => c.ConcertId == openAir.Id);
-            //if (coordinates != null)
-            //{
-            //    _context.Remove(coordinates);
-            //}
             if (openAir != null)
                 _context.Remove(openAir);
 
@@ -72,11 +67,6 @@ namespace ConcertBackend.Repositories.Classes
 
         public async Task DeletePartyAsync(Party party)
         {
-            //var coordinates = _context.Coordinates.Where(c => c.ConcertId == party.Id);
-            //if (coordinates != null)
-            //{
-            //    _context.Remove(coordinates);
-            //}
             if (party != null)
                 _context.Remove(party);
 

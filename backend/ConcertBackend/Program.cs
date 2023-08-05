@@ -17,6 +17,7 @@ builder.Services.AddDbContext<ConcertsDbContext>(
     options => options.UseSqlServer(ConfigurationExtensions.GetConnectionString(builder.Configuration, "DefaultConnection"))
     );
 builder.Services.AddTransient<IConcertRepository, ConcertRepository>();
+builder.Services.AddTransient<IPromocodesRepository, PromocodesRepository>();
 var app = builder.Build();
 
  //Configure the HTTP request pipeline.

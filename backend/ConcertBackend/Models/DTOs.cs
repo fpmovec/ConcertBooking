@@ -39,4 +39,10 @@
         public float Longitude { get; set; }
         public float Latitude { get; set; }
     }
+
+    public class PromocodeDto
+    {
+        public required string Code { get; set; }
+        public float Total { get; set; }
+    }
 }
