@@ -1,5 +1,6 @@
 ﻿using ConcertBackend.Models;
 using ConcertBackend.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,12 +17,14 @@ namespace ConcertBackend.Controllers
                 _promocodesRepository = repository;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Promocode>>> GetPromocodesAsync()
         {
             return Ok(await _promocodesRepository.GetPromocodesAsync());
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult<Promocode>> GetPromocodeByIdAsync(int id)
         {
@@ -33,6 +36,7 @@ namespace ConcertBackend.Controllers
             return Ok(promocode);
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> AddPromocodeAsync([FromBody]PromocodeDto promocode)
         {
@@ -47,6 +51,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeletePromocodeAsync(int id)
         {
