@@ -16,11 +16,18 @@ namespace ConcertBackend.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendEmail(EmailDto email)
+        public ActionResult SendEmail(string email)
         {
             _service.SendEmail(email);
 
             return Ok();
+        }
+
+        [HttpGet("confirmation")]
+        public ActionResult<Guid> GetConfirmationCode()
+        {
+            var confirmationCode = _service.GetConfirmationCode();
+            return Ok(confirmationCode);
         }
     }
 }

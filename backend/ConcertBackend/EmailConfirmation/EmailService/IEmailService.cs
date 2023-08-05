@@ -4,6 +4,7 @@ namespace ConcertBackend.EmailConfirmation.EmailService
 {
     public interface IEmailService
     {
-        void SendEmail(EmailDto emailDto);
+        void SendEmail(string email);
+        Guid GetConfirmationCode();
     }
 }
