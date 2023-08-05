@@ -110,6 +110,7 @@ namespace ConcertBackend.Repositories.Classes
         {
             return await _context.Concerts
                 .Include(c => c.Coordinates)
+                .Include(c => c.Bookings)
                 .ToListAsync();   
         }
 

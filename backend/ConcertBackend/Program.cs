@@ -18,6 +18,7 @@ builder.Services.AddDbContext<ConcertsDbContext>(
     );
 builder.Services.AddTransient<IConcertRepository, ConcertRepository>();
 builder.Services.AddTransient<IPromocodesRepository, PromocodesRepository>();
+builder.Services.AddTransient<IBookingRepository, BookingRepository>();
 var app = builder.Build();
 
  //Configure the HTTP request pipeline.
