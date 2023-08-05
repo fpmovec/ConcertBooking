@@ -1,5 +1,6 @@
 ﻿using ConcertBackend.Models;
 using ConcertBackend.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -15,6 +16,7 @@ namespace ConcertBackend.Controllers
             _concertRepository = repository;
         }
 
+        [AllowAnonymous]
         [HttpGet("concerts")]
         public async Task<ActionResult<List<Concert>>> GetAllConcerts()
         {
@@ -27,6 +29,7 @@ namespace ConcertBackend.Controllers
             return Ok(concerts);
         }
 
+        [AllowAnonymous]
         [HttpGet("classic")]
         public async Task<ActionResult<List<Classic>>> GetAllClassics() {
             var classics = await _concertRepository.GetClassicsAsync();
@@ -37,6 +40,7 @@ namespace ConcertBackend.Controllers
             return Ok(classics);
         }
 
+        [AllowAnonymous]
         [HttpGet("party")]
         public async Task<ActionResult<List<Party>>> GetAllParties()
         {
@@ -48,6 +52,7 @@ namespace ConcertBackend.Controllers
             return Ok(parties);
         }
 
+        [AllowAnonymous]
         [HttpGet("openair")]
         public async Task<ActionResult<List<OpenAir>>> GetAllOpenAirs()
         {
@@ -59,6 +64,7 @@ namespace ConcertBackend.Controllers
             return Ok(openAirs);
         }
 
+        [AllowAnonymous]
         [HttpGet("search/{criteria}")]
         public async Task<ActionResult<List<Concert>>> GetConcertsByCriteria(string? criteria)
         {
@@ -66,6 +72,7 @@ namespace ConcertBackend.Controllers
             return Ok(searchedConcerts);
         }
 
+        [AllowAnonymous]
         [HttpGet("coordinates/{id}")]
         public async Task<ActionResult<Coordinates>> GetCoordinatesByConcertId(int id)
         {
@@ -77,6 +84,7 @@ namespace ConcertBackend.Controllers
             return Ok(coordinates);
         }
 
+        [AllowAnonymous]
         [HttpGet("classic/{id}")]
         public async Task<ActionResult<Classic>> GetClassicById(int id)
         {
@@ -88,6 +96,7 @@ namespace ConcertBackend.Controllers
             return Ok(concert);
         }
 
+        [AllowAnonymous]
         [HttpGet("party/{id}")]
         public async Task<ActionResult<Party>> GetPartyById(int id)
         {
@@ -99,6 +108,7 @@ namespace ConcertBackend.Controllers
             return Ok(concert);
         }
 
+        [AllowAnonymous]
         [HttpGet("openair/{id}")]
         public async Task<ActionResult<OpenAir>> GetOpenAirById(int id)
         {
@@ -110,6 +120,7 @@ namespace ConcertBackend.Controllers
             return Ok(concert);
         }
 
+        [Authorize]
         [HttpPost("classic")]
         public async Task<ActionResult> AddClassic([FromBody] ClassicDto concert)
         {
@@ -133,6 +144,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpPost("party")]
         public async Task<ActionResult> AddParty(PartyDto partyDto)
         {
@@ -155,6 +167,7 @@ namespace ConcertBackend.Controllers
 
         }
 
+        [Authorize]
         [HttpPost("openair")]
         public async Task<ActionResult> AddOpenAir(OpenAirDto openairDto)
         {
@@ -177,6 +190,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpPost("coordinates")]
         public async Task<ActionResult> AddCoordinatesAsync([FromBody] CoordinatesDto coordinatesDto)
         {
@@ -194,7 +208,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
-
+        [Authorize]
         [HttpDelete("classic/{id}")]
         public async Task<ActionResult> DeleteClassic(int id)
         {
@@ -205,6 +219,8 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
+
+        [Authorize]
         [HttpDelete("party/{id}")]
         public async Task<ActionResult> DeleteParty(int id)
         {
@@ -215,6 +231,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpDelete("openair/{id}")]
         public async Task<ActionResult> DeleteOpenAir(int id)
         {
@@ -225,6 +242,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpDelete("coordinates/{id}")]
         public async Task<ActionResult> DeleteCoordinates(int id)
         {

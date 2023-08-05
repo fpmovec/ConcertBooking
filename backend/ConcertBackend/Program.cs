@@ -1,6 +1,7 @@
 using ConcertBackend.Context;
 using ConcertBackend.Repositories.Classes;
 using ConcertBackend.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,17 @@ builder.Services.AddDbContext<ConcertsDbContext>(
 builder.Services.AddTransient<IConcertRepository, ConcertRepository>();
 builder.Services.AddTransient<IPromocodesRepository, PromocodesRepository>();
 builder.Services.AddTransient<IBookingRepository, BookingRepository>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.Authority = "https://dev-ii744htuz2rl8fvk.us.auth0.com/";
+    options.Audience = "https://concertsbooking";
+});
+
 var app = builder.Build();
 
  //Configure the HTTP request pipeline.
@@ -33,6 +45,7 @@ app.UseHttpsRedirection();
 }
 
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>

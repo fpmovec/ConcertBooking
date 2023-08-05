@@ -146,6 +146,4 @@ namespace ConcertBackend.Repositories.Classes
                 .FirstOrDefaultAsync();
         }
     }
-
-
 }

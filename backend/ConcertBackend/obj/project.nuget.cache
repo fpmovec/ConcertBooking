@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "N3zun1DovMnQtuFp16EWAkQufWeIhLTQZKxm8ulk8wHxyqnyodlhgVZqIyX4WwGtpzh+HxgQxRfcm8dnCasQjA==",
+  "dgSpecHash": "X+JWj/SB0wP3b6Yl+QeyVLCH8X8SyDWPJT8fK226Emw7VoLQL6bFyxNcA3WJysOIvzSPyB4P2Dhrms5xoE/dGw==",
   "success": true,
   "projectFilePath": "D:\\ConcertBooking\\backend\\ConcertBackend\\ConcertBackend.csproj",
   "expectedPackageFiles": [
     "D:\\Nuget\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "D:\\Nuget\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "D:\\Nuget\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "D:\\Nuget\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.9\\microsoft.aspnetcore.authentication.jwtbearer.7.0.9.nupkg.sha512",
     "D:\\Nuget\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
     "D:\\Nuget\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "D:\\Nuget\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
