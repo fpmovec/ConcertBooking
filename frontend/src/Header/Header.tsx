@@ -1,16 +1,14 @@
-import {
-  Link,
-  useSearchParams,
-  useNavigate,
-} from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styles from "./Header.module.css";
+import { useAuth } from "../Authorization/Auth";
 
 type FormData = {
   search: string;
 };
 
 export const Header = () => {
+  const { isAuthenticated, user, loading } = useAuth();
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm<FormData>();
   const [searchParams] = useSearchParams();
@@ -52,10 +50,21 @@ export const Header = () => {
           🎫 <span>Purchased tickets</span>
         </button>
       </div>
-
-      <Link to="./admin" className={styles.signIn}>
-        🧑 Sign In
-      </Link>
+      {!loading &&
+        (isAuthenticated ? (
+          <div>
+            <span style={{ marginRight: 5 }}>{user!.name}</span>
+            <Link to="./signout" className={styles.signIn}>
+              Sign Out
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <Link to="./signin" className={styles.signIn}>
+              Sign In
+            </Link>
+          </div>
+        ))}
     </div>
   );
 };
