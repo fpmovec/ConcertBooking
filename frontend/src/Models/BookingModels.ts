@@ -7,4 +7,5 @@ export interface Booking {
     ticketQuantity: number;
     concertId: number;
     purchaseAmount: number;
+    username: string;
 }

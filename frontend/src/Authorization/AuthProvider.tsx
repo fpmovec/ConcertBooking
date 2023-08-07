@@ -26,8 +26,8 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       setAuth0Client(auth0FromHook);
 
       if (
-        window.location.pathname === '/signin-callback' &&
-        window.location.search.indexOf('code=') > -1
+        window.location.pathname === "/signin-callback" &&
+        window.location.search.indexOf("code=") > -1
       ) {
         await auth0FromHook.handleRedirectCallback();
         window.location.replace(window.location.origin);
@@ -50,9 +50,10 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         isAuthenticated,
         user,
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        signIn: () => getAuth0ClientFromState().loginWithRedirect(),
+        signIn: () => getAuth0ClientFromState().loginWithPopup(),
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        signOut: () => getAuth0ClientFromState().logout({
+        signOut: () =>
+          getAuth0ClientFromState().logout({
             clientId: authSettings.clientId,
             logoutParams: {
               returnTo: window.location.origin + "/signout-callback",

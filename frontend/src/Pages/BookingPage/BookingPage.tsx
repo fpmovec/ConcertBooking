@@ -3,10 +3,11 @@ import { useForm } from "react-hook-form";
 import { bookedConcert, setCurrentBookingId } from "../../Redux/Slices";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ErrorField } from "../../Components/SuccesErrorFields/ErrorField";
-
+import { useAuth } from "../../Authorization/Auth";
 import { Currency } from "../../Components/Currency/Currency";
 import styles from "./BookingPage.module.css";
 import React from "react";
+import { getCode } from "../../Models/ConcertFunctions";
 
 type FormData = {
   firstName: string;
@@ -16,11 +17,13 @@ type FormData = {
   ticketQuantity: number;
   concertId: number;
   promocode: string;
+  code: string;
 };
 
 export const BookingPage = () => {
+  const { user } = useAuth();
   const promocodes = useAppSelector((state) => state.concerts.promocodes);
-const concerts = useAppSelector(state => state.concerts.allConcerts);
+  const concerts = useAppSelector((state) => state.concerts.allConcerts);
   const IsPromo = (data: string): boolean => {
     const code = promocodes.filter((pc) => pc.code === data);
     if (code.length !== 0) {
@@ -33,8 +36,20 @@ const concerts = useAppSelector(state => state.concerts.allConcerts);
     }
   };
 
-  const [isPromo, setIsPromo] = React.useState(false);
+  const IsValidCode = (data: string) => {
+    const code = getCode();
 
+    return code === data ? true : false;
+  };
+
+  const confirm = (data: FormData) => {
+    setIsConfirmation(true);
+    setCurrentForm(data);
+  };
+
+  const [isPromo, setIsPromo] = React.useState(false);
+  const [isConfirmation, setIsConfirmation] = React.useState(false);
+  const [currentForm, setCurrentForm] = React.useState<FormData>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const bookings = useAppSelector((state) => state.concerts.booking);
@@ -56,17 +71,19 @@ const concerts = useAppSelector(state => state.concerts.allConcerts);
 
   console.log(bookings);
 
-  const submitForm = (data: FormData) => {
+  const submit = () => {
+    const data = currentForm;
     dispatch(
       bookedConcert({
         id: currentBookingId,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-        ticketQuantity: data.ticketQuantity,
+        firstName: data!.firstName,
+        lastName: data!.lastName,
+        email: data!.email,
+        phoneNumber: data!.phoneNumber,
+        ticketQuantity: data!.ticketQuantity,
         concertId: Number(concertId),
         purchaseAmount: promoPrice * quantity,
+        username: user!.name
       })
     );
     currentBookingId = currentBookingId + 1;
@@ -83,134 +100,168 @@ const concerts = useAppSelector(state => state.concerts.allConcerts);
           {<Currency currency={promoPrice * quantity} />}
         </div>
       </div>
-      <form
-        onSubmit={(event) => void handleSubmit(submitForm)(event)}
-        className={styles.form}
-      >
+      {isConfirmation ? (
         <div>
-          <label htmlFor="firstName">First name:</label>
-          <input
-            id="firstName"
-            type="text"
-            {...register("firstName", { required: true, minLength: 3 })}
-          />
-          {errors.firstName && errors.firstName.type === "required" && (
-            <ErrorField data="Enter the first name" />
-          )}
-          {errors.firstName && errors.firstName.type === "minLength" && (
-            <ErrorField data="This field must be contained at least 3 characters" />
-          )}
-        </div>
-        <div>
-          <label htmlFor="lastName">Last name:</label>
-          <input
-            id="lastName"
-            type="text"
-            {...register("lastName", { required: true, minLength: 3 })}
-          />
-          {errors.lastName && errors.lastName.type === "required" && (
-            <ErrorField data="Enter the last name" />
-          )}
-          {errors.lastName && errors.lastName.type === "minLength" && (
-            <ErrorField data="This field must be contained at least 3 characters" />
-          )}
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            id="email"
-            type="text"
-            {...register("email", {
-              required: true,
-              pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            })}
-          />
-          {errors.email && errors.email.type === "required" && (
-            <ErrorField data="Enter your Email" />
-          )}
-          {errors.email && errors.email.type === "pattern" && (
-            <ErrorField data="Email is not correct" />
-          )}
-        </div>
-        <div>
-          <label htmlFor="phone">Phone number:</label>
-          <input
-            id="phone"
-            type="text"
-            {...register("phoneNumber", {
-              required: true,
-              pattern:
-                /^[\\+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?[0-9]{4,6}$/im,
-            })}
-          />
-          {errors.phoneNumber && errors.phoneNumber.type === "required" && (
-            <ErrorField data="Enter your phone number" />
-          )}
-          {errors.phoneNumber && errors.phoneNumber.type === "pattern" && (
-            <ErrorField data="The phone number is not correct" />
-          )}
-        </div>
-        <div>
-          <label htmlFor="tickets">Tickets quantity:</label>
-          <input
-            id="tickets"
-            type="number"
-            {...register("ticketQuantity", {
-              required: true,
-              min: 1,
-              max: concertByCurrentId?.ticketsCount,
-              validate: {
-                quantity: (v) => {
-                  setQuantity(v);
-                  return true;
-                },
-              },
-            })}
-            defaultValue={1}
-          />
-          {errors.ticketQuantity &&
-            errors.ticketQuantity.type === "required" && (
-              <ErrorField data="Specify the number of tickets to purchase" />
-            )}
-          {errors.ticketQuantity && errors.ticketQuantity.type === "min" && (
-            <ErrorField data="You can book at least 1 ticket" />
-          )}
-          {errors.ticketQuantity && errors.ticketQuantity.type === "max" && (
-            <ErrorField
-              data={`You can book no more than ${
-                concertByCurrentId!.ticketsCount
-              } tickets`}
-            />
-          )}
-        </div>
-        {isPromo && (
-          <div>
-            <label htmlFor="promo">Promocode:</label>
-            <input
-              id="promo"
-              type="text"
-              {...register("promocode", {
-                validate: {
-                  isPromo: (v) => IsPromo(v) === true,
-                },
-              })}
-            />
-            {errors.promocode && errors.promocode.type === "isPromo" && (
-              <ErrorField data="An incorrect promocode" />
-            )}
+          <div style={{ fontWeight: 200, fontSize: 23 }}>
+            A confirmation code has been sent to your email. Enter it below:
           </div>
-        )}
-        <div>
-          <button type="submit">Book</button>
-          <button
-            type="button"
-            onClick={() => setIsPromo(true)}
-            className={styles.promoButton}
-          >
-            I have a promocode
-          </button>
+          <div className={styles.confirm}>
+            <form 
+              onSubmit={(event) => void handleSubmit(submit)(event)}
+            >
+              <input
+                type="text"
+                {...register("code", {
+                  required: true,
+                  validate: {
+                    isValidCode: (v) => IsValidCode(v) === true,
+                  },
+                })}
+              />
+              {errors.code && errors.code.type === "required" && (
+                <ErrorField data="Enter the code" />
+              )}
+              {errors.code && errors.code.type === "isValidCode" && (
+                <ErrorField data="The code is not correct" />
+              )}
+              <button type="submit">Confirm</button>
+            </form>
+          </div>
         </div>
-      </form>
+      ) : (
+        <div>
+          <form
+            onSubmit={(event) => void handleSubmit(confirm)(event)}
+            className={styles.form}
+          >
+            <div>
+              <label htmlFor="firstName">First name:</label>
+              <input
+                id="firstName"
+                type="text"
+                {...register("firstName", { required: true, minLength: 3 })}
+              />
+              {errors.firstName && errors.firstName.type === "required" && (
+                <ErrorField data="Enter the first name" />
+              )}
+              {errors.firstName && errors.firstName.type === "minLength" && (
+                <ErrorField data="This field must be contained at least 3 characters" />
+              )}
+            </div>
+            <div>
+              <label htmlFor="lastName">Last name:</label>
+              <input
+                id="lastName"
+                type="text"
+                {...register("lastName", { required: true, minLength: 3 })}
+              />
+              {errors.lastName && errors.lastName.type === "required" && (
+                <ErrorField data="Enter the last name" />
+              )}
+              {errors.lastName && errors.lastName.type === "minLength" && (
+                <ErrorField data="This field must be contained at least 3 characters" />
+              )}
+            </div>
+            <div>
+              <label htmlFor="email">Email:</label>
+              <input
+                id="email"
+                type="text"
+                {...register("email", {
+                  required: true,
+                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                })}
+              />
+              {errors.email && errors.email.type === "required" && (
+                <ErrorField data="Enter your Email" />
+              )}
+              {errors.email && errors.email.type === "pattern" && (
+                <ErrorField data="Email is not correct" />
+              )}
+            </div>
+            <div>
+              <label htmlFor="phone">Phone number:</label>
+              <input
+                id="phone"
+                type="text"
+                {...register("phoneNumber", {
+                  required: true,
+                  pattern:
+                    /^[\\+]?[(]?[0-9]{3}[)]?[-\s\\.]?[0-9]{3}[-\s\\.]?[0-9]{4,6}$/im,
+                })}
+              />
+              {errors.phoneNumber && errors.phoneNumber.type === "required" && (
+                <ErrorField data="Enter your phone number" />
+              )}
+              {errors.phoneNumber && errors.phoneNumber.type === "pattern" && (
+                <ErrorField data="The phone number is not correct" />
+              )}
+            </div>
+            <div>
+              <label htmlFor="tickets">Tickets quantity:</label>
+              <input
+                id="tickets"
+                type="number"
+                {...register("ticketQuantity", {
+                  required: true,
+                  min: 1,
+                  max: concertByCurrentId?.ticketsCount,
+                  validate: {
+                    quantity: (v) => {
+                      setQuantity(v);
+                      return true;
+                    },
+                  },
+                })}
+                defaultValue={1}
+              />
+              {errors.ticketQuantity &&
+                errors.ticketQuantity.type === "required" && (
+                  <ErrorField data="Specify the number of tickets to purchase" />
+                )}
+              {errors.ticketQuantity &&
+                errors.ticketQuantity.type === "min" && (
+                  <ErrorField data="You can book at least 1 ticket" />
+                )}
+              {errors.ticketQuantity &&
+                errors.ticketQuantity.type === "max" && (
+                  <ErrorField
+                    data={`You can book no more than ${
+                      concertByCurrentId!.ticketsCount
+                    } tickets`}
+                  />
+                )}
+            </div>
+            {isPromo && (
+              <div>
+                <label htmlFor="promo">Promocode:</label>
+                <input
+                  id="promo"
+                  type="text"
+                  {...register("promocode", {
+                    validate: {
+                      isPromo: (v) => IsPromo(v) === true,
+                    },
+                  })}
+                />
+                {errors.promocode && errors.promocode.type === "isPromo" && (
+                  <ErrorField data="An incorrect promocode" />
+                )}
+              </div>
+            )}
+            <div>
+              <button type="submit">Book</button>
+              <button
+                type="button"
+                onClick={() => setIsPromo(true)}
+                className={styles.promoButton}
+              >
+                I have a promocode
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };

@@ -36,20 +36,23 @@ export const Header = () => {
           </button>
         </form>
       </div>
-      <div>
-        <button
-          onClick={() => navigate("/booked")}
-          className={styles.bookedButton}
-        >
-          🎫 <span>Booked tickets</span>{" "}
-        </button>
-        <button
-          onClick={() => navigate("/purchased")}
-          className={styles.bookedButton}
-        >
-          🎫 <span>Purchased tickets</span>
-        </button>
-      </div>
+      {isAuthenticated && (
+        <div>
+          <button
+            onClick={() => navigate("/booked")}
+            className={styles.bookedButton}
+          >
+            🎫 <span>Booked tickets</span>{" "}
+          </button>
+          <button
+            onClick={() => navigate("/purchased")}
+            className={styles.bookedButton}
+          >
+            🎫 <span>Purchased tickets</span>
+          </button>
+        </div>
+      )}
+
       {!loading &&
         (isAuthenticated ? (
           <div>

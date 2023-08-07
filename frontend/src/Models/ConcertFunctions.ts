@@ -53,3 +53,7 @@ export function DeleteCoordinates(
 ): Coordinates[] {
   return array.filter((b) => b.concertId !== element.concertId);
 }
+
+export const getCode = () => {
+  return "1111";
+};
