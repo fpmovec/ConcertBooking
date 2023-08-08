@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../../../Redux/Hooks";
 import  styles  from "./AddConcertPage.module.css"
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
-import { addParty } from "../../../Redux/Slices";
+//import { addParty } from "../../../Redux/Slices";
 
 interface Props {
   concertId: number;
@@ -25,10 +25,10 @@ export const PartyProps = ({ concertId }: Props) => {
   });
 
   const submitForm = (data: FormData) => {
-   dispatch(addParty({
-      concertId: concertId,
-      ageLimit: data.ageLimit,
-    }));
+   //dispatch(addParty({
+     // concertId: concertId,
+     // ageLimit: data.ageLimit,
+   // }));
     setIsSuccessfully(true)
   };
 

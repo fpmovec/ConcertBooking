@@ -33,6 +33,12 @@ builder.Services.AddAuthentication(options =>
     options.Audience = "https://concertsbooking";
 });
 
+builder.Services.AddCors(options => 
+   options.AddPolicy("CorsPolicy", build => 
+       build.AllowAnyMethod()
+              .AllowAnyHeader()
+              .WithOrigins("http://localhost:5173")));
+
 var app = builder.Build();
 
  //Configure the HTTP request pipeline.
@@ -47,6 +53,7 @@ app.UseHttpsRedirection();
 }
 
 app.UseRouting();
+app.UseCors("CorsPolicy");
 app.UseAuthentication();
 app.UseAuthorization();
 

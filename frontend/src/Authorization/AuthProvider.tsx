@@ -50,7 +50,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         isAuthenticated,
         user,
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        signIn: () => getAuth0ClientFromState().loginWithPopup(),
+        signIn: () => getAuth0ClientFromState().loginWithRedirect(),
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         signOut: () =>
           getAuth0ClientFromState().logout({

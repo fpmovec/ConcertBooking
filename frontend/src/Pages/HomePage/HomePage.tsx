@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { ConcertList } from "../../Components/Concert/ConcertList";
-import { useAppSelector } from "../../Redux/Hooks";
+import { useAppSelector, useAppDispatch } from "../../Redux/Hooks";
+import { setConcerts } from "../../Redux/Slices";
 import { TypeCheckbox } from "../../Components/SortPanel/SortPanel";
 import { useState } from "react";
+import { GetAllConcerts } from "../../Requests/GET/ConcertsRequests";
 import styles from "./HomePage.module.css";
+import React from "react";
 
 export interface IConcertType {
   classics: boolean;
@@ -16,8 +20,18 @@ export const HomePage = () => {
     partys: true,
     openAirs: true,
   });
-const concerts = useAppSelector(state => state.concerts.allConcerts);
-  const typeFilter = (arg: string) => concerts.filter(c => c.concertType === arg);
+  const concerts = useAppSelector((state) => state.concerts.allConcerts);
+  const dispatch = useAppDispatch();
+  const typeFilter = (arg: string) =>
+    concerts.filter((c) => c.concertType === arg);
+
+  React.useEffect(() => {
+    const doGetConcerts = async () => {
+      const allConcerts = await GetAllConcerts();
+      dispatch(setConcerts(allConcerts));
+    };
+     doGetConcerts();
+  }, [concerts.length, dispatch]);
 
   return (
     <>
@@ -50,9 +64,9 @@ const concerts = useAppSelector(state => state.concerts.allConcerts);
           concertType.openAirs ||
           concertType.partys
         ) && <div className="notFound">Nothing found 😔</div>}
-        {concertType.classics && <ConcertList data={typeFilter("Classic")}/>}
-        {concertType.partys && <ConcertList data={typeFilter("Party")}/>}
-        {concertType.openAirs && <ConcertList data={typeFilter("OpenAir")}/>}
+        {concertType.classics && <ConcertList data={typeFilter("Classic")} />}
+        {concertType.partys && <ConcertList data={typeFilter("Party")} />}
+        {concertType.openAirs && <ConcertList data={typeFilter("OpenAir")} />}
       </div>
     </>
   );

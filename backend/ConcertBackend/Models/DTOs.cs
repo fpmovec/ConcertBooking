@@ -1,4 +1,6 @@
-﻿namespace ConcertBackend.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ConcertBackend.Models
 {
     public class ClassicDto
     {
@@ -48,8 +50,7 @@
 
     public class EmailDto
     {
-        public string To { get; set; } = string.Empty;
-        public string Subject { get; set; } = string.Empty;
-        public string Body { get; set; } = string.Empty;
+        [Required, EmailAddress]
+        public required string EmailAddress { get; set; }
     }
 }

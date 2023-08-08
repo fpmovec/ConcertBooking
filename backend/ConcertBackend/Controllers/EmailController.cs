@@ -16,9 +16,9 @@ namespace ConcertBackend.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendEmail(string email)
+        public ActionResult SendEmail(EmailDto email)
         {
-            _service.SendEmail(email);
+            _service.SendEmail(email.EmailAddress);
 
             return Ok();
         }

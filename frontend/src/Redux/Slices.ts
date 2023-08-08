@@ -24,6 +24,17 @@ const concertSlice = createSlice({
       state.viewing = action.payload;
     },
 
+    gotClassicInfo(state, action: PayloadAction<Classic | null>) {
+      state.viewingClassic = action.payload;
+    },
+
+    gotPartyInfo(state, action: PayloadAction<Party | null>) {
+      state.viewingParty = action.payload;
+    },
+
+    gotOpenAirInfo(state, action: PayloadAction<OpenAir | null>) {
+      state.viewingOpenAir = action.payload;
+    },
     searchingConcerts(state) {
       state.loading = true;
       state.searching = [];
@@ -62,35 +73,38 @@ const concertSlice = createSlice({
       state.allConcerts = action.payload;
     },
 
-    addClassic(state, action: PayloadAction<Classic>) {
-      state.allClassics.push(action.payload);
-    },
-    addParty(state, action: PayloadAction<Party>) {
-      state.allPartys.push(action.payload);
-    },
-    addOpenAir(state, action: PayloadAction<OpenAir>) {
-      state.allOpenAirs.push(action.payload);
-    },
+    gotCoordinates(state, action: PayloadAction<Coordinates>) {
+      state.viewingCoordinates = action.payload;
+    }
+    //addClassic(state, action: PayloadAction<Classic>) {
+    //  state.allClassics.push(action.payload);
+    //},
+    //addParty(state, action: PayloadAction<Party>) {
+     // state.allPartys.push(action.payload);
+    //},
+    //addOpenAir(state, action: PayloadAction<OpenAir>) {
+    //  state.allOpenAirs.push(action.payload);
+    //},
 
-    addCoordinates(state, action: PayloadAction<Coordinates>) {
-      state.allCoordinates.push(action.payload);
-    },
+    //addCoordinates(state, action: PayloadAction<Coordinates>) {
+   //   state.allCoordinates.push(action.payload);
+    //},
 
-    setClassics(state, action: PayloadAction<Classic[]>) {
-      state.allClassics = action.payload;
-    },
+    //setClassics(state, action: PayloadAction<Classic[]>) {
+    //  state.allClassics = action.payload;
+    //},
 
-    setPartys(state, action: PayloadAction<Party[]>) {
-      state.allPartys = action.payload;
-    },
+    //setPartys(state, action: PayloadAction<Party[]>) {
+    //  state.allPartys = action.payload;
+    //},
 
-    setOpenAirs(state, action: PayloadAction<OpenAir[]>) {
-      state.allOpenAirs = action.payload;
-    },
+    //setOpenAirs(state, action: PayloadAction<OpenAir[]>) {
+    //  state.allOpenAirs = action.payload;
+    //},
 
-    setCoordinates(state, action: PayloadAction<Coordinates[]>) {
-      state.allCoordinates = action.payload;
-    },
+    //setCoordinates(state, action: PayloadAction<Coordinates[]>) {
+    //  state.allCoordinates = action.payload;
+    //},
   },
 });
 
@@ -106,14 +120,19 @@ export const {
   addPurchase,
   addConcert,
   setConcerts,
-  setClassics,
-  setCoordinates,
-  setOpenAirs,
-  setPartys,
-  addClassic,
-  addCoordinates,
-  addParty,
-  addOpenAir
+  //setClassics,
+  //setCoordinates,
+  //setOpenAirs,
+  //setPartys,
+  //addClassic,
+ // addCoordinates,
+  //addParty,
+  //addOpenAir,
+  //gotInfo,
+  gotClassicInfo,
+  gotOpenAirInfo,
+  gotPartyInfo,
+  gotCoordinates
 } = concertSlice.actions;
 
 export default concertSlice.reducer;

@@ -6,16 +6,20 @@ import { getInitialPromocodes, getInitialConcerts, getInitialClassics, getInitia
 interface ConcertsState {
   readonly loading: boolean;
   readonly viewing: Concert | null;
+  readonly viewingParty: Party | null;
+  readonly viewingClassic: Classic | null;
+  readonly viewingOpenAir: OpenAir | null;
   readonly searching: Concert[];
   readonly booking: Booking[];
   readonly currentBookingId: number;
   readonly promocodes: Promocode[];
   readonly purchased: Booking[];
   readonly allConcerts: Concert[];
-  readonly allClassics: Classic[];
-  readonly allPartys: Party[];
-  readonly allOpenAirs: OpenAir[];
-  readonly allCoordinates: Coordinates[];
+  readonly viewingCoordinates: Coordinates | null;
+  //readonly allClassics: Classic[];
+  //readonly allPartys: Party[];
+  //readonly allOpenAirs: OpenAir[];
+  //readonly allCoordinates: Coordinates[];
 }
 
 export interface AppState {
@@ -30,9 +34,13 @@ export const initialConcertsState: ConcertsState = {
   currentBookingId: 1,
   promocodes: getInitialPromocodes(),
   purchased: [],
-  allConcerts: getInitialConcerts(),
-  allClassics: getInitialClassics(),
-  allPartys: getInitialPartys(),
-  allOpenAirs: getInitialOpenAirs(),
-  allCoordinates: getInitialCoordinates()
+  allConcerts: [],
+  //allClassics: getInitialClassics(),
+  //allPartys: getInitialPartys(),
+  //allOpenAirs: getInitialOpenAirs(),
+  //allCoordinates: getInitialCoordinates(),
+  viewingClassic: null,
+  viewingParty: null,
+  viewingOpenAir: null,
+  viewingCoordinates: null
 };

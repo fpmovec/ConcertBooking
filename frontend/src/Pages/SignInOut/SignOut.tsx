@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const SignOutPage = ({ action }: Props) => {
-   let message = 'Signin Out...';
+   let message = 'Signing Out...';
    const { signOut } = useAuth();
 
    switch (action) {

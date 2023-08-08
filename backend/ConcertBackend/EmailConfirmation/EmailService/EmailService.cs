@@ -30,7 +30,7 @@ namespace ConcertBackend.EmailConfirmation.EmailService
             };
 
             using var smtp = new SmtpClient();
-            smtp.Connect(_configuration.GetSection("EmailHost").Value, 587, MailKit.Security.SecureSocketOptions.StartTls);
+            smtp.Connect(_configuration.GetSection("EmailHost").Value, 465, MailKit.Security.SecureSocketOptions.SslOnConnect);
             smtp.Authenticate(_configuration.GetSection("Email").Value, _configuration.GetSection("EmailPassword").Value);
             smtp.Send(email);
             smtp.Disconnect(true);

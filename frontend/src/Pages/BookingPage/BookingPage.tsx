@@ -8,6 +8,7 @@ import { Currency } from "../../Components/Currency/Currency";
 import styles from "./BookingPage.module.css";
 import React from "react";
 import { getCode } from "../../Models/ConcertFunctions";
+import { GetConfirmationCode, SendConfirmationCode } from "../../Requests/EmailConfirmation";
 
 type FormData = {
   firstName: string;
@@ -36,15 +37,15 @@ export const BookingPage = () => {
     }
   };
 
-  const IsValidCode = (data: string) => {
-    const code = getCode();
-
+  const IsValidCode = async (data: string) => {
+    const code = await GetConfirmationCode();
     return code === data ? true : false;
   };
 
-  const confirm = (data: FormData) => {
+  const confirm = async (data: FormData) => {
     setIsConfirmation(true);
     setCurrentForm(data);
+    await SendConfirmationCode(data.email);
   };
 
   const [isPromo, setIsPromo] = React.useState(false);
@@ -58,7 +59,7 @@ export const BookingPage = () => {
   );
   const { concertId } = useParams();
   const [quantity, setQuantity] = React.useState(1);
-  const concertByCurrentId = concerts.find((c) => c.Id === Number(concertId));
+  const concertByCurrentId = concerts.find((c) => c.id === Number(concertId));
   const firstPrice = concertByCurrentId!.price;
   const [promoPrice, setPromoPrice] = React.useState(concertByCurrentId!.price);
   const {
@@ -83,7 +84,7 @@ export const BookingPage = () => {
         ticketQuantity: data!.ticketQuantity,
         concertId: Number(concertId),
         purchaseAmount: promoPrice * quantity,
-        username: user!.name
+        username: user!.name,
       })
     );
     currentBookingId = currentBookingId + 1;
@@ -106,15 +107,13 @@ export const BookingPage = () => {
             A confirmation code has been sent to your email. Enter it below:
           </div>
           <div className={styles.confirm}>
-            <form 
-              onSubmit={(event) => void handleSubmit(submit)(event)}
-            >
+            <form onSubmit={(event) => void handleSubmit(submit)(event)}>
               <input
                 type="text"
                 {...register("code", {
                   required: true,
                   validate: {
-                    isValidCode: (v) => IsValidCode(v) === true,
+                    isValidCode: async (v) => (await IsValidCode(v)) === true,
                   },
                 })}
               />

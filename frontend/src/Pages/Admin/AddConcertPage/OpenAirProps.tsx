@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import styles from "./AddConcertPage.module.css";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import { useAppDispatch } from "../../../Redux/Hooks";
-import { addOpenAir } from "../../../Redux/Slices";
+//import { addOpenAir } from "../../../Redux/Slices";
 import { useState } from 'react'
 
 interface Props {
@@ -27,11 +27,11 @@ const dispatch = useAppDispatch();
   });
 
   const submitForm = (data: FormData) => {
-   dispatch(addOpenAir({
-      concertId: concertId,
-      headliner: data.headliner,
-      journey: data.journey,
-    }));
+   //dispatch(addOpenAir({
+    //  concertId: concertId,
+     // headliner: data.headliner,
+     // journey: data.journey,
+    //}));
     setIsSuccesfully(true);
   };
 

@@ -14,6 +14,6 @@ export const SignIn = ({ action }: Props) => {
           signIn();
     
     return (
-        <div className={styles.sign}>Signin in...</div>
+        <div className={styles.sign}>Signing in...</div>
     )
 }

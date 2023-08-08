@@ -1,5 +1,5 @@
 export interface Concert {
-  Id: number;
+  id: number;
   performer: string;
   ticketsCount: number;
   concertDate: string;
@@ -14,19 +14,19 @@ export interface Coordinates {
   latitude: number;
 }
 export interface Classic {
-    concertId: number;
+  concertId: number;
   voiceType: string;
   concertName: string;
   composer: string;
 }
 
 export interface OpenAir {
-    concertId: number;
+  concertId: number;
   headliner: string;
   journey: string;
 }
 
 export interface Party {
-    concertId: number;
+  concertId: number;
   ageLimit: number;
 }

@@ -10,7 +10,7 @@ export const ConcertList = ({ data }: Props) => {
   return data.length > 0 ? (
     <ul className={styles.ul}>
       {data.map((concert) => (
-        <li className={styles.li} key={concert.Id}>
+        <li className={styles.li} key={concert.id}>
           <ConcertComponent data={concert} />
         </li>
       ))}

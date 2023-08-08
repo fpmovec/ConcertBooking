@@ -45,7 +45,7 @@ export const Header = () => {
             🎫 <span>Booked tickets</span>{" "}
           </button>
           <button
-            onClick={() => navigate("/purchased")}
+            onClick={() => navigate("/admin")}
             className={styles.bookedButton}
           >
             🎫 <span>Purchased tickets</span>

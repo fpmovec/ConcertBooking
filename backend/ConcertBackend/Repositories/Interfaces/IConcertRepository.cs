@@ -18,6 +18,7 @@ namespace ConcertBackend.Repositories.Interfaces
         Task AddPartyAsync(Party party);
         Task AddOpenAirAsync(OpenAir openAir);
         Task<Coordinates?> AddCoordinatesAsync(Coordinates coordinates);
+        Task DeleteConcertAsync(Concert concert);
         Task DeleteClassicAsync(Classic classic);
         Task DeletePartyAsync(Party party);
         Task DeleteOpenAirAsync(OpenAir openAir);

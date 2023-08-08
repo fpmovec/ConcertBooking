@@ -10,12 +10,11 @@ interface Props {
 
 export const ConcertComponent = ({ data }: Props) => {
   const navigate = useNavigate();
-  const navigateToBooking = () => navigate(`/booking/${data.Id}`);
-
+  const navigateToBooking = () => navigate(`/booking/${data.id}`);
   return (
     <div className={styles.concert}>
       <div>
-        <Link to={`/concerts/${data.Id}`} className={styles.title}>
+        <Link to={`/concerts/${data.id}`} className={styles.title}>
           {data.performer}
         </Link>
         <div className={styles.description}>

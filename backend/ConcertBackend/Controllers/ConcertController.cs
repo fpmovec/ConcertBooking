@@ -97,6 +97,17 @@ namespace ConcertBackend.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("concert/{id}")]
+        public async Task<ActionResult<Concert>> GetConcertById(int id)
+        {
+            var concert = await _concertRepository.GetConcertByIdAsync(id);
+            if (concert == null)
+                return NotFound();
+
+            return Ok(concert);
+        }
+
+        [AllowAnonymous]
         [HttpGet("party/{id}")]
         public async Task<ActionResult<Party>> GetPartyById(int id)
         {
@@ -250,6 +261,16 @@ namespace ConcertBackend.Controllers
             if (coordinates == null) return NotFound();
 
             await _concertRepository.DeleteCoordinatesAsync(coordinates);
+            return Ok();
+        }
+
+        [HttpDelete("concerts/{id}")]
+        public async Task<ActionResult> DeleteConcert(int id)
+        {
+            var concert = _concertRepository.GetConcertByIdAsync(id);
+            if (concert == null) return NotFound();
+
+            await _concertRepository.DeleteConcertAsync(concert.Result);
             return Ok();
         }
     }

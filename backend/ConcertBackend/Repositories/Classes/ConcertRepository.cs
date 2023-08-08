@@ -50,6 +50,12 @@ namespace ConcertBackend.Repositories.Classes
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeleteConcertAsync(Concert concert)
+        {
+            _context.Remove(concert);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task DeleteCoordinatesAsync(Coordinates coordinates)
         {
                 _context.Remove(coordinates);

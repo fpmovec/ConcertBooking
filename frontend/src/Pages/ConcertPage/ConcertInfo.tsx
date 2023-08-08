@@ -1,43 +1,65 @@
-import { useAppSelector } from "../../Redux/Hooks";
-import { Concert } from "../../Models/ConcertModels";
+import { useAppSelector, useAppDispatch } from "../../Redux/Hooks";
+import {
+  gotClassicInfo,
+  gotOpenAirInfo,
+  gotPartyInfo,
+  gotCoordinates,
+} from "../../Redux/Slices";
+import { Concert, Party } from "../../Models/ConcertModels";
 import { NotFound } from "../NotFoundPage/NotFoundPage";
 import { MapComponent } from "../../Components/Maps/Map";
 import { useNavigate } from "react-router-dom";
 import styles from "./ConcertPage.module.css";
 import { Currency } from "../../Components/Currency/Currency";
+import {
+  GetClassicById,
+  GetPartyById,
+  GetOpenAirById,
+  GetCoordinatesByConcertId,
+} from "../../Requests/GET/ConcertsRequests";
+import React from "react";
 
 interface Props {
-  data: Concert | null;
+  data: Concert;
 }
 
 export const ConcertInfo = ({ data }: Props) => {
   const navigate = useNavigate();
-  const partys = useAppSelector((state) => state.concerts.allPartys);
-  const classics = useAppSelector((state) => state.concerts.allClassics);
-  const openAirs = useAppSelector((state) => state.concerts.allOpenAirs);
-  const ConcertCoordinates = useAppSelector(
-    (state) => state.concerts.allCoordinates
-  );
-  const navToBooking = () => navigate(`/booking/${data!.Id}`);
-
-  if (data === null) return <NotFound />;
+  const dispatch = useAppDispatch();
+  const navToBooking = () => {
+    navigate(`/booking/${data.id}`);
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+  };
 
   const isParty = data.concertType === "Party";
   const isOpenAir = data.concertType === "OpenAir";
   const isClassic = data.concertType === "Classic";
+  React.useEffect(() => {
+    const getInfo = async () => {
+      if (isParty) {
+        const concert = await GetPartyById(data.id);
+        dispatch(gotPartyInfo(concert));
+      }
+      if (isClassic) {
+        const concert = await GetClassicById(data.id);
+        dispatch(gotClassicInfo(concert));
+      }
+      if (isOpenAir) {
+        const concert = await GetOpenAirById(data.id);
+        dispatch(gotOpenAirInfo(concert));
+      }
+    };
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    getInfo();
+  }, [data.id, dispatch, isClassic, isOpenAir, isParty]);
 
-  const getMorePartyInfo = () =>
-    partys.filter((c) => c.concertId === data.Id)[0];
+  const classic = useAppSelector((state) => state.concerts.viewingClassic);
+  const party = useAppSelector((state) => state.concerts.viewingParty);
+  const openAir = useAppSelector((state) => state.concerts.viewingOpenAir);
+  const coordinates = useAppSelector(
+    (state) => state.concerts.viewingCoordinates
+  );
 
-  const getMoreClassicInfo = () =>
-    classics.filter((c) => c.concertId === data.Id)[0];
-
-  const getMoreOpenAirInfo = () =>
-    openAirs.filter((c) => c.concertId === data.Id)[0];
-
-  const coordinates = ConcertCoordinates.filter(
-    (c) => c.concertId === data.Id
-  )[0];
   return (
     <div>
       <div className={styles.title}>
@@ -67,25 +89,25 @@ export const ConcertInfo = ({ data }: Props) => {
           </div>
         </div>
         <div className={styles.map}>
-          <MapComponent location={coordinates} />
+          {<MapComponent location={coordinates!} />}
         </div>
       </div>
       <div>
         {isParty && (
           <div>
-            <h2>🔞Age Limit: {getMorePartyInfo().ageLimit}+</h2>
+            <h2>🔞Age Limit: {party?.ageLimit}+</h2>
           </div>
         )}
         {isClassic && (
           <ul className={styles.list}>
             <li>
-              Composer: <span>{getMoreClassicInfo().composer}</span>
+              Composer: <span>{classic?.composer}</span>
             </li>
             <li>
-              Voice Type: <span>{getMoreClassicInfo().voiceType}</span>
+              Voice Type: <span>{classic?.voiceType}</span>
             </li>
             <li>
-              Concert Name: <span>{getMoreClassicInfo().concertName}</span>
+              Concert Name: <span>{classic?.concertName}</span>
             </li>
           </ul>
         )}
@@ -93,12 +115,10 @@ export const ConcertInfo = ({ data }: Props) => {
           <ul className={styles.list}>
             <li>
               Headliner:{" "}
-              <span className={styles.date}>
-                {getMoreOpenAirInfo().headliner}
-              </span>
+              <span className={styles.date}>{openAir?.headliner}</span>
             </li>
             <li>
-              Journey: <span>{getMoreOpenAirInfo().journey}</span>
+              Journey: <span>{openAir?.journey}</span>
             </li>
           </ul>
         )}

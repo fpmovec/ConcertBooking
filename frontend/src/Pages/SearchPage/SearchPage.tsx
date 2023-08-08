@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ConcertList } from "../../Components/Concert/ConcertList";
 import { searchingConcerts, searchedConcerts } from "../../Redux/Slices";
-import { GetConcertsByCriteria } from "../../Models/ConcertFunctions";
+import { GetConcertsByCriteria } from "../../Requests/GET/ConcertsRequests";
 import styles from "./SearchPage.module.css";
 
 export const SearchPage = () => {
@@ -16,10 +16,13 @@ export const SearchPage = () => {
   const isSearched = useRef(true);
 
   React.useEffect(() => {
-    dispath(searchingConcerts());
-    const foundConcerts = GetConcertsByCriteria(criteria, allConcerts);
-    isSearched.current = foundConcerts.length === 0 ? false : true;
-    dispath(searchedConcerts(foundConcerts));
+    const getSearch = async () => {
+      dispath(searchingConcerts());
+      const foundConcerts = await GetConcertsByCriteria(criteria);
+      isSearched.current = foundConcerts.length === 0 ? false : true;
+      dispath(searchedConcerts(foundConcerts));
+    };
+    void getSearch();
   }, [allConcerts, criteria, dispath]);
 
   return isSearched.current ? (

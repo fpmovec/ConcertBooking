@@ -20,7 +20,9 @@ namespace ConcertBackend.Models
         public required string ConcertType { get; set; }
         [Required, Range(3, 1000)]
         public float Price { get; set; }
+        [JsonIgnore]
         public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+        [JsonIgnore]
         public Coordinates? Coordinates { get; set; }
     }
 
