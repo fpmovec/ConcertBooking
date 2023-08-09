@@ -72,17 +72,6 @@ namespace ConcertBackend.Controllers
             return Ok(searchedConcerts);
         }
 
-        //[AllowAnonymous]
-        //[HttpGet("coordinates/{id}")]
-        //public async Task<ActionResult<Coordinates>> GetCoordinatesByConcertId(int id)
-        //{
-        //    var coordinates = await _concertRepository.GetCoordinatesByConcertIdAsync(id);
-
-        //    if (coordinates == null)
-        //        return NotFound();
-
-        //    return Ok(coordinates);
-        //}
 
         [AllowAnonymous]
         [HttpGet("classic/{id}")]
@@ -131,7 +120,7 @@ namespace ConcertBackend.Controllers
             return Ok(concert);
         }
 
-        [Authorize]
+        [Authorize(Policy = "admin")]
         [HttpPost("classic")]
         public async Task<ActionResult> AddClassic([FromBody] ClassicDto concert)
         {
@@ -156,7 +145,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
-        [Authorize]
+        [Authorize(Policy = "admin")]
         [HttpPost("party")]
         public async Task<ActionResult> AddParty(PartyDto partyDto)
         {
@@ -180,7 +169,7 @@ namespace ConcertBackend.Controllers
 
         }
 
-        [Authorize]
+        [Authorize(Policy = "admin")]
         [HttpPost("openair")]
         public async Task<ActionResult> AddOpenAir(OpenAirDto openairDto)
         {
@@ -204,25 +193,9 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
-        //[Authorize]
-        //[HttpPost("coordinates")]
-        //public async Task<ActionResult> AddCoordinatesAsync([FromBody] CoordinatesDto coordinatesDto)
-        //{
-        //    var coordinates = new Coordinates
-        //    {
-        //        ConcertId = coordinatesDto.ConcertId,
-        //        Longitude = coordinatesDto.Longitude,
-        //        Latitude = coordinatesDto.Latitude,
-        //    };
-        //    var concert = await _concertRepository.AddCoordinatesAsync(coordinates);
+     
 
-        //    if (concert == null)
-        //        return NotFound();
-
-        //    return Ok();
-        //}
-
-        [Authorize]
+        [Authorize(Policy = "admin")]
         [HttpDelete("classic/{id}")]
         public async Task<ActionResult> DeleteClassic(int id)
         {
@@ -234,7 +207,7 @@ namespace ConcertBackend.Controllers
         }
 
 
-        [Authorize]
+        [Authorize(Policy = "admin")]
         [HttpDelete("party/{id}")]
         public async Task<ActionResult> DeleteParty(int id)
         {
@@ -245,7 +218,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
-        [Authorize]
+        [Authorize(Policy = "admin")]
         [HttpDelete("openair/{id}")]
         public async Task<ActionResult> DeleteOpenAir(int id)
         {
@@ -255,17 +228,6 @@ namespace ConcertBackend.Controllers
             await _concertRepository.DeleteOpenAirAsync(concert);
             return Ok();
         }
-
-        //[Authorize]
-        //[HttpDelete("coordinates/{id}")]
-        //public async Task<ActionResult> DeleteCoordinates(int id)
-        //{
-        //    var coordinates = await _concertRepository.GetCoordinatesByConcertIdAsync(id);
-        //    if (coordinates == null) return NotFound();
-
-        //    await _concertRepository.DeleteCoordinatesAsync(coordinates);
-        //    return Ok();
-        //}
 
         [Authorize(Policy = "admin")]
         [HttpDelete("concerts/{id}")]

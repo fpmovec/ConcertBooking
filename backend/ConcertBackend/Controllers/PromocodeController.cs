@@ -24,7 +24,7 @@ namespace ConcertBackend.Controllers
             return Ok(await _promocodesRepository.GetPromocodesAsync());
         }
 
-        [AllowAnonymous]
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<Promocode>> GetPromocodeByIdAsync(int id)
         {
@@ -36,7 +36,7 @@ namespace ConcertBackend.Controllers
             return Ok(promocode);
         }
 
-        [Authorize("admin")]
+        [Authorize(Policy = "admin")]
         [HttpPost]
         public async Task<ActionResult> AddPromocodeAsync([FromBody]PromocodeDto promocode)
         {

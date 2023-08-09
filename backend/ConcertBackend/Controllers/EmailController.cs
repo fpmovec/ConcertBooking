@@ -1,5 +1,6 @@
 ﻿using ConcertBackend.EmailConfirmation.EmailService;
 using ConcertBackend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConcertBackend.Controllers
@@ -15,6 +16,7 @@ namespace ConcertBackend.Controllers
             _service = service;
         }
 
+        [Authorize(Policy = "admin"), Authorize(Policy = "user")]
         [HttpPost]
         public ActionResult SendEmail(EmailDto email)
         {
@@ -23,6 +25,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
+        [Authorize(Policy = "admin"), Authorize(Policy = "user")]
         [HttpGet("confirmation")]
         public ActionResult<Guid> GetConfirmationCode()
         {
