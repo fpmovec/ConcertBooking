@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import styles from "./AddConcertPage.module.css";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
-import { useAppDispatch } from "../../../Redux/Hooks";
+//import { useAppDispatch } from "../../../Redux/Hooks";
 //import { addOpenAir } from "../../../Redux/Slices";
-import { useState } from 'react'
+import { useState } from "react";
+import { Concert } from "../../../Models/ConcertModels";
+import { PostOpenAir } from "../../../Requests/POST/ConcertsRequests";
 
 interface Props {
-  concertId: number;
+  concert: Concert;
 }
 
 type FormData = {
@@ -14,9 +16,9 @@ type FormData = {
   journey: string;
 };
 
-export const OpenAitProps = ({ concertId }: Props) => {
-const dispatch = useAppDispatch();
-    const [isSuccessfully, setIsSuccesfully] = useState(false);
+export const OpenAitProps = ({ concert }: Props) => {
+  //const dispatch = useAppDispatch();
+  const [isSuccessfully, setIsSuccesfully] = useState(false);
 
   const {
     register,
@@ -26,17 +28,30 @@ const dispatch = useAppDispatch();
     mode: "onBlur",
   });
 
-  const submitForm = (data: FormData) => {
-   //dispatch(addOpenAir({
-    //  concertId: concertId,
-     // headliner: data.headliner,
-     // journey: data.journey,
-    //}));
+  const submitForm = async (data: FormData) => {
+    await PostOpenAir(
+      {
+        performer: concert.performer,
+        ticketsCount: concert.ticketsCount,
+        concertDate: concert.concertDate,
+        location: concert.location,
+        price: concert.price,
+        headliner: data.headliner,
+        journey: data.journey,
+        coordinates: {
+          longitude: concert.coordinates.longitude,
+          latitude: concert.coordinates.latitude
+        }
+      },
+    );
     setIsSuccesfully(true);
   };
 
   return (
-    <form className={styles.form} onSubmit={e => void handleSubmit(submitForm)(e)}>
+    <form
+      className={styles.form}
+      onSubmit={(e) => void handleSubmit(submitForm)(e)}
+    >
       <div>
         <label htmlFor="head">Headliner: </label>
         <input
@@ -67,7 +82,9 @@ const dispatch = useAppDispatch();
         )}
       </div>
       <button type="submit">Add concert</button>
-      {isSuccessfully && <div className={styles.success}>The concert is successfully added</div>}
+      {isSuccessfully && (
+        <div className={styles.success}>The concert is successfully added</div>
+      )}
     </form>
   );
 };

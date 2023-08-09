@@ -3,10 +3,10 @@ import {
   gotClassicInfo,
   gotOpenAirInfo,
   gotPartyInfo,
-  gotCoordinates,
+  //gotCoordinates,
 } from "../../Redux/Slices";
-import { Concert, Party } from "../../Models/ConcertModels";
-import { NotFound } from "../NotFoundPage/NotFoundPage";
+import { Concert } from "../../Models/ConcertModels";
+//import { NotFound } from "../NotFoundPage/NotFoundPage";
 import { MapComponent } from "../../Components/Maps/Map";
 import { useNavigate } from "react-router-dom";
 import styles from "./ConcertPage.module.css";
@@ -15,7 +15,7 @@ import {
   GetClassicById,
   GetPartyById,
   GetOpenAirById,
-  GetCoordinatesByConcertId,
+  //GetCoordinatesByConcertId,
 } from "../../Requests/GET/ConcertsRequests";
 import React from "react";
 
@@ -56,9 +56,9 @@ export const ConcertInfo = ({ data }: Props) => {
   const classic = useAppSelector((state) => state.concerts.viewingClassic);
   const party = useAppSelector((state) => state.concerts.viewingParty);
   const openAir = useAppSelector((state) => state.concerts.viewingOpenAir);
-  const coordinates = useAppSelector(
-    (state) => state.concerts.viewingCoordinates
-  );
+  //const coordinates = useAppSelector(
+  //  (state) => state.concerts.viewingCoordinates
+  //);
 
   return (
     <div>
@@ -89,7 +89,7 @@ export const ConcertInfo = ({ data }: Props) => {
           </div>
         </div>
         <div className={styles.map}>
-          {<MapComponent location={coordinates!} />}
+          {<MapComponent location={data.coordinates} />}
         </div>
       </div>
       <div>

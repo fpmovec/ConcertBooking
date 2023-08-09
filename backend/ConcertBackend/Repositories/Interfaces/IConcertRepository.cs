@@ -13,15 +13,12 @@ namespace ConcertBackend.Repositories.Interfaces
         Task<Party?> GetPartyAsync(int id);
         Task<OpenAir?> GetOpenAirAsync(int id);
         Task<List<Concert>> GetConcertByCriteriaAsync(string? criteria);
-        Task<Coordinates> GetCoordinatesByConcertIdAsync(int id);
         Task AddClassicAsync(Classic classic);
         Task AddPartyAsync(Party party);
         Task AddOpenAirAsync(OpenAir openAir);
-        Task<Coordinates?> AddCoordinatesAsync(Coordinates coordinates);
         Task DeleteConcertAsync(Concert concert);
         Task DeleteClassicAsync(Classic classic);
         Task DeletePartyAsync(Party party);
         Task DeleteOpenAirAsync(OpenAir openAir);
-        Task DeleteCoordinatesAsync(Coordinates coordinates);
     }
 }

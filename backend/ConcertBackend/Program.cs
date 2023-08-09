@@ -33,6 +33,12 @@ builder.Services.AddAuthentication(options =>
     options.Audience = "https://concertsbooking";
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("admin", policy => policy.RequireClaim("permissions", "create:admin"));
+    options.AddPolicy("user", policy => policy.RequireClaim("permissions", "read:user"));
+});
+
 builder.Services.AddCors(options => 
    options.AddPolicy("CorsPolicy", build => 
        build.AllowAnyMethod()

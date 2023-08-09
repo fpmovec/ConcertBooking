@@ -36,7 +36,7 @@ namespace ConcertBackend.Controllers
             return Ok(promocode);
         }
 
-        [Authorize]
+        [Authorize("admin")]
         [HttpPost]
         public async Task<ActionResult> AddPromocodeAsync([FromBody]PromocodeDto promocode)
         {
@@ -51,7 +51,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
-        [Authorize]
+        [Authorize(Policy = "admin")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeletePromocodeAsync(int id)
         {

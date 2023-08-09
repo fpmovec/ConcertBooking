@@ -9,10 +9,6 @@ namespace ConcertBackend.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Concert>()
-                .HasOne(c => c.Coordinates)
-                .WithOne()
-                .HasForeignKey<Coordinates>(co => co.ConcertId);
 
             modelBuilder.Entity<Concert>()
                 .HasMany(c => c.Bookings)
@@ -24,7 +20,7 @@ namespace ConcertBackend.Context
         public DbSet<Classic> Classics { get; set; }
         public DbSet<Party> Parties { get; set; }
         public DbSet<OpenAir> OpenAirs { get; set; }    
-        public DbSet<Coordinates> Coordinates { get; set; }
+        //public DbSet<Coordinates> Coordinates { get; set; }
         public DbSet<Promocode> Promocodes { get; set; }
         public DbSet<Booking> Bookings { get; set; }
     }

@@ -7,7 +7,7 @@ interface Props {
 
 export const MapComponent = ({ location } : Props) => {
   const defaultState = {
-    center: [53.902284, 27.561831],
+    center: [location.longitude, location.latitude],
     zoom: 11,
   };
 

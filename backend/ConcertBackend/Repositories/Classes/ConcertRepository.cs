@@ -20,15 +20,15 @@ namespace ConcertBackend.Repositories.Classes
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Coordinates?> AddCoordinatesAsync(Coordinates coordinates)
-        {
-            var concert = _context.Concerts.Find(coordinates.ConcertId);
-            if (concert == null) { return null; }
+        //public async Task<Coordinates?> AddCoordinatesAsync(Coordinates coordinates)
+        //{
+        //    var concert = _context.Concerts.Find(coordinates.ConcertId);
+        //    if (concert == null) { return null; }
 
-            _context.Coordinates.Add(coordinates);
-            await _context.SaveChangesAsync();
-            return coordinates;
-        }
+        //    _context.Coordinates.Add(coordinates);
+        //    await _context.SaveChangesAsync();
+        //    return coordinates;
+        //}
 
         public async Task AddOpenAirAsync(OpenAir openAir)
         {
@@ -56,12 +56,12 @@ namespace ConcertBackend.Repositories.Classes
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteCoordinatesAsync(Coordinates coordinates)
-        {
-                _context.Remove(coordinates);
-                await _context.SaveChangesAsync();
+        //public async Task DeleteCoordinatesAsync(Coordinates coordinates)
+        //{
+        //        _context.Remove(coordinates);
+        //        await _context.SaveChangesAsync();
          
-        }
+        //}
 
         public async Task DeleteOpenAirAsync(OpenAir openAir)
         {
@@ -101,13 +101,17 @@ namespace ConcertBackend.Repositories.Classes
 
            var searchedConcerts = await _context.Concerts
                 .Where(c => c.Performer.ToLower().IndexOf(criteria!.Trim().ToLower()) > -1)
+                .Include(c => c.Coordinates)
                 .ToListAsync();
             return searchedConcerts;
         }
 
         public async Task<Concert> GetConcertByIdAsync(int id)
         {
-           Concert? concert = await _context.Concerts.FindAsync(id);
+           Concert? concert = await _context.Concerts
+                .Where(c => c.Id == id)
+                .Include(c => c.Coordinates)
+                .FirstOrDefaultAsync();
 
             return concert;
         }
@@ -116,39 +120,38 @@ namespace ConcertBackend.Repositories.Classes
         {
             return await _context.Concerts
                 .Include(c => c.Coordinates)
-                .Include(c => c.Bookings)
                 .ToListAsync();   
         }
 
-        public async Task<Coordinates> GetCoordinatesByConcertIdAsync(int id)
-        {
-            Coordinates? coordinates = await _context.Coordinates.Where(c => c.ConcertId == id).FirstOrDefaultAsync();
-            return coordinates;
-        }
+        //public async Task<Coordinates> GetCoordinatesByConcertIdAsync(int id)
+        //{
+        //    Coordinates? coordinates = await _context.Coordinates.Where(c => c.ConcertId == id).FirstOrDefaultAsync();
+        //    return coordinates;
+        //}
 
         public async Task<OpenAir?> GetOpenAirAsync(int id)
         {
             return await _context.OpenAirs
                  .Where(c => c.Id == id)
-                 .Include(co => co.Coordinates)
+                 .Include(c => c.Coordinates)
                  .FirstOrDefaultAsync();
         }
 
         public async Task<List<OpenAir>> GetOpenAirsAsync()
         {
-            return await _context.OpenAirs.ToListAsync();
+            return await _context.OpenAirs.Include(c => c.Coordinates).ToListAsync();
         }
 
         public async Task<List<Party>> GetPartiesAsync()
         {
-            return await _context.Parties.ToListAsync();
+            return await _context.Parties.Include(c => c.Coordinates).ToListAsync();
         }
 
         public async Task<Party?> GetPartyAsync(int id)
         {
             return await _context.Parties
                 .Where(c => c.Id == id)
-                .Include(co => co.Coordinates)
+                .Include(c => c.Coordinates)
                 .FirstOrDefaultAsync();
         }
     }

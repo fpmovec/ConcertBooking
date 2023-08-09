@@ -67,9 +67,9 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const getAccessToken = async () => {
   const auth0FromHook = await createAuth0Client(authSettings);
   const accessToken = await auth0FromHook.getTokenSilently();
-
   return accessToken;
 };

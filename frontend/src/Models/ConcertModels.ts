@@ -6,10 +6,10 @@ export interface Concert {
   location: string;
   concertType: string;
   price: number;
+  coordinates: Coordinates;
 }
 
 export interface Coordinates {
-  concertId: number;
   longitude: number;
   latitude: number;
 }

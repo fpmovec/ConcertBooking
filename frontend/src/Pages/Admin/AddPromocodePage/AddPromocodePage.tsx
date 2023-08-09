@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import { Promocode } from "../../../Models/Promocode";
 import { setPromocodes } from "../../../Redux/Slices";
 import React from "react";
+import { PostPromocode } from "../../../Requests/POST/PromocodesRequest";
 
 type PromocodeData = {
   code: string;
@@ -24,12 +25,14 @@ export const AddPromocodePage = () => {
   });
 
   const submitForm = (data: PromocodeData) => {
-    const promo: Promocode = {
-      code: data.code,
-      total: 1 - data.discount * 0.01,
+    const add = async () => {
+      await PostPromocode({
+        code: data.code,
+        total: 1 - data.discount * 0.01,
+      });
     };
-    console.log(promo);
-    dispath(setPromocodes([...promocodes, promo]));
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    add();
   };
 
   return (

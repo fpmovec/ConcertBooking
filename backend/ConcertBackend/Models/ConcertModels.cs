@@ -22,7 +22,6 @@ namespace ConcertBackend.Models
         public float Price { get; set; }
         [JsonIgnore]
         public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
-        [JsonIgnore]
         public Coordinates? Coordinates { get; set; }
     }
 
@@ -56,7 +55,6 @@ namespace ConcertBackend.Models
     public class Coordinates
     {
         public int Id { get; set; }
-        public int ConcertId { get; set; }
         [Required]
         public float Longitude { get; set; }
         [Required]

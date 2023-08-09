@@ -16,20 +16,18 @@ export const GetAllConcerts = async (): Promise<Concert[]> => {
       "Content-Type": "application/json",
     },
   });
-
   allConcerts = await response.json();
+
   return allConcerts;
 };
 
 export const GetConcertById = async (id: number): Promise<Concert> => {
   const response = await fetch(`https://localhost:7235/concert/${id}`, {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
   });
 
   const concert: Concert = await response.json();
+  console.log(concert);
   return concert;
 };
 
@@ -87,7 +85,7 @@ export const GetConcertsByCriteria = async (
   criteria: string | null
 ): Promise<Concert[]> => {
   let response: Response;
-  if (criteria !== null && criteria !== '')
+  if (criteria !== null && criteria !== "")
     response = await fetch(`https://localhost:7235/search/${criteria}`, {
       method: "GET",
       headers: {

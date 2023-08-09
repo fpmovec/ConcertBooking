@@ -2,11 +2,11 @@ import { useState } from "react";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import styles from "./AddConcertPage.module.css";
 import { useForm } from "react-hook-form";
-import { useAppSelector, useAppDispatch } from "../../../Redux/Hooks";
-import { addConcert } from "../../../Redux/Slices";
+//import { useAppSelector } from "../../../Redux/Hooks";
 import { ClassicProps } from "./ClassicProps";
 import { OpenAitProps } from "./OpenAirProps";
 import { PartyProps } from "./PartyProps";
+import { Concert } from "../../../Models/ConcertModels";
 
 type FormData = {
   performer: string;
@@ -20,18 +20,17 @@ type FormData = {
 };
 
 export const AddConcertPage = () => {
-  const dispatch = useAppDispatch();
   const [selectedType, setSelectedType] = useState("Classic");
   const isRadioSelected = (value: string): boolean => selectedType === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSelectedType(e.target.value);
   };
-  const concerts = useAppSelector((state) => state.concerts.allConcerts);
-  const getCurrentConcertId = () => Math.max(...concerts.map((c) => c.id)) + 1;
-  const currentConcertId = getCurrentConcertId();
+  //const concerts = useAppSelector((state) => state.concerts.allConcerts);
+  //const getCurrentConcertId = () => Math.max(...concerts.map((c) => c.id)) + 1;
+  //const currentConcertId = getCurrentConcertId();
   const [isContinue, setIsContinue] = useState(false);
-  const [currentId, setCurrentId] = useState(currentConcertId);
-
+  //const [currentId, setCurrentId] = useState(currentConcertId);
+   const [concert, setConcert] = useState<Concert>();
   const {
     register,
     formState: { errors },
@@ -41,27 +40,23 @@ export const AddConcertPage = () => {
   });
 
   const submitForm = (data: FormData) => {
-    setCurrentId(Math.max(...concerts.map((c) => c.id)) + 1);
-    dispatch(
-      addConcert({
-        id: currentId,
+    //setCurrentId(Math.max(...concerts.map((c) => c.id)) + 1);
+    const conc: Concert = {
+      id: 0,
         performer: data.performer,
         ticketsCount: data.ticketsCount,
         concertDate: data.concertDate.toString(),
         location: data.location,
         concertType: selectedType,
         price: data.price,
-      })
-    );
-   // dispatch(
-     // addCoordinates({
-     //   concertId: currentId,
-     //   longitude: data.longitude,
-     //   latitude: data.latitude,
-    //  })
-   // );
+        coordinates: {
+          longitude: data.longitude,
+          latitude: data.latitude
+    }}
+    console.log(conc)
+      setConcert(conc);
     setIsContinue(true);
-    console.log(concerts);
+
   };
 
   return (
@@ -216,11 +211,11 @@ export const AddConcertPage = () => {
           {isContinue ? (
             <div>
               {selectedType === "Classic" && (
-                <ClassicProps concertId={currentId} />
+                <ClassicProps concert={concert!} />
               )}
-              {selectedType === "Party" && <PartyProps concertId={currentId} />}
+              {selectedType === "Party" && <PartyProps concert={concert!} />}
               {selectedType === "OpenAir" && (
-                <OpenAitProps concertId={currentId} />
+                <OpenAitProps concert={concert!} />
               )}
             </div>
           ) : (

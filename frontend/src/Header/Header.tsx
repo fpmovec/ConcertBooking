@@ -2,6 +2,7 @@ import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styles from "./Header.module.css";
 import { useAuth } from "../Authorization/Auth";
+import { isAdmin } from "../Pages/Admin/AdminList";
 
 type FormData = {
   search: string;
@@ -36,27 +37,38 @@ export const Header = () => {
           </button>
         </form>
       </div>
-      {isAuthenticated && (
+      {isAuthenticated && (isAdmin(user!.email) ? (
         <div>
           <button
-            onClick={() => navigate("/booked")}
-            className={styles.bookedButton}
+          onClick={() => navigate('/admin')}
+          className={styles.bookedButton}
           >
-            🎫 <span>Booked tickets</span>{" "}
-          </button>
-          <button
-            onClick={() => navigate("/admin")}
-            className={styles.bookedButton}
-          >
-            🎫 <span>Purchased tickets</span>
+            <span>Admin panel</span>
           </button>
         </div>
-      )}
+      ) : (
+        <>
+          <div>
+            <button
+              onClick={() => navigate("/booked")}
+              className={styles.bookedButton}
+            >
+              🎫 <span>Booked tickets</span>{" "}
+            </button>
+            <button
+              onClick={() => navigate("/purchased")}
+              className={styles.bookedButton}
+            >
+              🎫 <span>Purchased tickets</span>
+            </button>
+          </div>
+        </>
+      ))}
 
       {!loading &&
         (isAuthenticated ? (
           <div>
-            <span style={{ marginRight: 5 }}>{user!.name}</span>
+            <span style={{ marginRight: 5 }}>{user?.email}</span>
             <Link to="./signout" className={styles.signIn}>
               Sign Out
             </Link>

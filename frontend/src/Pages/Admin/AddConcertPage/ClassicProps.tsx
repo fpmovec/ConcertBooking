@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import styles from "./AddConcertPage.module.css";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
-import { useAppDispatch } from "../../../Redux/Hooks";
+//import { useAppDispatch } from "../../../Redux/Hooks";
 //import { addClassic } from "../../../Redux/Slices";
 import { useState } from "react";
+import { Concert } from "../../../Models/ConcertModels";
+import { PostClassic } from "../../../Requests/POST/ConcertsRequests";
 
 interface Props {
-  concertId: number;
+  concert: Concert;
 }
 
 type FormData = {
@@ -15,9 +17,8 @@ type FormData = {
   composer: string;
 };
 
-export const ClassicProps = ({ concertId }: Props) => {
-
-  const dispatch = useAppDispatch();
+export const ClassicProps = ({ concert }: Props) => {
+  //const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -28,13 +29,30 @@ export const ClassicProps = ({ concertId }: Props) => {
 
   const [isSuccessfully, setIsSuccessfully] = useState(false);
 
-  const submitForm = (data: FormData) => {
+  const submitForm = async (data: FormData) => {
     //dispatch(addClassic({
-     // concertId: concertId,
-     // voiceType: data.voiceType,
-     // concertName: data.concertName,
-     // composer: data.composer,
+    // concertId: concertId,
+    // voiceType: data.voiceType,
+    // concertName: data.concertName,
+    // composer: data.composer,
     //}));
+    console.log(concert);
+    await PostClassic(
+      {
+        performer: concert.performer,
+        ticketsCount: concert.ticketsCount,
+        concertDate: concert.concertDate,
+        location: concert.location,
+        price: concert.price,
+        voiceType: data.voiceType,
+        concertName: data.concertName,
+        composer: data.composer,
+        coordinates: {
+          latitude: concert.coordinates.latitude,
+          longitude: concert.coordinates.longitude
+        }
+      }
+    );
     setIsSuccessfully(true);
   };
 
@@ -88,7 +106,9 @@ export const ClassicProps = ({ concertId }: Props) => {
         )}
       </div>
       <button type="submit">Add concert</button>
-      {isSuccessfully && <div className={styles.success}>The concert is successfully added</div>}
+      {isSuccessfully && (
+        <div className={styles.success}>The concert is successfully added</div>
+      )}
     </form>
   );
 };

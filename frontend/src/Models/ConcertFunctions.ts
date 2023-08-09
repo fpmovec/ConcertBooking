@@ -1,6 +1,6 @@
 import { getAccessToken } from "../Authorization/AuthProvider";
 import { Booking } from "./BookingModels";
-import { Classic, Concert, Coordinates, OpenAir, Party } from "./ConcertModels";
+import { Classic, Concert, OpenAir, Party } from "./ConcertModels";
 import { Promocode } from "./Promocode";
 
 export const GetConcert = (
@@ -14,14 +14,14 @@ export const GetConcert = (
   return null;
 };
 
-export const GetConcerts = async (): Promise<void> => {
+/*export const GetConcerts = async (): Promise<void> => {
   //let concerts: Concert[] = [];
   const promocode: Promocode = {
     code: "ASDF",
     total: 0.8,
   };
   console.log("I am an async function");
-  const response = await fetch(`https://localhost:7235/Promocode`, {
+    await fetch(`https://localhost:7235/Promocode`, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + `${await getAccessToken()}`,
@@ -38,7 +38,7 @@ export const GetConcerts = async (): Promise<void> => {
     },
   });
   console.log(await response1.json());
-};
+};*/
 
 export const GetConcertsByCriteria = (
   criteria: string | null,
@@ -74,12 +74,12 @@ export function DeleteOpenAir(element: OpenAir, array: OpenAir[]): OpenAir[] {
 export function DeleteClassic(element: Classic, array: Classic[]): Classic[] {
   return array.filter((b) => b.concertId !== element.concertId);
 }
-export function DeleteCoordinates(
+/*export function DeleteCoordinates(
   element: Coordinates,
   array: Coordinates[]
 ): Coordinates[] {
   return array.filter((b) => b.concertId !== element.concertId);
-}
+}*/
 
 export const getCode = () => {
   return "1111";

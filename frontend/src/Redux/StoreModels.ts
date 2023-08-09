@@ -11,11 +11,11 @@ interface ConcertsState {
   readonly viewingOpenAir: OpenAir | null;
   readonly searching: Concert[];
   readonly booking: Booking[];
-  readonly currentBookingId: number;
+  //readonly currentBookingId: number;
   readonly promocodes: Promocode[];
   readonly purchased: Booking[];
   readonly allConcerts: Concert[];
-  readonly viewingCoordinates: Coordinates | null;
+  //readonly viewingCoordinates: Coordinates | null;
   //readonly allClassics: Classic[];
   //readonly allPartys: Party[];
   //readonly allOpenAirs: OpenAir[];
@@ -31,16 +31,12 @@ export const initialConcertsState: ConcertsState = {
   viewing: null,
   searching: [],
   booking: [],
-  currentBookingId: 1,
-  promocodes: getInitialPromocodes(),
+  //currentBookingId: 1,
+  promocodes: [],
   purchased: [],
   allConcerts: [],
-  //allClassics: getInitialClassics(),
-  //allPartys: getInitialPartys(),
-  //allOpenAirs: getInitialOpenAirs(),
-  //allCoordinates: getInitialCoordinates(),
   viewingClassic: null,
   viewingParty: null,
   viewingOpenAir: null,
-  viewingCoordinates: null
+  //viewingCoordinates: null
 };

@@ -72,17 +72,17 @@ namespace ConcertBackend.Controllers
             return Ok(searchedConcerts);
         }
 
-        [AllowAnonymous]
-        [HttpGet("coordinates/{id}")]
-        public async Task<ActionResult<Coordinates>> GetCoordinatesByConcertId(int id)
-        {
-            var coordinates = await _concertRepository.GetCoordinatesByConcertIdAsync(id);
+        //[AllowAnonymous]
+        //[HttpGet("coordinates/{id}")]
+        //public async Task<ActionResult<Coordinates>> GetCoordinatesByConcertId(int id)
+        //{
+        //    var coordinates = await _concertRepository.GetCoordinatesByConcertIdAsync(id);
 
-            if (coordinates == null)
-                return NotFound();
+        //    if (coordinates == null)
+        //        return NotFound();
 
-            return Ok(coordinates);
-        }
+        //    return Ok(coordinates);
+        //}
 
         [AllowAnonymous]
         [HttpGet("classic/{id}")]
@@ -149,6 +149,7 @@ namespace ConcertBackend.Controllers
                 VoiceType = concert.VoiceType,
                 ConcertName = concert.ConcertName,
                 Composer = concert.Composer,
+                Coordinates = concert.Coordinates,
             };
 
             await _concertRepository.AddClassicAsync(classicConcert);
@@ -171,6 +172,7 @@ namespace ConcertBackend.Controllers
                 ConcertType = "Party",
                 Price = partyDto.Price,
                 AgeLimit = partyDto.AgeLimit,
+                Coordinates = partyDto.Coordinates,
             };
 
             await _concertRepository.AddPartyAsync(party);
@@ -195,29 +197,30 @@ namespace ConcertBackend.Controllers
                 Price = openairDto.Price,
                 Journey = openairDto.Journey,
                 Headliner = openairDto.Headliner,
+                Coordinates = openairDto.Coordinates,
             };
 
             await _concertRepository.AddOpenAirAsync(openair);
             return Ok();
         }
 
-        [Authorize]
-        [HttpPost("coordinates")]
-        public async Task<ActionResult> AddCoordinatesAsync([FromBody] CoordinatesDto coordinatesDto)
-        {
-            var coordinates = new Coordinates
-            {
-                ConcertId = coordinatesDto.ConcertId,
-                Longitude = coordinatesDto.Longitude,
-                Latitude = coordinatesDto.Latitude,
-            };
-            var concert = await _concertRepository.AddCoordinatesAsync(coordinates);
+        //[Authorize]
+        //[HttpPost("coordinates")]
+        //public async Task<ActionResult> AddCoordinatesAsync([FromBody] CoordinatesDto coordinatesDto)
+        //{
+        //    var coordinates = new Coordinates
+        //    {
+        //        ConcertId = coordinatesDto.ConcertId,
+        //        Longitude = coordinatesDto.Longitude,
+        //        Latitude = coordinatesDto.Latitude,
+        //    };
+        //    var concert = await _concertRepository.AddCoordinatesAsync(coordinates);
 
-            if (concert == null)
-                return NotFound();
+        //    if (concert == null)
+        //        return NotFound();
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
         [Authorize]
         [HttpDelete("classic/{id}")]
@@ -253,17 +256,18 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
-        [Authorize]
-        [HttpDelete("coordinates/{id}")]
-        public async Task<ActionResult> DeleteCoordinates(int id)
-        {
-            var coordinates = await _concertRepository.GetCoordinatesByConcertIdAsync(id);
-            if (coordinates == null) return NotFound();
+        //[Authorize]
+        //[HttpDelete("coordinates/{id}")]
+        //public async Task<ActionResult> DeleteCoordinates(int id)
+        //{
+        //    var coordinates = await _concertRepository.GetCoordinatesByConcertIdAsync(id);
+        //    if (coordinates == null) return NotFound();
 
-            await _concertRepository.DeleteCoordinatesAsync(coordinates);
-            return Ok();
-        }
+        //    await _concertRepository.DeleteCoordinatesAsync(coordinates);
+        //    return Ok();
+        //}
 
+        [Authorize(Policy = "admin")]
         [HttpDelete("concerts/{id}")]
         public async Task<ActionResult> DeleteConcert(int id)
         {

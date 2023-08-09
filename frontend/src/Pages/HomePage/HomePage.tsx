@@ -30,7 +30,7 @@ export const HomePage = () => {
       const allConcerts = await GetAllConcerts();
       dispatch(setConcerts(allConcerts));
     };
-     doGetConcerts();
+    doGetConcerts();
   }, [concerts.length, dispatch]);
 
   return (

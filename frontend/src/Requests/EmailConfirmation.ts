@@ -2,7 +2,7 @@ export const SendConfirmationCode = async (email: string) => {
     const emailDto: EmailDto = {
         emailaddress: email
     }
-  const response = await fetch(`https://localhost:7235/Email`, {
+    await fetch(`https://localhost:7235/Email`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

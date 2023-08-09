@@ -12,6 +12,7 @@ namespace ConcertBackend.Models
         public string? VoiceType { get; set; }
         public string? ConcertName { get; set; }
         public string? Composer { get; set; }
+        public Coordinates? Coordinates { get; set; }
     }
 
     public class PartyDto
@@ -22,6 +23,7 @@ namespace ConcertBackend.Models
         public required string Location { get; set; }
         public float Price { get; set; }
         public int AgeLimit { get; set; }
+        public Coordinates? Coordinates { get; set; }
     }
 
     public class OpenAirDto
@@ -33,14 +35,15 @@ namespace ConcertBackend.Models
         public float Price { get; set; }
         public string Journey { get; set; } = string.Empty;
         public string Headliner { get; set; } = string.Empty;
+        public Coordinates? Coordinates { get; set; }
     }
 
-    public class CoordinatesDto
-    {
-        public int ConcertId { get; set; }
-        public float Longitude { get; set; }
-        public float Latitude { get; set; }
-    }
+    //public class CoordinatesDto
+    //{
+    //    public int ConcertId { get; set; }
+    //    public float Longitude { get; set; }
+    //    public float Latitude { get; set; }
+    //}
 
     public class PromocodeDto
     {
