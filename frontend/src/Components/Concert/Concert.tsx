@@ -2,6 +2,7 @@ import { Concert } from "../../Models/ConcertModels";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Currency } from "../Currency/Currency";
+import { useAuth } from "../../Authorization/Auth";
 import styles from "./ConcertList.module.css";
 
 interface Props {
@@ -9,8 +10,12 @@ interface Props {
 }
 
 export const ConcertComponent = ({ data }: Props) => {
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const navigateToBooking = () => navigate(`/booking/${data.id}`);
+  const navigateToBooking = () => {
+    if (isAuthenticated) navigate(`/booking/${data.id}`);
+    else navigate("/signin");
+  };
   return (
     <div className={styles.concert}>
       <div>

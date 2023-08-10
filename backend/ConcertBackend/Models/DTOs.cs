@@ -38,13 +38,6 @@ namespace ConcertBackend.Models
         public Coordinates? Coordinates { get; set; }
     }
 
-    //public class CoordinatesDto
-    //{
-    //    public int ConcertId { get; set; }
-    //    public float Longitude { get; set; }
-    //    public float Latitude { get; set; }
-    //}
-
     public class PromocodeDto
     {
         public required string Code { get; set; }
@@ -55,5 +48,37 @@ namespace ConcertBackend.Models
     {
         [Required, EmailAddress]
         public required string EmailAddress { get; set; }
+    }
+
+    public class BookingDto
+    {
+        public string FirstName { get; set; } = string.Empty;
+        [Required, MinLength(3)]
+        public string LastName { get; set; } = string.Empty;
+        [Required, EmailAddress]
+        public string Email { get; set; } = string.Empty;
+        [Required, Phone]
+        public string PhoneNumber { get; set; } = string.Empty;
+        [Required, Range(1, 250)]
+        public int TicketQuantity { get; set; }
+        [Required, Range(1, int.MaxValue)]
+        public float PurchaseAmount { get; set; }
+        public int ConcertId { get; set; }
+    }
+
+    public class OrderDto
+    {
+        [Required]
+        public string FirstName { get; set; } = string.Empty;
+        [Required]
+        public string LastName { get; set; } = string.Empty;
+        [Required, Phone]
+        public string PhoneNumber { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        [Required, Range(1, 250)]
+        public int TicketQuantity { get; set; }
+        [Required, Range(1, int.MaxValue)]
+        public float PurchaseAmount { get; set; }
+        public int ConcertId { get; set; }
     }
 }

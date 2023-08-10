@@ -18,19 +18,22 @@ import {
   //GetCoordinatesByConcertId,
 } from "../../Requests/GET/ConcertsRequests";
 import React from "react";
+import { useAuth } from "../../Authorization/Auth";
 
 interface Props {
   data: Concert;
 }
 
 export const ConcertInfo = ({ data }: Props) => {
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const navToBooking = () => {
-    navigate(`/booking/${data.id}`);
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    console.log(isAuthenticated);
+    if (isAuthenticated) navigate(`/booking/${data.id}`);
+    else navigate("/signin");
   };
-
+  
   const isParty = data.concertType === "Party";
   const isOpenAir = data.concertType === "OpenAir";
   const isClassic = data.concertType === "Classic";

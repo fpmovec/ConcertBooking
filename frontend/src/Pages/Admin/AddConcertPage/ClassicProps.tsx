@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
 import styles from "./AddConcertPage.module.css";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
-//import { useAppDispatch } from "../../../Redux/Hooks";
-//import { addClassic } from "../../../Redux/Slices";
 import { useState } from "react";
 import { Concert } from "../../../Models/ConcertModels";
 import { PostClassic } from "../../../Requests/POST/ConcertsRequests";
@@ -18,7 +16,6 @@ type FormData = {
 };
 
 export const ClassicProps = ({ concert }: Props) => {
-  //const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -30,12 +27,6 @@ export const ClassicProps = ({ concert }: Props) => {
   const [isSuccessfully, setIsSuccessfully] = useState(false);
 
   const submitForm = async (data: FormData) => {
-    //dispatch(addClassic({
-    // concertId: concertId,
-    // voiceType: data.voiceType,
-    // concertName: data.concertName,
-    // composer: data.composer,
-    //}));
     console.log(concert);
     await PostClassic(
       {

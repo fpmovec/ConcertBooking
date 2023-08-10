@@ -2,7 +2,7 @@ import { Promocode } from "../../../../Models/Promocode";
 import styles from "./Promocode.module.css";
 
 import { DeletePromocode } from "../../../../Requests/DELETE/PromocodesRequestst";
-import { useAppDispatch, useAppSelector } from "../../../../Redux/Hooks";
+import { useAppDispatch } from "../../../../Redux/Hooks";
 import { setPromocodes } from "../../../../Redux/Slices";
 import { GetPromocodes } from "../../../../Requests/GET/PromocodesRequests";
 

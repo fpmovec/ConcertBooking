@@ -1,21 +1,21 @@
 import { Link } from "react-router-dom";
-import { Booking } from "../../Models/BookingModels";
 import { Currency } from "../Currency/Currency";
 import styles from './BookingComponent.module.css'
+import { Order } from "../../Models/OrderModels";
 
 interface Props {
-    booking: Booking;
+    order: Order;
     concertPerformer: string | undefined;
   }
 
-export const PurchasedComponent = ({ booking, concertPerformer}: Props) => {
+export const PurchasedComponent = ({ order, concertPerformer}: Props) => {
     return (
         <div className={styles.booking}>
           <div className={styles.title}>
-            <div>Purchase Id: {booking.id}</div>
+            <div>Purchase Id: {order.id}</div>
             <div>
               <span style={{ fontWeight: 200 }}>Total price: </span>{" "}
-              <Currency currency={booking.purchaseAmount} />
+              <Currency currency={order.purchaseAmount} />
             </div>
           </div>
           <div className={styles.block}>
@@ -25,18 +25,18 @@ export const PurchasedComponent = ({ booking, concertPerformer}: Props) => {
                 <span>
                   <Link
                     className={styles.link}
-                    to={`/concerts/${booking.concertId}`}
+                    to={`/concerts/${order.concertId}`}
                   >
                     {concertPerformer}
                   </Link>
                 </span>
                 <br />
-                📛 Name: {booking.firstName} {booking.lastName}
+                📛 Name: {order.fullName}
               </div>
               <div>
-                📧 Email: {booking.email}
+                📧 Email: {order.email}
                 <br />
-                🎫 Ticket quantity: {booking.ticketQuantity}
+                🎫 Ticket quantity: {order.ticketQuantity}
               </div>
             </div>
           </div>

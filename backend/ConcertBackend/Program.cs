@@ -2,6 +2,7 @@ using ConcertBackend.Context;
 using ConcertBackend.EmailConfirmation.EmailService;
 using ConcertBackend.Repositories.Classes;
 using ConcertBackend.Repositories.Interfaces;
+using ConcertBackend.Repositories.Realizations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<ConcertsDbContext>(
 builder.Services.AddTransient<IConcertRepository, ConcertRepository>();
 builder.Services.AddTransient<IPromocodesRepository, PromocodesRepository>();
 builder.Services.AddTransient<IBookingRepository, BookingRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddSingleton<IEmailService, EmailService>();
 
 builder.Services.AddAuthentication(options =>

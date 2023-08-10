@@ -16,7 +16,7 @@ namespace ConcertBackend.Controllers
             _service = service;
         }
 
-        [Authorize(Policy = "admin"), Authorize(Policy = "user")]
+        [Authorize]
         [HttpPost]
         public ActionResult SendEmail(EmailDto email)
         {
@@ -25,7 +25,7 @@ namespace ConcertBackend.Controllers
             return Ok();
         }
 
-        [Authorize(Policy = "admin"), Authorize(Policy = "user")]
+        [Authorize]
         [HttpGet("confirmation")]
         public ActionResult<Guid> GetConfirmationCode()
         {

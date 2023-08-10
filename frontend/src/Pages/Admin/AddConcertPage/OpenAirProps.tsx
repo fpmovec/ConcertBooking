@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
 import styles from "./AddConcertPage.module.css";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
-//import { useAppDispatch } from "../../../Redux/Hooks";
-//import { addOpenAir } from "../../../Redux/Slices";
 import { useState } from "react";
 import { Concert } from "../../../Models/ConcertModels";
 import { PostOpenAir } from "../../../Requests/POST/ConcertsRequests";
@@ -17,7 +15,6 @@ type FormData = {
 };
 
 export const OpenAitProps = ({ concert }: Props) => {
-  //const dispatch = useAppDispatch();
   const [isSuccessfully, setIsSuccesfully] = useState(false);
 
   const {

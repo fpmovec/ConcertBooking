@@ -18,9 +18,11 @@ namespace ConcertBackend.Repositories.Classes
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Booking>> GetAllBookingsAsync()
+        public async Task<IEnumerable<Booking>> GetAllBookingsByEmailAsync(string email)
         {
-            return await _context.Bookings.ToListAsync();
+            return await _context.Bookings
+                .Where(b => b.Email == email)
+                .ToListAsync();
         }
 
         public async Task<Booking?> GetBookingByIdAsync(int id)

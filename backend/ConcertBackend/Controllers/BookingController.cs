@@ -3,6 +3,7 @@ using ConcertBackend.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ConcertBackend.Controllers
 {
@@ -18,19 +19,33 @@ namespace ConcertBackend.Controllers
             _bookingRepository = repository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Booking>>> GetAllBookingsAsync()
+        [Authorize(Policy = "user")]
+        //[AllowAnonymous]
+        [HttpGet("{email}")]
+        public async Task<ActionResult<IEnumerable<Booking>>> GetAllBookingsByEmailAsync([EmailAddress]string email)
         {
-            return Ok(await _bookingRepository.GetAllBookingsAsync());
+            return Ok(await _bookingRepository.GetAllBookingsByEmailAsync(email));
         }
 
+        [Authorize(Policy = "user")]
         [HttpPost]
-        public async Task<ActionResult> AddBookingAsync([FromBody]Booking booking)
+        public async Task<ActionResult> AddBookingAsync([FromBody]BookingDto bookingDto)
         {
+            var booking = new Booking()
+            {
+                FirstName = bookingDto.FirstName,
+                LastName = bookingDto.LastName,
+                Email = bookingDto.Email,
+                PhoneNumber = bookingDto.PhoneNumber,
+                PurchaseAmount = bookingDto.PurchaseAmount,
+                TicketQuantity = bookingDto.TicketQuantity,
+                ConcertId = bookingDto.ConcertId,
+            };
             await _bookingRepository.AddBookingAsync(booking);
             return Ok();
         }
 
+        [Authorize(Policy = "user")]
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteBookingAsync(int id)
         {

@@ -14,6 +14,11 @@ namespace ConcertBackend.Context
                 .HasMany(c => c.Bookings)
                 .WithOne()
                 .HasForeignKey(c => c.ConcertId);
+
+            modelBuilder.Entity<Concert>()
+                .HasMany(c => c.Orders)
+                .WithOne()
+                .HasForeignKey(c => c.ConcertId);
         }
 
         public DbSet<Concert> Concerts { get; set; }
@@ -23,5 +28,6 @@ namespace ConcertBackend.Context
         //public DbSet<Coordinates> Coordinates { get; set; }
         public DbSet<Promocode> Promocodes { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

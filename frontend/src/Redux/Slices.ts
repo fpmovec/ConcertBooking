@@ -4,11 +4,11 @@ import { Booking } from "../Models/BookingModels";
 import {
   Classic,
   Concert,
-  Coordinates,
   OpenAir,
   Party,
 } from "../Models/ConcertModels";
 import { Promocode } from "../Models/Promocode";
+import { Order } from "../Models/OrderModels";
 
 const concertSlice = createSlice({
   name: "concerts",
@@ -49,10 +49,6 @@ const concertSlice = createSlice({
       state.booking.push(action.payload);
     },
 
-    setCurrentBookingId(state, action: PayloadAction<number>) {
-      state.currentBookingId = action.payload;
-    },
-
     setBookings(state, action: PayloadAction<Booking[]>) {
       state.booking = action.payload;
     },
@@ -61,8 +57,8 @@ const concertSlice = createSlice({
       state.promocodes = action.payload;
     },
 
-    addPurchase(state, action: PayloadAction<Booking>) {
-      state.purchased.push(action.payload);
+    setPurchases(state, action: PayloadAction<Order[]>) {
+      state.purchased = action.payload;
     },
 
     addConcert(state, action: PayloadAction<Concert>) {
@@ -72,39 +68,6 @@ const concertSlice = createSlice({
     setConcerts(state, action: PayloadAction<Concert[]>) {
       state.allConcerts = action.payload;
     },
-
-    gotCoordinates(state, action: PayloadAction<Coordinates>) {
-      state.viewingCoordinates = action.payload;
-    }
-    //addClassic(state, action: PayloadAction<Classic>) {
-    //  state.allClassics.push(action.payload);
-    //},
-    //addParty(state, action: PayloadAction<Party>) {
-     // state.allPartys.push(action.payload);
-    //},
-    //addOpenAir(state, action: PayloadAction<OpenAir>) {
-    //  state.allOpenAirs.push(action.payload);
-    //},
-
-    //addCoordinates(state, action: PayloadAction<Coordinates>) {
-   //   state.allCoordinates.push(action.payload);
-    //},
-
-    //setClassics(state, action: PayloadAction<Classic[]>) {
-    //  state.allClassics = action.payload;
-    //},
-
-    //setPartys(state, action: PayloadAction<Party[]>) {
-    //  state.allPartys = action.payload;
-    //},
-
-    //setOpenAirs(state, action: PayloadAction<OpenAir[]>) {
-    //  state.allOpenAirs = action.payload;
-    //},
-
-    //setCoordinates(state, action: PayloadAction<Coordinates[]>) {
-    //  state.allCoordinates = action.payload;
-    //},
   },
 });
 
@@ -114,25 +77,14 @@ export const {
   searchingConcerts,
   searchedConcerts,
   bookedConcert,
-  setCurrentBookingId,
   setBookings,
   setPromocodes,
-  addPurchase,
+  setPurchases,
   addConcert,
   setConcerts,
-  //setClassics,
-  //setCoordinates,
-  //setOpenAirs,
-  //setPartys,
-  //addClassic,
- // addCoordinates,
-  //addParty,
-  //addOpenAir,
-  //gotInfo,
   gotClassicInfo,
   gotOpenAirInfo,
   gotPartyInfo,
-  gotCoordinates
 } = concertSlice.actions;
 
 export default concertSlice.reducer;

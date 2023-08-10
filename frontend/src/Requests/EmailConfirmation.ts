@@ -1,3 +1,5 @@
+import { getAccessToken } from "../Authorization/AuthProvider";
+
 export const SendConfirmationCode = async (email: string) => {
     const emailDto: EmailDto = {
         emailaddress: email
@@ -6,6 +8,7 @@ export const SendConfirmationCode = async (email: string) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": "Bearer " + `${await getAccessToken()}`
     },
     body: JSON.stringify(emailDto),
   });
@@ -16,6 +19,7 @@ export const GetConfirmationCode = async (): Promise<string> => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      "Authorization": "Bearer " + `${await getAccessToken()}`
     },
   });
 

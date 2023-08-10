@@ -1,14 +1,20 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { bookedConcert, setCurrentBookingId } from "../../Redux/Slices";
+import {
+  setPromocodes,
+} from "../../Redux/Slices";
 import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
 import { ErrorField } from "../../Components/SuccesErrorFields/ErrorField";
 import { useAuth } from "../../Authorization/Auth";
 import { Currency } from "../../Components/Currency/Currency";
 import styles from "./BookingPage.module.css";
 import React from "react";
-import { getCode } from "../../Models/ConcertFunctions";
-import { GetConfirmationCode, SendConfirmationCode } from "../../Requests/EmailConfirmation";
+import {
+  GetConfirmationCode,
+  SendConfirmationCode,
+} from "../../Requests/EmailConfirmation";
+import { PostBooking } from "../../Requests/POST/BookingsRequests";
+import { GetPromocodes } from "../../Requests/GET/PromocodesRequests";
 
 type FormData = {
   firstName: string;
@@ -25,70 +31,84 @@ export const BookingPage = () => {
   const { user } = useAuth();
   const promocodes = useAppSelector((state) => state.concerts.promocodes);
   const concerts = useAppSelector((state) => state.concerts.allConcerts);
+  const { concertId } = useParams();
+  const concertByCurrentId = concerts.find((c) => c.id === Number(concertId));
+  const firstPrice = concertByCurrentId!.price;
+  const [isPromo, setIsPromo] = React.useState<boolean>();
+  const [promoPrice, setPromoPrice] = React.useState(concertByCurrentId!.price);
+  const [isApplied, setIsApplied] = React.useState<boolean>(false);
+  const dispatch = useAppDispatch();
+
   const IsPromo = (data: string): boolean => {
-    const code = promocodes.filter((pc) => pc.code === data);
+    const code = promocodes.filter((pc) => pc.code === data.trim());
     if (code.length !== 0) {
-      setPromoPrice(code[0].total * promoPrice);
+      if (!isApplied) {
+        setPromoPrice(code[0].total * firstPrice);
+      setIsApplied(true);
+      }
       return true;
     } else {
-      setPromoPrice(firstPrice);
       if (data === "") return true;
+      setPromoPrice(firstPrice)
+      setIsApplied(false)
       return false;
     }
   };
 
+
+  React.useEffect(() => {
+    const doGet = async () => {
+      const promocodes = await GetPromocodes();
+      dispatch(setPromocodes(promocodes));
+    };
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    doGet();
+  }, [dispatch]);
+
+
   const IsValidCode = async (data: string) => {
     const code = await GetConfirmationCode();
-    return code === data ? true : false;
+    return code === data.trim() ? true : false;
   };
 
   const confirm = async (data: FormData) => {
     setIsConfirmation(true);
     setCurrentForm(data);
-    await SendConfirmationCode(data.email);
+    await SendConfirmationCode(user!.email);
   };
 
-  const [isPromo, setIsPromo] = React.useState(false);
   const [isConfirmation, setIsConfirmation] = React.useState(false);
   const [currentForm, setCurrentForm] = React.useState<FormData>();
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const bookings = useAppSelector((state) => state.concerts.booking);
-  let currentBookingId = useAppSelector(
-    (state) => state.concerts.currentBookingId
-  );
-  const { concertId } = useParams();
+
   const [quantity, setQuantity] = React.useState(1);
-  const concertByCurrentId = concerts.find((c) => c.id === Number(concertId));
-  const firstPrice = concertByCurrentId!.price;
-  const [promoPrice, setPromoPrice] = React.useState(concertByCurrentId!.price);
+
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    mode: "onChange",
+    mode: "all",
   });
 
   console.log(bookings);
 
   const submit = () => {
-    const data = currentForm;
-    dispatch(
-      bookedConcert({
-        id: currentBookingId,
-        firstName: data!.firstName,
-        lastName: data!.lastName,
-        email: data!.email,
-        phoneNumber: data!.phoneNumber,
-        ticketQuantity: data!.ticketQuantity,
+    const doAdd = async () => {
+      await PostBooking({
+        firstName: currentForm!.firstName,
+        lastName: currentForm!.lastName,
+        email: user!.email,
+        phoneNumber: currentForm!.phoneNumber,
+        ticketQuantity: currentForm!.ticketQuantity,
         concertId: Number(concertId),
         purchaseAmount: promoPrice * quantity,
-        username: user!.name,
-      })
-    );
-    currentBookingId = currentBookingId + 1;
-    dispatch(setCurrentBookingId(currentBookingId));
+      });
+    };
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    doAdd();
     navigate("/thanks?status=booking");
   };
 
@@ -162,23 +182,6 @@ export const BookingPage = () => {
               )}
             </div>
             <div>
-              <label htmlFor="email">Email:</label>
-              <input
-                id="email"
-                type="text"
-                {...register("email", {
-                  required: true,
-                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                })}
-              />
-              {errors.email && errors.email.type === "required" && (
-                <ErrorField data="Enter your Email" />
-              )}
-              {errors.email && errors.email.type === "pattern" && (
-                <ErrorField data="Email is not correct" />
-              )}
-            </div>
-            <div>
               <label htmlFor="phone">Phone number:</label>
               <input
                 id="phone"
@@ -239,7 +242,7 @@ export const BookingPage = () => {
                   type="text"
                   {...register("promocode", {
                     validate: {
-                      isPromo: (v) => IsPromo(v) === true,
+                      isPromo: (v) => IsPromo(v.trim()) === true,
                     },
                   })}
                 />

@@ -2,10 +2,11 @@ import { Booking } from "../../Models/BookingModels";
 import { Currency } from "../Currency/Currency";
 import styles from "./BookingComponent.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../Redux/Hooks";
-import { DeleteBooking } from "../../Models/ConcertFunctions";
+import { useAppDispatch } from "../../Redux/Hooks";
 import { setBookings } from "../../Redux/Slices";
-
+import { DeleteBooking } from "../../Requests/DELETE/BookingsRequests";
+import { useAuth } from "../../Authorization/Auth";
+import { GetAllBookingsByEmail } from "../../Requests/GET/BookingsRequests";
 
 interface Props {
   booking: Booking;
@@ -14,13 +15,17 @@ interface Props {
 
 export const BookingComponent = ({ booking, concertPerformer }: Props) => {
   const dispatch = useAppDispatch();
-  const allBookings = useAppSelector((state) => state.concerts.booking);
-  let currentBookings = allBookings;
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleClick = () => {
-    currentBookings = DeleteBooking(booking, allBookings);
-    dispatch(setBookings(currentBookings));
+    const remove = async () => {
+      await DeleteBooking(booking.id);
+      const bookings = await GetAllBookingsByEmail(user!.email);
+      dispatch(setBookings(bookings));
+    };
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    remove();
   };
 
   const payClick = () => navigate(`/pay/${booking.id}`);
@@ -55,17 +60,17 @@ export const BookingComponent = ({ booking, concertPerformer }: Props) => {
             🎫 Ticket quantity: {booking.ticketQuantity}
           </div>
         </div>
-       
-            <div className={styles.buttonsBlock}>
-              <div>
-                <button onClick={payClick} className={styles.remove}>
-                  💸 Pay
-                </button>
-              </div>
-              <button onClick={handleClick} className={styles.remove}>
-                🗑️ Remove
-              </button>
-            </div>
+
+        <div className={styles.buttonsBlock}>
+          <div>
+            <button onClick={payClick} className={styles.remove}>
+              💸 Pay
+            </button>
+          </div>
+          <button onClick={handleClick} className={styles.remove}>
+            🗑️ Remove
+          </button>
+        </div>
       </div>
     </div>
   );

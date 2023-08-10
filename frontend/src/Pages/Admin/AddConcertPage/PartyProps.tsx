@@ -1,11 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-//import { useAppDispatch } from "../../../Redux/Hooks";
 import styles from "./AddConcertPage.module.css";
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import { Concert } from "../../../Models/ConcertModels";
 import { PostParty } from "../../../Requests/POST/ConcertsRequests";
-//import { addParty } from "../../../Redux/Slices";
 
 interface Props {
   concert: Concert;
@@ -16,7 +14,6 @@ type FormData = {
 };
 
 export const PartyProps = ({ concert }: Props) => {
-  //const dispatch = useAppDispatch();
   const [isSuccessfully, setIsSuccessfully] = React.useState(false);
   const {
     register,

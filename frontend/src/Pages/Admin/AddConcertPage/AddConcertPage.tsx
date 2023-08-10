@@ -25,11 +25,8 @@ export const AddConcertPage = () => {
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSelectedType(e.target.value);
   };
-  //const concerts = useAppSelector((state) => state.concerts.allConcerts);
-  //const getCurrentConcertId = () => Math.max(...concerts.map((c) => c.id)) + 1;
-  //const currentConcertId = getCurrentConcertId();
+
   const [isContinue, setIsContinue] = useState(false);
-  //const [currentId, setCurrentId] = useState(currentConcertId);
    const [concert, setConcert] = useState<Concert>();
   const {
     register,
@@ -40,7 +37,6 @@ export const AddConcertPage = () => {
   });
 
   const submitForm = (data: FormData) => {
-    //setCurrentId(Math.max(...concerts.map((c) => c.id)) + 1);
     const conc: Concert = {
       id: 0,
         performer: data.performer,

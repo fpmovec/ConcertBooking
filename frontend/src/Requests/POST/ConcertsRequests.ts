@@ -34,17 +34,6 @@ interface OpenAirDto {
   coordinates: Coordinates;
 }
 
-export const PostCoordinates = async (dto: Coordinates) => {
-    await fetch(`https://localhost:7235/coordinates`, {
-    method: "POST",
-    headers: {
-      'Authorization': "Bearer " + `${await getAccessToken()}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(dto),
-  });
-}
-
 export const PostClassic = async (
   dto: ClassicDto,
 

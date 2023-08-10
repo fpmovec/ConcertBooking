@@ -1,9 +1,6 @@
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import styles from "./AddPromocodePage.module.css";
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
-import { Promocode } from "../../../Models/Promocode";
-import { setPromocodes } from "../../../Redux/Slices";
 import React from "react";
 import { PostPromocode } from "../../../Requests/POST/PromocodesRequest";
 
@@ -14,8 +11,6 @@ type PromocodeData = {
 
 export const AddPromocodePage = () => {
   const [isSucces, setIsSuccess] = React.useState(false);
-  const dispath = useAppDispatch();
-  const promocodes = useAppSelector((state) => state.concerts.promocodes);
   const {
     register,
     handleSubmit,

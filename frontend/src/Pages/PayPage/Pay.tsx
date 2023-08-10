@@ -2,9 +2,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useAppSelector } from "../../Redux/Hooks";
 import styles from "./Pay.module.css";
-import { addPurchase, setBookings } from "../../Redux/Slices";
-import { useDispatch } from "react-redux";
-import { DeleteBooking } from "../../Models/ConcertFunctions";
+import { DeleteBooking } from "../../Requests/DELETE/BookingsRequests";
+import { PostOrder } from "../../Requests/POST/OrdersRequests";
+import { useAuth } from "../../Authorization/Auth";
+
 
 const initialOptions = {
   clientId:
@@ -17,11 +18,10 @@ export const Pay = () => {
   const { bookingId } = useParams();
   const navigate = useNavigate();
   const allBookings = useAppSelector((state) => state.concerts.booking);
-  const dispatch = useDispatch();
   const currentBooking = [...allBookings].filter(
     (b) => b.id === Number(bookingId)
   )[0];
-  let currBookings = allBookings;
+ const { user } = useAuth();
 
   return (
     <div className={styles.main}>
@@ -40,13 +40,17 @@ export const Pay = () => {
               });
             }}
             onApprove={(data, actions) => {
-              return actions.order!.capture().then(function (details) {
-                console.log(
-                  "Transaction completed by " + details.payer.name!.given_name!
-                );
-                currBookings = DeleteBooking(currentBooking, allBookings);
-                dispatch(setBookings(currBookings));
-                dispatch(addPurchase(currentBooking));
+              return actions.order!.capture().then(async function (details) {
+                await PostOrder({
+                  firstName: currentBooking.firstName,
+                  lastName: currentBooking.lastName,
+                  email: user!.email,
+                  phoneNumber: currentBooking.phoneNumber,
+                  purchaseAmount: currentBooking.purchaseAmount,
+                  ticketQuantity: currentBooking.ticketQuantity,
+                  concertId: currentBooking.concertId
+                });
+                await DeleteBooking(currentBooking.id);
                 navigate(`/thanks?status=purchase`);
               });
             }}
