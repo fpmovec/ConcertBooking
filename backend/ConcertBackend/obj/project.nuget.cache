@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QQI4OxFMNIJILVCCSpjw+PGKv+GwP9inn6foGrADBBnnJ1r455M47KrHfMbL5Wd1lxI79dTE4PgvmmMm4ftdNg==",
+  "dgSpecHash": "6RjEe7g627WrXjsQ8QEz5D5wddnvtKyp6c9sCTGbdfLA0wv+X4RD0HykWVj3hKwPXrfQ1De0QWJ5NI8dOl/RsQ==",
   "success": true,
   "projectFilePath": "D:\\ConcertBooking\\backend\\ConcertBackend\\ConcertBackend.csproj",
   "expectedPackageFiles": [
@@ -49,6 +49,8 @@
     "D:\\Nuget\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "D:\\Nuget\\mimekit\\4.1.0\\mimekit.4.1.0.nupkg.sha512",
     "D:\\Nuget\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "D:\\Nuget\\npgsql\\7.0.4\\npgsql.7.0.4.nupkg.sha512",
+    "D:\\Nuget\\npgsql.entityframeworkcore.postgresql\\7.0.4\\npgsql.entityframeworkcore.postgresql.7.0.4.nupkg.sha512",
     "D:\\Nuget\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "D:\\Nuget\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "D:\\Nuget\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",

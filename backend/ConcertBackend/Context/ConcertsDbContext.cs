@@ -21,6 +21,11 @@ namespace ConcertBackend.Context
                 .HasForeignKey(c => c.ConcertId);
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseNpgsql("Host=127.0.0.1;Port=5432;Database=concertsbooking;Username=admin;Password=root");
+        }
+
         public DbSet<Concert> Concerts { get; set; }
         public DbSet<Classic> Classics { get; set; }
         public DbSet<Party> Parties { get; set; }

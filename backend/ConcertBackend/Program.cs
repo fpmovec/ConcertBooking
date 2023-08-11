@@ -16,9 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddDbContext<ConcertsDbContext>(
-    options => options.UseSqlServer(ConfigurationExtensions.GetConnectionString(builder.Configuration, "DefaultConnection"))
-    );
+builder.Services.AddDbContext<ConcertsDbContext>();
 builder.Services.AddTransient<IConcertRepository, ConcertRepository>();
 builder.Services.AddTransient<IPromocodesRepository, PromocodesRepository>();
 builder.Services.AddTransient<IBookingRepository, BookingRepository>();
