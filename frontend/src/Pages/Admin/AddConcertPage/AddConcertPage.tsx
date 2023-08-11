@@ -27,7 +27,7 @@ export const AddConcertPage = () => {
   };
 
   const [isContinue, setIsContinue] = useState(false);
-   const [concert, setConcert] = useState<Concert>();
+  const [concert, setConcert] = useState<Concert>();
   const {
     register,
     formState: { errors },
@@ -39,20 +39,20 @@ export const AddConcertPage = () => {
   const submitForm = (data: FormData) => {
     const conc: Concert = {
       id: 0,
-        performer: data.performer,
-        ticketsCount: data.ticketsCount,
-        concertDate: data.concertDate.toString(),
-        location: data.location,
-        concertType: selectedType,
-        price: data.price,
-        coordinates: {
-          longitude: data.longitude,
-          latitude: data.latitude
-    }}
-    console.log(conc)
-      setConcert(conc);
+      performer: data.performer,
+      ticketsCount: data.ticketsCount,
+      concertDate: data.concertDate.toString(),
+      location: data.location,
+      concertType: selectedType,
+      price: data.price,
+      coordinates: {
+        longitude: data.longitude,
+        latitude: data.latitude,
+      },
+    };
+    console.log(conc);
+    setConcert(conc);
     setIsContinue(true);
-
   };
 
   return (
@@ -144,7 +144,7 @@ export const AddConcertPage = () => {
                   id="long"
                   type="number"
                   {...register("longitude", { required: true })}
-                  defaultValue={53.902284}
+                  step={0.000001}
                 />
               </div>
               <div>
@@ -153,7 +153,7 @@ export const AddConcertPage = () => {
                   id="lat"
                   type="number"
                   {...register("latitude", { required: true })}
-                  defaultValue={27.561831}
+                  step={0.000001}
                 />
               </div>
             </fieldset>

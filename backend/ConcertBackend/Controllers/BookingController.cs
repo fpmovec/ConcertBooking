@@ -20,7 +20,6 @@ namespace ConcertBackend.Controllers
         }
 
         [Authorize(Policy = "user")]
-        //[AllowAnonymous]
         [HttpGet("{email}")]
         public async Task<ActionResult<IEnumerable<Booking>>> GetAllBookingsByEmailAsync([EmailAddress]string email)
         {

@@ -48,9 +48,9 @@ export const BookingPage = () => {
       }
       return true;
     } else {
+      setIsApplied(false)
       if (data === "") return true;
       setPromoPrice(firstPrice)
-      setIsApplied(false)
       return false;
     }
   };

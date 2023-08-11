@@ -26,8 +26,7 @@ namespace ConcertBackend.Controllers
             return Ok(orders);
         }
 
-        //[Authorize]
-        [AllowAnonymous]
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddOrderAsync([FromBody]OrderDto orderDto)
         {
