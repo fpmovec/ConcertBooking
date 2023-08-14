@@ -36,7 +36,7 @@ docker-compose --version
 
 ![](https://github.com/fpmovec/Images/blob/main/photo_2023-08-11_18-42-12.jpg)
 
-Теперь создаем соединение для БД с именем db_concerts. Создаем БД под именем concertsbooking. Host устанавливаем 127.0.0.1, имя пользователя admin и пароль root. После того, как это сделали, в консоли идем в папку backend/ConcertsBooking и вводим команду 
+Теперь создаем соединение для БД с именем db_concerts(все эти действия проделываем в развернутом контейнере Docker, интрукция по его запуску ниже). Создаем БД под именем concertsbooking. Host устанавливаем 127.0.0.1, имя пользователя admin и пароль root. После того, как это сделали, в консоли идем в папку backend/ConcertsBooking и вводим команду 
 ```C#
 dotnet ef database update
 ```
