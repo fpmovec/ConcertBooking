@@ -4,6 +4,7 @@ import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import { useState } from "react";
 import { Concert } from "../../../Models/ConcertModels";
 import { PostOpenAir } from "../../../Requests/POST/ConcertsRequests";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   concert: Concert;
@@ -16,7 +17,7 @@ type FormData = {
 
 export const OpenAitProps = ({ concert }: Props) => {
   const [isSuccessfully, setIsSuccesfully] = useState(false);
-
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -42,11 +43,12 @@ export const OpenAitProps = ({ concert }: Props) => {
       },
     );
     setIsSuccesfully(true);
+    navigate("/admin/concerts");
   };
 
   return (
     <form
-      className={styles.form}
+      className={styles.form1}
       onSubmit={(e) => void handleSubmit(submitForm)(e)}
     >
       <div>

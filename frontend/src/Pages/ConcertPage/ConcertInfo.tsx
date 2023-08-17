@@ -19,21 +19,24 @@ import {
 } from "../../Requests/GET/ConcertsRequests";
 import React from "react";
 import { useAuth } from "../../Authorization/Auth";
+import { isAdmin } from "../Admin/AdminList";
+import { Modal } from "../../Components/Modal/Modal";
 
 interface Props {
   data: Concert;
 }
 
 export const ConcertInfo = ({ data }: Props) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const navToBooking = () => {
-    console.log(isAuthenticated);
-    if (isAuthenticated) navigate(`/booking/${data.id}`);
-    else navigate("/signin");
+    if (isAuthenticated) {
+      if (isAdmin(user!.email)) setModalActive(true);
+      else navigate(`/booking/${data.id}`);
+    } else navigate("/signin");
   };
-  
+
   const isParty = data.concertType === "Party";
   const isOpenAir = data.concertType === "OpenAir";
   const isClassic = data.concertType === "Classic";
@@ -59,6 +62,7 @@ export const ConcertInfo = ({ data }: Props) => {
   const classic = useAppSelector((state) => state.concerts.viewingClassic);
   const party = useAppSelector((state) => state.concerts.viewingParty);
   const openAir = useAppSelector((state) => state.concerts.viewingOpenAir);
+  const [modalActive, setModalActive] = React.useState(false);
   //const coordinates = useAppSelector(
   //  (state) => state.concerts.viewingCoordinates
   //);
@@ -126,6 +130,14 @@ export const ConcertInfo = ({ data }: Props) => {
           </ul>
         )}
       </div>
+      <Modal active={modalActive} setActive={setModalActive}>
+        <div className={styles.modalBlock}>
+          <div>Admin can not book tickets</div>
+          <div className={styles.buttonsBlock}>
+            <button onClick={() => setModalActive(false)}>Ok</button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

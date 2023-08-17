@@ -13,8 +13,8 @@ export const MapComponent = ({ location } : Props) => {
 
   return (
     <div>
-      <YMaps>
-        <Map defaultState={defaultState} width={500} height={300}>
+      <YMaps >
+        <Map defaultState={defaultState}  width={500} height={300} >
           <Placemark geometry={[location.longitude, location.latitude]} />
         </Map>
       </YMaps>

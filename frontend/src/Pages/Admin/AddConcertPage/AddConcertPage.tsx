@@ -27,7 +27,7 @@ export const AddConcertPage = () => {
   };
 
   const [isContinue, setIsContinue] = useState(false);
-   const [concert, setConcert] = useState<Concert>();
+  const [concert, setConcert] = useState<Concert>();
   const {
     register,
     formState: { errors },
@@ -39,20 +39,20 @@ export const AddConcertPage = () => {
   const submitForm = (data: FormData) => {
     const conc: Concert = {
       id: 0,
-        performer: data.performer,
-        ticketsCount: data.ticketsCount,
-        concertDate: data.concertDate.toString(),
-        location: data.location,
-        concertType: selectedType,
-        price: data.price,
-        coordinates: {
-          longitude: data.longitude,
-          latitude: data.latitude
-    }}
-    console.log(conc)
-      setConcert(conc);
+      performer: data.performer,
+      ticketsCount: data.ticketsCount,
+      concertDate: data.concertDate.toString(),
+      location: data.location,
+      concertType: selectedType,
+      price: data.price,
+      coordinates: {
+        longitude: data.longitude,
+        latitude: data.latitude,
+      },
+    };
+    console.log(conc);
+    setConcert(conc);
     setIsContinue(true);
-
   };
 
   return (
@@ -110,13 +110,15 @@ export const AddConcertPage = () => {
             <input
               id="price"
               type="number"
-              {...register("price", { required: true, min: 3 })}
+              {...register("price", { required: true, min: 0 })}
             />
             {errors.price && errors.price.type === "required" && (
               <ErrorField data="Enter the ticket price" />
             )}
             {errors.price && errors.price.type === "min" && (
-              <ErrorField data="The cost cannot be less than 3$" />
+              <div style={{ fontSize: 16 }}>
+                <ErrorField data="The cost cannot be less than 0$" />
+              </div>
             )}
           </div>
 
@@ -126,13 +128,13 @@ export const AddConcertPage = () => {
               id="quantity"
               type="number"
               defaultValue={10}
-              {...register("ticketsCount", { required: true, min: 5 })}
+              {...register("ticketsCount", { required: true, min: 1 })}
             />
             {errors.ticketsCount && errors.ticketsCount.type === "required" && (
               <ErrorField data="Enter the ticket quantity of the concert" />
             )}
             {errors.ticketsCount && errors.ticketsCount.type === "min" && (
-              <ErrorField data="The number of tickets must be more than 5" />
+              <ErrorField data="The number of tickets must be more than 1" />
             )}
           </div>
           <div>

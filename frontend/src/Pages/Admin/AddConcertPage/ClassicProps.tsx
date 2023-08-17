@@ -4,6 +4,7 @@ import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import { useState } from "react";
 import { Concert } from "../../../Models/ConcertModels";
 import { PostClassic } from "../../../Requests/POST/ConcertsRequests";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   concert: Concert;
@@ -24,48 +25,83 @@ export const ClassicProps = ({ concert }: Props) => {
     mode: "onBlur",
   });
 
+const navigate = useNavigate();
+
+  const [voiceType, setVoiceType] = useState("Tenor");
+  const isRadioSelected = (value: string): boolean => voiceType === value;
+  const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setVoiceType(e.target.value);
+  };
+
   const [isSuccessfully, setIsSuccessfully] = useState(false);
 
   const submitForm = async (data: FormData) => {
     console.log(concert);
-    await PostClassic(
-      {
-        performer: concert.performer,
-        ticketsCount: concert.ticketsCount,
-        concertDate: concert.concertDate,
-        location: concert.location,
-        price: concert.price,
-        voiceType: data.voiceType,
-        concertName: data.concertName,
-        composer: data.composer,
-        coordinates: {
-          latitude: concert.coordinates.latitude,
-          longitude: concert.coordinates.longitude
-        }
-      }
-    );
+    await PostClassic({
+      performer: concert.performer,
+      ticketsCount: concert.ticketsCount,
+      concertDate: concert.concertDate,
+      location: concert.location,
+      price: concert.price,
+      voiceType: voiceType,
+      concertName: data.concertName,
+      composer: data.composer,
+      coordinates: {
+        latitude: concert.coordinates.latitude,
+        longitude: concert.coordinates.longitude,
+      },
+    });
     setIsSuccessfully(true);
+    navigate("/admin/concerts");
   };
 
   return (
     <form
-      className={styles.form}
+      className={styles.form1}
+      style={{marginRight: 10}}
       onSubmit={(e) => void handleSubmit(submitForm)(e)}
     >
-      <div>
-        <label htmlFor="voice">Voice type: </label>
-        <input
-          id="voice"
-          type="text"
-          {...register("voiceType", { required: true, minLength: 3 })}
-        />
-        {errors.voiceType && errors.voiceType.type === "required" && (
-          <ErrorField data="Enter the voice type" />
-        )}
-        {errors.voiceType && errors.voiceType.type === "minLength" && (
-          <ErrorField data="This field must be contained at least 3 characters" />
-        )}
-      </div>
+      <div className={styles.checkType}>
+              <fieldset>
+                <legend>Voice type</legend>
+                <div>
+                  <div className={styles.radio}>
+                    <p>
+                      <input
+                        type="radio"
+                        value="Tenor"
+                        checked={isRadioSelected("Tenor")}
+                        onChange={handleRadioClick}
+                        id="r1"
+                      />
+                      Tenor
+                    </p>
+                  </div>
+                  <div className={styles.radio}>
+                    <p>
+                      <input
+                        type="radio"
+                        value="Bass"
+                        checked={isRadioSelected("Bass")}
+                        onChange={handleRadioClick}
+                      />
+                      Bass
+                    </p>
+                  </div>
+                  <div className={styles.radio}>
+                    <p>
+                      <input
+                        type="radio"
+                        value="Baritone"
+                        checked={isRadioSelected("Baritone")}
+                        onChange={handleRadioClick}
+                      />
+                      <span>Baritone</span>
+                    </p>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
 
       <div>
         <label htmlFor="name">Concert name: </label>
@@ -74,8 +110,8 @@ export const ClassicProps = ({ concert }: Props) => {
           type="text"
           {...register("concertName", { required: true, minLength: 3 })}
         />
-        {errors.voiceType && errors.voiceType.type === "required" && (
-          <ErrorField data="Enter the concert name" />
+        {errors.concertName && errors.concertName.type === "required" && (
+          <ErrorField data="Enter the name" />
         )}
         {errors.voiceType && errors.voiceType.type === "minLength" && (
           <ErrorField data="This field must be contained at least 3 characters" />

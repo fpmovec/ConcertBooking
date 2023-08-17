@@ -6,6 +6,8 @@ import { setConcerts } from "../../../Redux/Slices";
 import styles from "./ConcertsPage.module.css";
 import { DeleteConcert } from "../../../Requests/DELETE/ConcertsDelete";
 import { GetAllConcerts } from "../../../Requests/GET/ConcertsRequests";
+import React from "react";
+import { Modal } from "../../../Components/Modal/Modal";
 
 interface Props {
   concert: Concert;
@@ -13,12 +15,13 @@ interface Props {
 
 export const ConcertComponent = ({ concert }: Props) => {
   const dispath = useAppDispatch();
-
+  const [modalActive, setModalActive] = React.useState(false);
   const handleClick = () => {
     const remove = async () => {
       await DeleteConcert(concert.id);
       const allConcerts = await GetAllConcerts();
       dispath(setConcerts(allConcerts));
+      alert("Concert is successfully deleted!");
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     remove();
@@ -41,10 +44,26 @@ export const ConcertComponent = ({ concert }: Props) => {
         </div>
       </div>
       <div>
-        <button onClick={handleClick} className={styles.remove}>
+        <button onClick={() => setModalActive(true)} className={styles.remove}>
           🗑️ Remove
         </button>
       </div>
+      <Modal active={modalActive} setActive={setModalActive}>
+        <div className={styles.modalBlock}>
+          <div>Are you sure you want to delete the concert?</div>
+          <div className={styles.buttonsBlock}>
+            <button onClick={() => setModalActive(false)}>No</button>
+            <button
+              onClick={() => {
+                handleClick();
+                setModalActive(false);
+              }}
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
