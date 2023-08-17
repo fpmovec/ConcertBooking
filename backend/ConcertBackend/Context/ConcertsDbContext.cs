@@ -5,7 +5,10 @@ namespace ConcertBackend.Context
 {
     public class ConcertsDbContext : DbContext
     {
-        public ConcertsDbContext(DbContextOptions<ConcertsDbContext> options) : base(options) { }
+        private readonly IConfiguration _configuration;
+        public ConcertsDbContext(DbContextOptions<ConcertsDbContext> options, IConfiguration config) : base(options) { 
+        _configuration = config;
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,7 +26,7 @@ namespace ConcertBackend.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=127.0.0.1;Port=5432;Database=concertsbooking;Username=admin;Password=root");
+            optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
         }
 
         public DbSet<Concert> Concerts { get; set; }
