@@ -4,43 +4,69 @@ namespace ConcertBackend.Models
 {
     public class ClassicDto
     {
+        [Required]
+        [MinLength(3), MaxLength(20)]
         public required string Performer { get; set; }
+        [Required, Range(1, 250)]
         public int TicketsCount { get; set; }
+        [Required]
         public required string ConcertDate { get; set; }
+        [Required, MinLength(3), MaxLength(50)]
         public required string Location { get; set; }
+        [Required, Range(0, 1000)]
         public float Price { get; set; }
+        [Required, MinLength(3), MaxLength(15)]
         public string? VoiceType { get; set; }
+        [Required, MinLength(3), MaxLength(25)]
         public string? ConcertName { get; set; }
+        [Required, MinLength(3), MaxLength(25)]
         public string? Composer { get; set; }
         public Coordinates? Coordinates { get; set; }
     }
 
     public class PartyDto
     {
+        [Required]
+        [MinLength(3), MaxLength(20)]
         public required string Performer { get; set; }
+        [Required, Range(1, 250)]
         public int TicketsCount { get; set; }
+        [Required]
         public required string ConcertDate { get; set; }
+        [Required, MinLength(3), MaxLength(50)]
         public required string Location { get; set; }
+        [Required, Range(0, 1000)]
         public float Price { get; set; }
+        [Required, Range(0, 100)]
         public int AgeLimit { get; set; }
         public Coordinates? Coordinates { get; set; }
     }
 
     public class OpenAirDto
     {
+        [Required]
+        [MinLength(3), MaxLength(20)]
         public required string Performer { get; set; }
+        [Required, Range(1, 250)]
         public int TicketsCount { get; set; }
+        [Required]
         public required string ConcertDate { get; set; }
+        [Required, MinLength(3), MaxLength(50)]
         public required string Location { get; set; }
+        [Required, Range(0, 1000)]
         public float Price { get; set; }
+        [Required, MinLength(3), MaxLength(125)]
         public string Journey { get; set; } = string.Empty;
+        [Required, MinLength(3), MaxLength(25)]
         public string Headliner { get; set; } = string.Empty;
         public Coordinates? Coordinates { get; set; }
     }
 
     public class PromocodeDto
     {
+        [Required, MinLength(1)]
         public required string Code { get; set; }
+        [Required, Range(0.74, 0.98)]
         public float Total { get; set; }
     }
 

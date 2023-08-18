@@ -201,7 +201,7 @@ namespace ConcertBackend.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("character varying(15)");
 
-                    b.ToTable("Classics");
+                    b.ToTable("Classics", (string)null);
                 });
 
             modelBuilder.Entity("ConcertBackend.Models.OpenAir", b =>
@@ -218,7 +218,7 @@ namespace ConcertBackend.Migrations
                         .HasMaxLength(125)
                         .HasColumnType("character varying(125)");
 
-                    b.ToTable("OpenAirs");
+                    b.ToTable("OpenAirs", (string)null);
                 });
 
             modelBuilder.Entity("ConcertBackend.Models.Party", b =>
@@ -228,7 +228,7 @@ namespace ConcertBackend.Migrations
                     b.Property<int>("AgeLimit")
                         .HasColumnType("integer");
 
-                    b.ToTable("Parties");
+                    b.ToTable("Parties", (string)null);
                 });
 
             modelBuilder.Entity("ConcertBackend.Models.Booking", b =>

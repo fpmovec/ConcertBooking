@@ -10,7 +10,7 @@ namespace ConcertBackend.Models
         [Required]
         [MinLength(3), MaxLength(20)]
         public required string Performer { get; set; }
-        [Required, Range(5, 250)]
+        [Required, Range(1, 250)]
         public int TicketsCount { get; set; }
         [Required]
         public required string ConcertDate { get; set; }
@@ -18,7 +18,7 @@ namespace ConcertBackend.Models
         public required string Location { get; set; }
         [Required, MinLength(3), MaxLength(10)]
         public required string ConcertType { get; set; }
-        [Required, Range(3, 1000)]
+        [Required, Range(0, 1000)]
         public float Price { get; set; }
         [JsonIgnore]
         public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
@@ -27,7 +27,6 @@ namespace ConcertBackend.Models
         public Coordinates? Coordinates { get; set; }
     }
 
-    [Table("Classics")]
     public class Classic : Concert
     {
         [Required, MinLength(3), MaxLength(15)]
@@ -38,14 +37,12 @@ namespace ConcertBackend.Models
         public string? Composer { get; set; }
     }
 
-    [Table("Parties")]
     public class Party : Concert
     {
         [Required, Range(0, 100)]
         public int AgeLimit { get; set; }
     }
 
-    [Table("OpenAirs")]
     public class OpenAir : Concert
     {
         [Required, MinLength(3), MaxLength(25)]

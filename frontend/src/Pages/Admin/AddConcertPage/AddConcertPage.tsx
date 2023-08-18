@@ -7,6 +7,9 @@ import { ClassicProps } from "./ClassicProps";
 import { OpenAitProps } from "./OpenAirProps";
 import { PartyProps } from "./PartyProps";
 import { Concert } from "../../../Models/ConcertModels";
+import React from "react";
+import { MapComponent } from "./Map/Map";
+import { useAppSelector } from "../../../Redux/Hooks";
 
 type FormData = {
   performer: string;
@@ -25,7 +28,8 @@ export const AddConcertPage = () => {
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSelectedType(e.target.value);
   };
-
+  const concerts = useAppSelector(state => state.concerts.allConcerts);
+ const [coordinates, setCoordinates] = React.useState<number[]>([53.902735, 27.555696]);
   const [isContinue, setIsContinue] = useState(false);
   const [concert, setConcert] = useState<Concert>();
   const {
@@ -35,6 +39,10 @@ export const AddConcertPage = () => {
   } = useForm<FormData>({
     mode: "onBlur",
   });
+
+const IsUnique = (name: string): boolean => {
+   return concerts.some(c => c.performer === name)
+}
 
   const submitForm = (data: FormData) => {
     const conc: Concert = {
@@ -46,8 +54,8 @@ export const AddConcertPage = () => {
       concertType: selectedType,
       price: data.price,
       coordinates: {
-        longitude: data.longitude,
-        latitude: data.latitude,
+        longitude: coordinates[0],
+        latitude: coordinates[1],
       },
     };
     console.log(conc);
@@ -68,13 +76,19 @@ export const AddConcertPage = () => {
             <input
               id="performer"
               type="text"
-              {...register("performer", { required: true, minLength: 3 })}
+              {...register("performer", { required: true, minLength: 3, 
+              validate: {
+                isUnique: (n) => IsUnique(n) === false
+              }})}
             />
             {errors.performer && errors.performer.type === "required" && (
               <ErrorField data="Enter the performer" />
             )}
             {errors.performer && errors.performer.type === "minLength" && (
               <ErrorField data="This field must be contained at least 3 characters" />
+            )}
+            {errors.performer && errors.performer.type === "isUnique" && (
+              <ErrorField data="The performer must be unique" />
             )}
           </div>
 
@@ -137,29 +151,13 @@ export const AddConcertPage = () => {
               <ErrorField data="The number of tickets must be more than 1" />
             )}
           </div>
-          <div>
-            <fieldset className={styles.coordFieldset}>
-              <legend>Coordinates</legend>
-              <div>
-                <label htmlFor="long">Longitude: </label>
-                <input
-                  id="long"
-                  type="number"
-                  {...register("longitude", { required: true })}
-                  defaultValue={53.902284}
-                />
-              </div>
-              <div>
-                <label htmlFor="lat">Latitude: </label>
-                <input
-                  id="lat"
-                  type="number"
-                  {...register("latitude", { required: true })}
-                  defaultValue={27.561831}
-                />
-              </div>
-            </fieldset>
+          <div className={styles.map_block}>
+          Put a label indicating the venue
+            <div className={styles.map}>
+            <MapComponent setCoordinates={setCoordinates}/>
           </div>
+          </div>
+          
           <div>
             <div className={styles.checkType}>
               <fieldset>

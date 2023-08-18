@@ -22,6 +22,10 @@ namespace ConcertBackend.Context
                 .HasMany(c => c.Orders)
                 .WithOne()
                 .HasForeignKey(c => c.ConcertId);
+
+            modelBuilder.Entity<Classic>().ToTable("Classics");
+            modelBuilder.Entity<Party>().ToTable("Parties");
+            modelBuilder.Entity<OpenAir>().ToTable("OpenAirs");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

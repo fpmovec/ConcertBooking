@@ -131,6 +131,10 @@ namespace ConcertBackend.Controllers
                 return BadRequest();
 
             var classic = _mapper.Map<Classic>(concert);
+            if (ModelState.IsValid)
+            {
+
+            }
             classic.ConcertType = "Classic";
 
             await _concertRepository.AddClassicAsync(classic);
