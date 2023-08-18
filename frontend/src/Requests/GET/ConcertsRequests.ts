@@ -85,13 +85,15 @@ export const GetConcertsByCriteria = async (
   criteria: string | null
 ): Promise<Concert[]> => {
   let response: Response;
-  if (criteria !== null && criteria !== "")
-    response = await fetch(`https://localhost:7235/search/${criteria}`, {
+  
+  if (criteria !== null && criteria !== ""){
+    const crit = criteria.trim().toLowerCase();
+    response = await fetch(`https://localhost:7235/search/${crit}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-    });
+    });}
   else
     response = await fetch("https://localhost:7235/concerts", {
       method: "GET",

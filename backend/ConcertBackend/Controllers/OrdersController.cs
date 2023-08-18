@@ -1,4 +1,5 @@
-﻿using ConcertBackend.Models;
+﻿using AutoMapper;
+using ConcertBackend.Models;
 using ConcertBackend.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -12,10 +13,12 @@ namespace ConcertBackend.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly IOrderRepository _repository;
+        private readonly IMapper _mapper;
 
-        public OrdersController(IOrderRepository repository)
+        public OrdersController(IOrderRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         [Authorize]
@@ -31,15 +34,17 @@ namespace ConcertBackend.Controllers
         [HttpPost]
         public async Task<IActionResult> AddOrderAsync([FromBody]OrderDto orderDto)
         {
-            var order = new Order()
-            {
-                FullName = orderDto.FirstName + " " + orderDto.LastName,
-                PhoneNumber = orderDto.PhoneNumber,
-                Email = orderDto.Email,
-                PurchaseAmount = orderDto.PurchaseAmount,
-                TicketQuantity = orderDto.TicketQuantity,
-                ConcertId = orderDto.ConcertId,
-            };
+            //var order = new Order()
+            //{
+            //    FullName = orderDto.FirstName + " " + orderDto.LastName,
+            //    PhoneNumber = orderDto.PhoneNumber,
+            //    Email = orderDto.Email,
+            //    PurchaseAmount = orderDto.PurchaseAmount,
+            //    TicketQuantity = orderDto.TicketQuantity,
+            //    ConcertId = orderDto.ConcertId,
+            //};
+            var order = _mapper.Map<Order>(orderDto);
+
             await _repository.AddOrderAsync(order);
 
             return Ok(order);

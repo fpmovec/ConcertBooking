@@ -98,12 +98,14 @@ namespace ConcertBackend.Repositories.Classes
         {
             if (criteria.IsNullOrEmpty())
                 return await _context.Concerts.ToListAsync();
-
-           var searchedConcerts = await _context.Concerts
-                .Where(c => c.Performer.ToLower().IndexOf(criteria!.Trim().ToLower()) > -1)
+          
+          var searchedConcerts = await _context.Concerts
+                .Where(c => c.Performer.ToLower().Contains(criteria!))
                 .Include(c => c.Coordinates)
                 .ToListAsync();
-            return searchedConcerts;
+                return searchedConcerts;
+        
+           
         }
 
         public async Task<Concert> GetConcertByIdAsync(int id)

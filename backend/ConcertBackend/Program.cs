@@ -1,5 +1,6 @@
 using ConcertBackend.Context;
 using ConcertBackend.EmailConfirmation.EmailService;
+using ConcertBackend.Mapping;
 using ConcertBackend.Repositories.Classes;
 using ConcertBackend.Repositories.Interfaces;
 using ConcertBackend.Repositories.Realizations;
@@ -22,6 +23,7 @@ builder.Services.AddTransient<IPromocodesRepository, PromocodesRepository>();
 builder.Services.AddTransient<IBookingRepository, BookingRepository>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddSingleton<IEmailService, EmailService>();
+builder.Services.AddAutoMapper(typeof(ConcertsMapper), typeof(BookingOrderMapper));
 
 builder.Services.AddAuthentication(options =>
 {

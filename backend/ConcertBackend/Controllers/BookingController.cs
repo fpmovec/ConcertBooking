@@ -1,4 +1,5 @@
-﻿using ConcertBackend.Models;
+﻿using AutoMapper;
+using ConcertBackend.Models;
 using ConcertBackend.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,14 +14,15 @@ namespace ConcertBackend.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingRepository _bookingRepository;
+        private readonly IMapper _mapper;
 
-        public BookingController(IBookingRepository repository)
+        public BookingController(IBookingRepository repository, IMapper mapper)
         {
             _bookingRepository = repository;
+            _mapper = mapper;
         }
 
         [Authorize(Policy = "user")]
-        //[AllowAnonymous]
         [HttpGet("{email}")]
         public async Task<ActionResult<IEnumerable<Booking>>> GetAllBookingsByEmailAsync([EmailAddress]string email)
         {
@@ -31,16 +33,18 @@ namespace ConcertBackend.Controllers
         [HttpPost]
         public async Task<ActionResult> AddBookingAsync([FromBody]BookingDto bookingDto)
         {
-            var booking = new Booking()
-            {
-                FirstName = bookingDto.FirstName,
-                LastName = bookingDto.LastName,
-                Email = bookingDto.Email,
-                PhoneNumber = bookingDto.PhoneNumber,
-                PurchaseAmount = bookingDto.PurchaseAmount,
-                TicketQuantity = bookingDto.TicketQuantity,
-                ConcertId = bookingDto.ConcertId,
-            };
+            //var booking = new Booking()
+            //{
+            //    FirstName = bookingDto.FirstName,
+            //    LastName = bookingDto.LastName,
+            //    Email = bookingDto.Email,
+            //    PhoneNumber = bookingDto.PhoneNumber,
+            //    PurchaseAmount = bookingDto.PurchaseAmount,
+            //    TicketQuantity = bookingDto.TicketQuantity,
+            //    ConcertId = bookingDto.ConcertId,
+            //};
+            var booking = _mapper.Map<Booking>(bookingDto);
+
             await _bookingRepository.AddBookingAsync(booking);
             return Ok();
         }

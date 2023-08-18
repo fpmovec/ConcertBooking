@@ -1,4 +1,5 @@
-﻿using ConcertBackend.Models;
+﻿using AutoMapper;
+using ConcertBackend.Models;
 using ConcertBackend.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,11 @@ namespace ConcertBackend.Controllers
     public class ConcertController : ControllerBase
     {
         private readonly IConcertRepository _concertRepository;
-        public ConcertController(IConcertRepository repository)
+        private readonly IMapper _mapper;
+        public ConcertController(IConcertRepository repository, IMapper mapper)
         {
             _concertRepository = repository;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
@@ -127,21 +130,10 @@ namespace ConcertBackend.Controllers
             if (concert == null)
                 return BadRequest();
 
-            var classicConcert = new Classic
-            {
-                Performer = concert.Performer,
-                TicketsCount = concert.TicketsCount,
-                ConcertDate = concert.ConcertDate,
-                Location = concert.Location,
-                ConcertType = "Classic",
-                Price = concert.Price,
-                VoiceType = concert.VoiceType,
-                ConcertName = concert.ConcertName,
-                Composer = concert.Composer,
-                Coordinates = concert.Coordinates,
-            };
+            var classic = _mapper.Map<Classic>(concert);
+            classic.ConcertType = "Classic";
 
-            await _concertRepository.AddClassicAsync(classicConcert);
+            await _concertRepository.AddClassicAsync(classic);
             return Ok();
         }
 
@@ -152,17 +144,8 @@ namespace ConcertBackend.Controllers
             if (partyDto == null)
                 return BadRequest();
 
-            var party = new Party()
-            {
-                Performer = partyDto.Performer,
-                TicketsCount = partyDto.TicketsCount,
-                ConcertDate = partyDto.ConcertDate,
-                Location = partyDto.Location,
-                ConcertType = "Party",
-                Price = partyDto.Price,
-                AgeLimit = partyDto.AgeLimit,
-                Coordinates = partyDto.Coordinates,
-            };
+            var party = _mapper.Map<Party>(partyDto);
+            party.ConcertType = "Party";
 
             await _concertRepository.AddPartyAsync(party);
             return Ok();
@@ -176,20 +159,10 @@ namespace ConcertBackend.Controllers
             if (openairDto == null)
                 return BadRequest();
 
-            var openair = new OpenAir()
-            {
-                Performer = openairDto.Performer,
-                TicketsCount = openairDto.TicketsCount,
-                ConcertDate = openairDto.ConcertDate,
-                Location = openairDto.Location,
-                ConcertType = "OpenAir",
-                Price = openairDto.Price,
-                Journey = openairDto.Journey,
-                Headliner = openairDto.Headliner,
-                Coordinates = openairDto.Coordinates,
-            };
+            var openAir = _mapper.Map<OpenAir>(openairDto);
+            openAir.ConcertType = "OpenAir";
 
-            await _concertRepository.AddOpenAirAsync(openair);
+            await _concertRepository.AddOpenAirAsync(openAir);
             return Ok();
         }
 

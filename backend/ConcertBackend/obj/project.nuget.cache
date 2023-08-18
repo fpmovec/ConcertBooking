@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "6RjEe7g627WrXjsQ8QEz5D5wddnvtKyp6c9sCTGbdfLA0wv+X4RD0HykWVj3hKwPXrfQ1De0QWJ5NI8dOl/RsQ==",
+  "dgSpecHash": "vk8ojeTjWkilWzi7Bs5WsVWtJiVSvCbR2ywirMlv4IRXC0CVlX62T8exDZNVmrLzvQS6RpYKpNoy74SC40BToQ==",
   "success": true,
   "projectFilePath": "D:\\ConcertBooking\\backend\\ConcertBackend\\ConcertBackend.csproj",
   "expectedPackageFiles": [
+    "D:\\Nuget\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
+    "D:\\Nuget\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "D:\\Nuget\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "D:\\Nuget\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "D:\\Nuget\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
@@ -12,7 +14,7 @@
     "D:\\Nuget\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.9\\microsoft.aspnetcore.authentication.jwtbearer.7.0.9.nupkg.sha512",
     "D:\\Nuget\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
     "D:\\Nuget\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
-    "D:\\Nuget\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "D:\\Nuget\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "D:\\Nuget\\microsoft.data.sqlclient\\5.0.2\\microsoft.data.sqlclient.5.0.2.nupkg.sha512",
     "D:\\Nuget\\microsoft.data.sqlclient.sni.runtime\\5.0.1\\microsoft.data.sqlclient.sni.runtime.5.0.1.nupkg.sha512",
     "D:\\Nuget\\microsoft.entityframeworkcore\\7.0.9\\microsoft.entityframeworkcore.7.0.9.nupkg.sha512",

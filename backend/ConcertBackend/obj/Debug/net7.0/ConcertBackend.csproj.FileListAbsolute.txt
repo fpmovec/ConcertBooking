@@ -82,3 +82,5 @@ D:\ConcertBooking\backend\ConcertBackend\bin\Debug\net7.0\System.Security.Crypto
 D:\ConcertBooking\backend\ConcertBackend\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll
 D:\ConcertBooking\backend\ConcertBackend\bin\Debug\net7.0\Npgsql.dll
 D:\ConcertBooking\backend\ConcertBackend\bin\Debug\net7.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+D:\ConcertBooking\backend\ConcertBackend\bin\Debug\net7.0\AutoMapper.dll
+D:\ConcertBooking\backend\ConcertBackend\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
