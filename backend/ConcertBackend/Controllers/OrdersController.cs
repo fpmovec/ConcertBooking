@@ -32,17 +32,11 @@ namespace ConcertBackend.Controllers
         //[Authorize]
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> AddOrderAsync([FromBody]OrderDto orderDto)
+        public async Task<ActionResult> AddOrderAsync([FromBody]OrderDto orderDto)
         {
-            //var order = new Order()
-            //{
-            //    FullName = orderDto.FirstName + " " + orderDto.LastName,
-            //    PhoneNumber = orderDto.PhoneNumber,
-            //    Email = orderDto.Email,
-            //    PurchaseAmount = orderDto.PurchaseAmount,
-            //    TicketQuantity = orderDto.TicketQuantity,
-            //    ConcertId = orderDto.ConcertId,
-            //};
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var order = _mapper.Map<Order>(orderDto);
 
             await _repository.AddOrderAsync(order);

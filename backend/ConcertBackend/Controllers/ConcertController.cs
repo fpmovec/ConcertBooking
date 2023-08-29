@@ -130,11 +130,10 @@ namespace ConcertBackend.Controllers
             if (concert == null)
                 return BadRequest();
 
-            var classic = _mapper.Map<Classic>(concert);
-            if (ModelState.IsValid)
-            {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
-            }
+            var classic = _mapper.Map<Classic>(concert);
             classic.ConcertType = "Classic";
 
             await _concertRepository.AddClassicAsync(classic);
@@ -147,6 +146,9 @@ namespace ConcertBackend.Controllers
         {
             if (partyDto == null)
                 return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             var party = _mapper.Map<Party>(partyDto);
             party.ConcertType = "Party";
@@ -162,6 +164,9 @@ namespace ConcertBackend.Controllers
         {
             if (openairDto == null)
                 return BadRequest();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             var openAir = _mapper.Map<OpenAir>(openairDto);
             openAir.ConcertType = "OpenAir";

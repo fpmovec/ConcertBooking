@@ -28,8 +28,10 @@ export const AddConcertPage = () => {
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSelectedType(e.target.value);
   };
-  const concerts = useAppSelector(state => state.concerts.allConcerts);
- const [coordinates, setCoordinates] = React.useState<number[]>([53.902735, 27.555696]);
+  const concerts = useAppSelector((state) => state.concerts.allConcerts);
+  const [coordinates, setCoordinates] = React.useState<number[]>([
+    53.902735, 27.555696,
+  ]);
   const [isContinue, setIsContinue] = useState(false);
   const [concert, setConcert] = useState<Concert>();
   const {
@@ -40,9 +42,9 @@ export const AddConcertPage = () => {
     mode: "onBlur",
   });
 
-const IsUnique = (name: string): boolean => {
-   return concerts.some(c => c.performer === name)
-}
+  const IsUnique = (name: string): boolean => {
+    return concerts.some((c) => c.performer === name);
+  };
 
   const submitForm = (data: FormData) => {
     const conc: Concert = {
@@ -76,10 +78,13 @@ const IsUnique = (name: string): boolean => {
             <input
               id="performer"
               type="text"
-              {...register("performer", { required: true, minLength: 3, 
-              validate: {
-                isUnique: (n) => IsUnique(n) === false
-              }})}
+              {...register("performer", {
+                required: true,
+                minLength: 3,
+                validate: {
+                  isUnique: (n) => IsUnique(n) === false,
+                },
+              })}
             />
             {errors.performer && errors.performer.type === "required" && (
               <ErrorField data="Enter the performer" />
@@ -152,12 +157,12 @@ const IsUnique = (name: string): boolean => {
             )}
           </div>
           <div className={styles.map_block}>
-          Put a label indicating the venue
+            Put a label indicating the venue
             <div className={styles.map}>
-            <MapComponent setCoordinates={setCoordinates}/>
+              <MapComponent setCoordinates={setCoordinates} />
+            </div>
           </div>
-          </div>
-          
+
           <div>
             <div className={styles.checkType}>
               <fieldset>

@@ -33,16 +33,9 @@ namespace ConcertBackend.Controllers
         [HttpPost]
         public async Task<ActionResult> AddBookingAsync([FromBody]BookingDto bookingDto)
         {
-            //var booking = new Booking()
-            //{
-            //    FirstName = bookingDto.FirstName,
-            //    LastName = bookingDto.LastName,
-            //    Email = bookingDto.Email,
-            //    PhoneNumber = bookingDto.PhoneNumber,
-            //    PurchaseAmount = bookingDto.PurchaseAmount,
-            //    TicketQuantity = bookingDto.TicketQuantity,
-            //    ConcertId = bookingDto.ConcertId,
-            //};
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var booking = _mapper.Map<Booking>(bookingDto);
 
             await _bookingRepository.AddBookingAsync(booking);

@@ -20,6 +20,9 @@ namespace ConcertBackend.Controllers
         [HttpPost]
         public ActionResult SendEmail(EmailDto email)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             _service.SendEmail(email.EmailAddress);
 
             return Ok();

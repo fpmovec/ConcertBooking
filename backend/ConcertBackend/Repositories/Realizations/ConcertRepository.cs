@@ -20,16 +20,6 @@ namespace ConcertBackend.Repositories.Classes
             await _context.SaveChangesAsync();
         }
 
-        //public async Task<Coordinates?> AddCoordinatesAsync(Coordinates coordinates)
-        //{
-        //    var concert = _context.Concerts.Find(coordinates.ConcertId);
-        //    if (concert == null) { return null; }
-
-        //    _context.Coordinates.Add(coordinates);
-        //    await _context.SaveChangesAsync();
-        //    return coordinates;
-        //}
-
         public async Task AddOpenAirAsync(OpenAir openAir)
         {
             _context.OpenAirs.Add(openAir);
@@ -56,13 +46,6 @@ namespace ConcertBackend.Repositories.Classes
             await _context.SaveChangesAsync();
         }
 
-        //public async Task DeleteCoordinatesAsync(Coordinates coordinates)
-        //{
-        //        _context.Remove(coordinates);
-        //        await _context.SaveChangesAsync();
-         
-        //}
-
         public async Task DeleteOpenAirAsync(OpenAir openAir)
         {
             if (openAir != null)
@@ -87,14 +70,17 @@ namespace ConcertBackend.Repositories.Classes
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<List<Classic>> GetClassicsAsync()
+        public async Task<IEnumerable<Classic>> GetClassicsAsync()
         {
             return await _context.Classics
-                .Include(c => c.Coordinates)
-                .ToListAsync();
+              .Include(c => c.Coordinates)
+              .ToListAsync();
+            //var classics = await _context.Classics.Include(c => c.Coordinates).ToListAsync();
+            //return classics.AsQueryable();
+            //return await _context.Classics.Include(c => c.Coordinates).ToListAsync();
         }
 
-        public async Task<List<Concert>> GetConcertByCriteriaAsync(string? criteria)
+        public async Task<IEnumerable<Concert>> GetConcertByCriteriaAsync(string? criteria)
         {
             if (criteria.IsNullOrEmpty())
                 return await _context.Concerts.ToListAsync();
@@ -118,7 +104,7 @@ namespace ConcertBackend.Repositories.Classes
             return concert;
         }
 
-        public async Task<List<Concert>> GetConcertsAsync()
+        public async Task<IEnumerable<Concert>> GetConcertsAsync()
         {
             return await _context.Concerts
                 .Include(c => c.Coordinates)
@@ -139,12 +125,12 @@ namespace ConcertBackend.Repositories.Classes
                  .FirstOrDefaultAsync();
         }
 
-        public async Task<List<OpenAir>> GetOpenAirsAsync()
+        public async Task<IEnumerable<OpenAir>> GetOpenAirsAsync()
         {
             return await _context.OpenAirs.Include(c => c.Coordinates).ToListAsync();
         }
 
-        public async Task<List<Party>> GetPartiesAsync()
+        public async Task<IEnumerable<Party>> GetPartiesAsync()
         {
             return await _context.Parties.Include(c => c.Coordinates).ToListAsync();
         }
