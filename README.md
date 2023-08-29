@@ -25,7 +25,6 @@ yarn install
 ```
 Таким образом мы установили все необходимые зависимости для клиентской части
  
-Все, после загрузки таблицы должны появиться в БД. Если сейчас в приложении вы зайдете с пользовательской записи, то никаких концертов там не будет, поэтому сначала советую зайти с учетной записи админа и добавить необходимые данные
   ### Запуск
 Начнем с запуска контейнера Docker. 
 
@@ -57,6 +56,18 @@ docker-compose up
 ```C#
 dotnet ef database update
 ```
+Если же вы запускаете впервые, то никаких данных в БД у вас не будет, поэтому добавьте их с помощью следующего запроса:
+```SQL
+INSERT INTO "Coordinates"("Longitude", "Latitude") VALUES(53.690655,26.861012)
+
+
+INSERT INTO "Concerts" ("Performer", "TicketsCount", "ConcertDate", "Location", "ConcertType", "Price", "CoordinatesId") 
+VALUES ('Dj Marshmallow', 25, '2023-08-18T17:51', 'Minsk', 'Party', 5, 1)
+
+INSERT INTO "Parties"("Id", "AgeLimit") VALUES(1, 18)
+```
+В итоге в БД будет создан один концерт 
+
 Далее необходимо запустить серверную часть с помощью команды командной строки в папке backend/ConcertBackend
 ```
 dotnet run --launch-profile "https"
