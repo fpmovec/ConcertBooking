@@ -14,7 +14,9 @@ interface ConcertsState {
   readonly promocodes: Promocode[];
   readonly purchased: Order[];
   readonly allConcerts: Concert[];
-  readonly coordinates: number[]
+  readonly coordinates: number[];
+  readonly coord: number[],
+  readonly location: string;
 }
 
 export interface AppState {
@@ -32,5 +34,7 @@ export const initialConcertsState: ConcertsState = {
   viewingClassic: null,
   viewingParty: null,
   viewingOpenAir: null,
-  coordinates: []
+  coordinates: [],
+  coord: [],
+  location: "Минск",
 };

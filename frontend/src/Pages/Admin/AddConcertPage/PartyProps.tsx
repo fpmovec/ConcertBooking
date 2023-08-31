@@ -25,7 +25,6 @@ export const PartyProps = ({ concert }: Props) => {
     mode: "onBlur",
   });
 
-
   const [ageLim, setAgeLim] = React.useState(0);
   const isRadioSelected = (value: number): boolean => ageLim === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -46,7 +45,9 @@ export const PartyProps = ({ concert }: Props) => {
       },
     });
     setIsSuccessfully(true);
+
     navigate("/admin/concerts");
+    alert("The concert is successfully added!");
   };
 
   return (

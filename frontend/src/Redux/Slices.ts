@@ -70,6 +70,12 @@ const concertSlice = createSlice({
     },
     setCoordinates(state, action: PayloadAction<number[]>) {
       state.coordinates = action.payload
+    },
+    setLocation(state, action: PayloadAction<string>) {
+      state.location = action.payload
+    },
+    setCoord(state, action: PayloadAction<number[]>) {
+      state.coord = action.payload
     }
   },
 });
@@ -88,7 +94,9 @@ export const {
   gotClassicInfo,
   gotOpenAirInfo,
   gotPartyInfo,
-  setCoordinates
+  setCoordinates,
+  setLocation,
+  setCoord
 } = concertSlice.actions;
 
 export default concertSlice.reducer;

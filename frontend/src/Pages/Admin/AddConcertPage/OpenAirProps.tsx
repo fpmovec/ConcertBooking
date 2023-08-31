@@ -44,6 +44,7 @@ export const OpenAitProps = ({ concert }: Props) => {
     );
     setIsSuccesfully(true);
     navigate("/admin/concerts");
+    alert("The concert is successfully added!");
   };
 
   return (

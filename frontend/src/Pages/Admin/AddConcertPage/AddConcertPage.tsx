@@ -9,7 +9,8 @@ import { PartyProps } from "./PartyProps";
 import { Concert } from "../../../Models/ConcertModels";
 import React from "react";
 import { MapComponent } from "./Map/Map";
-import { useAppSelector } from "../../../Redux/Hooks";
+import { useAppSelector, useAppDispatch } from "../../../Redux/Hooks";
+import { setLocation } from "../../../Redux/Slices";
 
 type FormData = {
   performer: string;
@@ -23,15 +24,19 @@ type FormData = {
 };
 
 export const AddConcertPage = () => {
+  const dispatch = useAppDispatch();
+  const location = useAppSelector((state) => state.concerts.location);
+  //const [location, setLoc] = React.useState<string>("Минск");
   const [selectedType, setSelectedType] = useState("Classic");
   const isRadioSelected = (value: string): boolean => selectedType === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSelectedType(e.target.value);
   };
   const concerts = useAppSelector((state) => state.concerts.allConcerts);
-  const [coordinates, setCoordinates] = React.useState<number[]>([
-    53.902735, 27.555696,
-  ]);
+  //  const [coordinates, setCoordinates] = React.useState<number[]>([
+  //    53.902735, 27.555696,
+  //  ]);
+  //const coordinates = useAppSelector(state => state.concerts.coord);
   const [isContinue, setIsContinue] = useState(false);
   const [concert, setConcert] = useState<Concert>();
   const {
@@ -114,7 +119,18 @@ export const AddConcertPage = () => {
             <input
               id="location"
               type="text"
-              {...register("location", { required: true, minLength: 5 })}
+              {...register("location", {
+                required: true,
+                minLength: 5,
+                validate: {
+                  setLoc: (l) => {
+                    if (location !== "")
+                       dispatch(setLocation(l));
+                    console.log(l);
+                    return true;
+                  },
+                },
+              })}
             />
             {errors.location && errors.location.type === "required" && (
               <ErrorField data="Enter the location of the concert" />
@@ -159,7 +175,7 @@ export const AddConcertPage = () => {
           <div className={styles.map_block}>
             Put a label indicating the venue
             <div className={styles.map}>
-              <MapComponent setCoordinates={setCoordinates} />
+              <MapComponent loc={location} />
             </div>
           </div>
 
@@ -227,3 +243,5 @@ export const AddConcertPage = () => {
     </div>
   );
 };
+
+
