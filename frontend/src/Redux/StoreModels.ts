@@ -35,6 +35,6 @@ export const initialConcertsState: ConcertsState = {
   viewingParty: null,
   viewingOpenAir: null,
   coordinates: [],
-  coord: [],
+  coord: [53.902735, 27.555696],
   location: "Минск",
 };

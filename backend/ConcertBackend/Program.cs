@@ -18,7 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<ConcertsDbContext>();
-builder.Services.AddTransient<IConcertRepository, ConcertRepository>();
+builder.Services.AddScoped<IConcertRepository, ConcertRepository>();
 builder.Services.AddTransient<IPromocodesRepository, PromocodesRepository>();
 builder.Services.AddTransient<IBookingRepository, BookingRepository>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();

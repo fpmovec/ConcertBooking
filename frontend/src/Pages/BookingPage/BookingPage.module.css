@@ -15,7 +15,10 @@
   gap: 30px;
   margin-bottom: 5px;
 }
-
+.form div label {
+  display: inline-block;
+  width: 180px;
+}
 .form div input {
   border-radius: 3px;
   scale: 1.3;

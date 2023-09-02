@@ -23,7 +23,7 @@ export const OpenAitProps = ({ concert }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    mode: "onBlur",
+    mode: "all",
   });
 
   const submitForm = async (data: FormData) => {
@@ -59,6 +59,7 @@ export const OpenAitProps = ({ concert }: Props) => {
           type="text"
           {...register("headliner", { required: true, minLength: 3 })}
         />
+        <br/>
         {errors.headliner && errors.headliner.type === "required" && (
           <ErrorField data="Enter the headliner" />
         )}
@@ -74,6 +75,7 @@ export const OpenAitProps = ({ concert }: Props) => {
           type="text"
           {...register("journey", { required: true, minLength: 5 })}
         />
+        <br/>
         {errors.journey && errors.journey.type === "required" && (
           <ErrorField data="Enter the journey" />
         )}

@@ -22,7 +22,7 @@ export const PartyProps = ({ concert }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    mode: "onBlur",
+    mode: "all",
   });
 
   const [ageLim, setAgeLim] = React.useState(0);

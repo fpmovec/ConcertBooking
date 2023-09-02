@@ -22,7 +22,7 @@ export const ClassicProps = ({ concert }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    mode: "onBlur",
+    mode: "all",
   });
 
 const navigate = useNavigate();
@@ -111,6 +111,7 @@ const navigate = useNavigate();
           type="text"
           {...register("concertName", { required: true, minLength: 3 })}
         />
+        <br/>
         {errors.concertName && errors.concertName.type === "required" && (
           <ErrorField data="Enter the name" />
         )}
@@ -126,6 +127,7 @@ const navigate = useNavigate();
           type="text"
           {...register("composer", { required: true, minLength: 3 })}
         />
+        <br/>
         {errors.composer && errors.composer.type === "required" && (
           <ErrorField data="Enter the composer" />
         )}
