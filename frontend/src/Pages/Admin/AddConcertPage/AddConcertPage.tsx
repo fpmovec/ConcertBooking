@@ -10,7 +10,6 @@ import { Concert } from "../../../Models/ConcertModels";
 import React from "react";
 import { MapComponent } from "./Map/Map";
 import { useAppSelector, useAppDispatch } from "../../../Redux/Hooks";
-import { setLocation } from "../../../Redux/Slices";
 import { MyGlobalContext } from "../../../Redux/Hooks";
 
 type FormData = {
@@ -25,9 +24,7 @@ type FormData = {
 };
 
 export const AddConcertPage = () => {
-  const dispatch = useAppDispatch();
-  //const location = useAppSelector((state) => state.concerts.location);
-  //const [location, setLoc] = React.useState<string>("Минск");
+
   const [selectedType, setSelectedType] = useState("Classic");
   const isRadioSelected = (value: string): boolean => selectedType === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -38,7 +35,6 @@ export const AddConcertPage = () => {
   const [location, setLocation] = React.useState<string>(
     "Минск, ул. Октябрьская, 16"
   );
-  //const coordinates = useAppSelector((state) => state.concerts.coord);
   const [isContinue, setIsContinue] = useState(false);
   const [concert, setConcert] = useState<Concert>();
   const {
@@ -63,8 +59,8 @@ export const AddConcertPage = () => {
       concertType: selectedType,
       price: data.price,
       coordinates: {
-        longitude: coord[0],
-        latitude: coord[1],
+        longitude: coord[1],
+        latitude: coord[0],
       },
     };
     console.log(conc);
@@ -80,6 +76,7 @@ export const AddConcertPage = () => {
           <form
             className={styles.form}
             onSubmit={(event) => void handleSubmit(submitForm)(event)}
+            
           >
             <div>
               <label htmlFor="performer">Performer: </label>
@@ -118,31 +115,6 @@ export const AddConcertPage = () => {
                 <ErrorField data="Enter the date of the concert" />
               )}
             </div>
-
-            {/* <div>
-            <label htmlFor="location">Location: </label>
-            <input
-              id="location"
-              type="text"
-              {...register("location", {
-                required: true,
-                minLength: 3,
-                validate: {
-                  setLoc: (l) => {
-                    if (location !== "") setLoc(l);
-                    console.log(l);
-                    return true;
-                  },
-                },
-              })}
-            />
-            {errors.location && errors.location.type === "required" && (
-              <ErrorField data="Enter the location of the concert" />
-            )}
-            {errors.location && errors.location.type === "minLength" && (
-              <ErrorField data="This field must be contained at least 5 characters" />
-            )}
-          </div> */}
 
             <div>
               <label htmlFor="price">Price, $: </label>
@@ -219,6 +191,7 @@ export const AddConcertPage = () => {
                           value="Party"
                           checked={isRadioSelected("Party")}
                           onChange={handleRadioClick}
+                          
                         />
                         Party
                       </p>

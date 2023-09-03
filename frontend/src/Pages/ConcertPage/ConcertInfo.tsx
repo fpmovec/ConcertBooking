@@ -3,10 +3,8 @@ import {
   gotClassicInfo,
   gotOpenAirInfo,
   gotPartyInfo,
-  //gotCoordinates,
 } from "../../Redux/Slices";
 import { Concert } from "../../Models/ConcertModels";
-//import { NotFound } from "../NotFoundPage/NotFoundPage";
 import { MapComponent } from "../../Components/Maps/Map";
 import { useNavigate } from "react-router-dom";
 import styles from "./ConcertPage.module.css";
@@ -15,7 +13,6 @@ import {
   GetClassicById,
   GetPartyById,
   GetOpenAirById,
-  //GetCoordinatesByConcertId,
 } from "../../Requests/GET/ConcertsRequests";
 import React from "react";
 import { useAuth } from "../../Authorization/Auth";
@@ -63,9 +60,6 @@ export const ConcertInfo = ({ data }: Props) => {
   const party = useAppSelector((state) => state.concerts.viewingParty);
   const openAir = useAppSelector((state) => state.concerts.viewingOpenAir);
   const [modalActive, setModalActive] = React.useState(false);
-  //const coordinates = useAppSelector(
-  //  (state) => state.concerts.viewingCoordinates
-  //);
 
   return (
     <div>

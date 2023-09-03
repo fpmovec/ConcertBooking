@@ -124,6 +124,7 @@ namespace ConcertBackend.Controllers
         }
 
         [Authorize(Policy = "admin")]
+        //[AllowAnonymous]
         [HttpPost("classic")]
         public async Task<ActionResult> AddClassic([FromBody] ClassicDto concert)
         {

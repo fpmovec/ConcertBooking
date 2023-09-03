@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import styles from "./AddConcertPage.module.css";
-import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import { Concert } from "../../../Models/ConcertModels";
 import { PostParty } from "../../../Requests/POST/ConcertsRequests";
 import { useNavigate } from "react-router-dom";
@@ -18,9 +17,7 @@ export const PartyProps = ({ concert }: Props) => {
   const [isSuccessfully, setIsSuccessfully] = React.useState(false);
   const navigate = useNavigate();
   const {
-    register,
     handleSubmit,
-    formState: { errors },
   } = useForm<FormData>({
     mode: "all",
   });
