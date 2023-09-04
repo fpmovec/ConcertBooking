@@ -6,7 +6,6 @@ import {
   Map,
   Placemark,
   SearchControl,
-  withYMaps,
 } from "react-yandex-maps";
 
 interface Props {
@@ -14,12 +13,7 @@ interface Props {
 }
 
 export const MapComponent = ({ location }: Props) => {
-  const defaultState = {
-    center: [location.longitude, location.latitude],
-    zoom: 11,
-  };
 
-  const [coord, setCoord] = React.useState([]);
   return (
     <div>
       <YMaps

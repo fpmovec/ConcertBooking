@@ -8,7 +8,7 @@ import {
 import { useGlobalContext } from "../../../../Redux/Hooks";
 import styles from "../AddConcertPage.module.css";
 
-export const MapComponent = () => {
+export const AdminMap = () => {
   const { setCoordinates, setLocation } = useGlobalContext();
   return (
     <>

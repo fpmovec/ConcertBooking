@@ -8,7 +8,7 @@ import { OpenAitProps } from "./OpenAirProps";
 import { PartyProps } from "./PartyProps";
 import { Concert } from "../../../Models/ConcertModels";
 import React from "react";
-import { MapComponent } from "./Map/Map";
+import { AdminMap } from "./Map/Map";
 import { useAppSelector, useAppDispatch } from "../../../Redux/Hooks";
 import { MyGlobalContext } from "../../../Redux/Hooks";
 
@@ -31,7 +31,7 @@ export const AddConcertPage = () => {
     setSelectedType(e.target.value);
   };
   const concerts = useAppSelector((state) => state.concerts.allConcerts);
-  const [coord, setCoord] = React.useState<number[]>([53.889571, 27.574776]);
+  const [coord, setCoord] = React.useState<number[]>([27.574776, 53.889571]);
   const [location, setLocation] = React.useState<string>(
     "Минск, ул. Октябрьская, 16"
   );
@@ -162,7 +162,7 @@ export const AddConcertPage = () => {
                     setLocation: setLocation,
                   }}
                 >
-                  <MapComponent />
+                  <AdminMap />
                 </MyGlobalContext.Provider>
               </div>
             </div>
