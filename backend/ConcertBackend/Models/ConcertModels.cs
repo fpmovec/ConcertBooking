@@ -14,7 +14,7 @@ namespace ConcertBackend.Models
         public int TicketsCount { get; set; }
         [Required]
         public required string ConcertDate { get; set; }
-        [Required, MinLength(3), MaxLength(50)]
+        [Required, MinLength(3), MaxLength(100)]
         public required string Location { get; set; }
         [Required, MinLength(3), MaxLength(10)]
         public required string ConcertType { get; set; }

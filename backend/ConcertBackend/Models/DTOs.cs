@@ -11,7 +11,7 @@ namespace ConcertBackend.Models
         public int TicketsCount { get; set; }
         [Required]
         public required string ConcertDate { get; set; }
-        [Required, MinLength(3), MaxLength(50)]
+        [Required, MinLength(3), MaxLength(100)]
         public required string Location { get; set; }
         [Required, Range(0, 1000)]
         public float Price { get; set; }
@@ -33,7 +33,7 @@ namespace ConcertBackend.Models
         public int TicketsCount { get; set; }
         [Required]
         public required string ConcertDate { get; set; }
-        [Required, MinLength(3), MaxLength(50)]
+        [Required, MinLength(3), MaxLength(100)]
         public required string Location { get; set; }
         [Required, Range(0, 1000)]
         public float Price { get; set; }
@@ -51,7 +51,7 @@ namespace ConcertBackend.Models
         public int TicketsCount { get; set; }
         [Required]
         public required string ConcertDate { get; set; }
-        [Required, MinLength(3), MaxLength(50)]
+        [Required, MinLength(3), MaxLength(100)]
         public required string Location { get; set; }
         [Required, Range(0, 1000)]
         public float Price { get; set; }

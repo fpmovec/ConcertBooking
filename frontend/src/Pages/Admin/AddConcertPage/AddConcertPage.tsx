@@ -59,8 +59,8 @@ export const AddConcertPage = () => {
       concertType: selectedType,
       price: data.price,
       coordinates: {
-        longitude: coord[1],
-        latitude: coord[0],
+        longitude: coord[0],
+        latitude: coord[1],
       },
     };
     console.log(conc);
@@ -151,9 +151,7 @@ export const AddConcertPage = () => {
                 <ErrorField data="The number of tickets must be more than 1" />
               )}
             </div>
-            <div className={styles.map_block}>
-              Select the address of the event
-              <div className={styles.map}>
+            <div>
                 <MyGlobalContext.Provider
                   value={{
                     coordinates: coord,
@@ -164,7 +162,6 @@ export const AddConcertPage = () => {
                 >
                   <AdminMap />
                 </MyGlobalContext.Provider>
-              </div>
             </div>
 
             <div>
