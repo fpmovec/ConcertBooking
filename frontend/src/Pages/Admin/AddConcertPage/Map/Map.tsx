@@ -14,7 +14,6 @@ export const AdminMap = () => {
   const [addressCoord, setAddressCoord] = useState<number[]>();
   const [inputValue, setInputValue] = useState<string>("");
   const [savedYMaps, setSavedYMaps] = useState<any>();
-  const [isHideYandexInput, setIsHideYandexInput] = useState<boolean>(false);
   const { setCoordinates, setLocation } = useGlobalContext();
 
   const onClickAddress = (e: any, ymaps: any) => {
