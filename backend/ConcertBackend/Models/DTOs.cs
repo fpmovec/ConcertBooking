@@ -5,7 +5,7 @@ namespace ConcertBackend.Models
     public class ClassicDto
     {
         [Required]
-        [MinLength(3), MaxLength(20)]
+        [MinLength(2), MaxLength(20)]
         public required string Performer { get; set; }
         [Required, Range(1, 250)]
         public int TicketsCount { get; set; }
@@ -27,7 +27,7 @@ namespace ConcertBackend.Models
     public class PartyDto
     {
         [Required]
-        [MinLength(3), MaxLength(20)]
+        [MinLength(2), MaxLength(20)]
         public required string Performer { get; set; }
         [Required, Range(1, 250)]
         public int TicketsCount { get; set; }
@@ -45,7 +45,7 @@ namespace ConcertBackend.Models
     public class OpenAirDto
     {
         [Required]
-        [MinLength(3), MaxLength(20)]
+        [MinLength(2), MaxLength(20)]
         public required string Performer { get; set; }
         [Required, Range(1, 250)]
         public int TicketsCount { get; set; }

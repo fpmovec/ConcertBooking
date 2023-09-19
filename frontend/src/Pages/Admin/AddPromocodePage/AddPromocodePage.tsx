@@ -3,6 +3,11 @@ import styles from "./AddPromocodePage.module.css";
 import { useForm } from "react-hook-form";
 import React from "react";
 import { PostPromocode } from "../../../Requests/POST/PromocodesRequest";
+import { useAppSelector, useAppDispatch } from "../../../Redux/Hooks";
+import { useNavigate } from "react-router-dom";
+import { GetPromocodes } from "../../../Requests/GET/PromocodesRequests";
+import { setPromocodes } from "../../../Redux/Slices";
+
 
 type PromocodeData = {
   code: string;
@@ -19,7 +24,24 @@ export const AddPromocodePage = () => {
     mode: "all",
   });
 
+const promocodes = useAppSelector(state =>  state.concerts.promocodes);
+const dispatch = useAppDispatch();
+   React.useEffect(() => {
+    const doGet = async () => {
+        const promo = await GetPromocodes();
+        dispatch(setPromocodes(promo));
+    }
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    doGet();
+   }, [dispatch]);
+
+const navigate = useNavigate();
+  const IsUnique = (name: string): boolean => {
+    return promocodes.some((c) => c.code === name);
+  };
+
   const submitForm = (data: PromocodeData) => {
+    setIsSuccess(true);
     const add = async () => {
       await PostPromocode({
         code: data.code,
@@ -39,11 +61,16 @@ export const AddPromocodePage = () => {
           className={styles.form}
         >
           <div>
-            <label htmlFor="code">Code: </label>
+            <label style={{
+              display: "inline-block",
+              width: 120
+            }} htmlFor="code">Code: </label>
             <input
               id="code"
               type="text"
-              {...register("code", { required: true, minLength: 3 })}
+              {...register("code", { required: true, minLength: 3, validate: {
+                isUnique: (c) => IsUnique(c) === false
+              } })}
             />
             {errors.code && errors.code.type === "required" && (
               <ErrorField data="Enter the promocode" />
@@ -51,9 +78,16 @@ export const AddPromocodePage = () => {
             {errors.code && errors.code.type === "minLength" && (
               <ErrorField data="This field must be contained at least 3 characters" />
             )}
+            {errors.code && errors.code.type === "isUnique" && (
+              <ErrorField data="The promocode must be unique" />
+            )}
           </div>
           <div>
-            <label htmlFor="disc">Discount, %: </label>
+            <label style={{
+              display: "inline-block",
+              width: 120
+            }}
+            htmlFor="disc">Discount, %: </label>
             <input
               id="disc"
               type="number"
@@ -71,7 +105,7 @@ export const AddPromocodePage = () => {
             )}
           </div>
 
-          <button onClick={() => setIsSuccess(true)} type="submit">
+          <button type="submit">
             Add the promocode
           </button>
           {isSucces && (

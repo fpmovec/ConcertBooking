@@ -55,6 +55,11 @@ export const AdminMap = () => {
             Location:{" "}
           </label>
           <input
+          onKeyDown={e => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+            }
+          }}
             style={{
               width: 350,
             }}

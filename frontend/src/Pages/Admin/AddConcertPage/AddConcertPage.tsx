@@ -49,6 +49,13 @@ export const AddConcertPage = () => {
     return concerts.some((c) => c.performer === name);
   };
 
+const IsValidDate = (date: Date): boolean => {
+  console.log(new Date().toISOString());
+  console.log(date);
+ return date.toString() > new Date().toISOString()
+  
+}
+
   const submitForm = (data: FormData) => {
     const conc: Concert = {
       id: 0,
@@ -85,7 +92,7 @@ export const AddConcertPage = () => {
                 type="text"
                 {...register("performer", {
                   required: true,
-                  minLength: 3,
+                  minLength: 2,
                   validate: {
                     isUnique: (n) => IsUnique(n) === false,
                   },
@@ -96,7 +103,7 @@ export const AddConcertPage = () => {
                 <ErrorField data="Enter the performer" />
               )}
               {errors.performer && errors.performer.type === "minLength" && (
-                <ErrorField data="This field must be contained at least 3 characters" />
+                <ErrorField data="This field must be contained at least 2 characters" />
               )}
               {errors.performer && errors.performer.type === "isUnique" && (
                 <ErrorField data="The performer must be unique" />
@@ -108,11 +115,16 @@ export const AddConcertPage = () => {
               <input
                 id="date"
                 type="datetime-local"
-                {...register("concertDate", { required: true })}
+                {...register("concertDate", { required: true, validate: {
+                  isValidDate: (d) => IsValidDate(d) === true
+                } })}
               />
               <br/>
               {errors.concertDate && errors.concertDate.type === "required" && (
                 <ErrorField data="Enter the date of the concert" />
+              )}
+              {errors.concertDate && errors.concertDate.type === "isValidDate" && (
+                <ErrorField data="Enter the correct date of the concert" />
               )}
             </div>
 

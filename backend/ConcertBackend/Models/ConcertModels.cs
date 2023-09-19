@@ -8,7 +8,7 @@ namespace ConcertBackend.Models
     {
         public int Id { get; set; }
         [Required]
-        [MinLength(3), MaxLength(20)]
+        [MinLength(2), MaxLength(20)]
         public required string Performer { get; set; }
         [Required, Range(1, 250)]
         public int TicketsCount { get; set; }

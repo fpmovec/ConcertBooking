@@ -123,7 +123,7 @@ export const BookingPage = () => {
       </div>
       {isConfirmation ? (
         <div>
-          <div style={{ fontWeight: 200, fontSize: 23 }}>
+          <div style={{ fontWeight: 200, fontSize: 23, textAlign: "center" }}>
             A confirmation code has been sent to your email. Enter it below:
           </div>
           <div className={styles.confirm}>
