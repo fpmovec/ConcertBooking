@@ -90,7 +90,7 @@ export const BookingPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
-    mode: "all",
+    mode: "onBlur",
   });
 
   console.log(bookings);
