@@ -1,7 +1,7 @@
 import { YMaps, Map, Placemark } from "react-yandex-maps";
 
 import { useGlobalContext } from "../../../../Redux/Hooks";
-import styles from "./Map.module.css"
+import styles from "./Map.module.css";
 import React, { useState } from "react";
 
 export const AdminMap = () => {
@@ -32,19 +32,19 @@ export const AdminMap = () => {
   const onYmapsLoad = (ymaps: any) => {
     setSavedYMaps(ymaps);
     const suggestView = new ymaps.SuggestView(inputRef.current);
-    suggestView.events.add("select", (e) => {
-      return onClickAddress(e, ymaps);
-    });
+     suggestView.events.add("select", (e) => {
+       return onClickAddress(e, ymaps);
+     });
   };
 
   return (
     <>
-      <div
-        className={styles.map_block}
-      >
-        <div style={{
-          marginBottom: 10
-        }}>
+      <div className={styles.map_block}>
+        <div
+          style={{
+            marginBottom: 10,
+          }}
+        >
           <label
             htmlFor="inp"
             style={{
@@ -55,11 +55,11 @@ export const AdminMap = () => {
             Location:{" "}
           </label>
           <input
-          onKeyDown={e => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-            }
-          }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+              }
+            }}
             style={{
               width: 350,
             }}
@@ -75,9 +75,12 @@ export const AdminMap = () => {
 
         <div className={styles.map}>
           <YMaps
+          enterprise={true}
             query={{
               apikey: "c5fe99d9-8d5e-4ac7-ab12-b96022fdf8da",
+              //apikey: "9e1f9863-433d-4c46-b962-e38338f4ea23",
               load: "package.full",
+             
             }}
           >
             <Map
@@ -87,6 +90,7 @@ export const AdminMap = () => {
               onLoad={onYmapsLoad}
               width={700}
               height={500}
+              //modules={["SuggestView"]}
             >
               {addressCoord && <Placemark geometry={addressCoord} />}
             </Map>

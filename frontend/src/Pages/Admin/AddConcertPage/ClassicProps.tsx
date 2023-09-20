@@ -28,6 +28,7 @@ export const ClassicProps = ({ concert }: Props) => {
 const navigate = useNavigate();
 
   const [voiceType, setVoiceType] = useState("Tenor");
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const isRadioSelected = (value: string): boolean => voiceType === value;
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setVoiceType(e.target.value);
@@ -37,6 +38,7 @@ const navigate = useNavigate();
 
   const submitForm = async (data: FormData) => {
     console.log(concert);
+    setIsButtonDisabled(true);
     await PostClassic({
       performer: concert.performer,
       ticketsCount: concert.ticketsCount,
@@ -54,6 +56,7 @@ const navigate = useNavigate();
     setIsSuccessfully(true);
     navigate("/admin/concerts");
     alert("The concert is successfully added!");
+    //setIsButtonDisabled(false);
   };
 
   return (
@@ -135,7 +138,7 @@ const navigate = useNavigate();
           <ErrorField data="This field must be contained at least 3 characters" />
         )}
       </div>
-      <button type="submit">Add concert</button>
+      <button disabled={isButtonDisabled} type="submit">Add concert</button>
       {isSuccessfully && (
         <div className={styles.success}>The concert is successfully added</div>
       )}
