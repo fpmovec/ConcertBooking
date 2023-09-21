@@ -19,7 +19,7 @@ export const MapComponent = ({ location }: Props) => {
       <YMaps
         enterprise
         query={{
-          apikey: "c5fe99d9-8d5e-4ac7-ab12-b96022fdf8da",
+          apikey: "c5fe99d9-8d5e-4ac7-ab12-b96022fdf8da&suggest_apikey=9e1f9863-433d-4c46-b962-e38338f4ea23",
         }}
       >
         <Map

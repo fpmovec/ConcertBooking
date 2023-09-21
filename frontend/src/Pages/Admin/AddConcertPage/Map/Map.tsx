@@ -1,4 +1,4 @@
-import { YMaps, Map, Placemark } from "react-yandex-maps";
+import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
 
 import { useGlobalContext } from "../../../../Redux/Hooks";
 import styles from "./Map.module.css";
@@ -32,9 +32,9 @@ export const AdminMap = () => {
   const onYmapsLoad = (ymaps: any) => {
     setSavedYMaps(ymaps);
     const suggestView = new ymaps.SuggestView(inputRef.current);
-     suggestView.events.add("select", (e) => {
-       return onClickAddress(e, ymaps);
-     });
+    suggestView.events.add("select", (e) => {
+      return onClickAddress(e, ymaps);
+    });
   };
 
   return (
@@ -74,19 +74,18 @@ export const AdminMap = () => {
         </div>
 
         <div className={styles.map}>
+
           <YMaps
-          enterprise={true}
-            query={{
-              apikey: "c5fe99d9-8d5e-4ac7-ab12-b96022fdf8da",
-              //apikey: "9e1f9863-433d-4c46-b962-e38338f4ea23",
-              load: "package.full",
-             
-            }}
+             query={{
+               apikey: "c5fe99d9-8d5e-4ac7-ab12-b96022fdf8da&suggest_apikey=9e1f9863-433d-4c46-b962-e38338f4ea23",
+               load: "package.full",
+             }}
           >
             <Map
               state={
                 addressCoord ? { ...mapState, center: addressCoord } : mapState
               }
+              
               onLoad={onYmapsLoad}
               width={700}
               height={500}
@@ -94,6 +93,7 @@ export const AdminMap = () => {
             >
               {addressCoord && <Placemark geometry={addressCoord} />}
             </Map>
+            
           </YMaps>
         </div>
       </div>
