@@ -92,12 +92,6 @@ Admin Account:
 
 Возможности: добавление/удаление промокода, добавление/удаление концертов
 
-User Account: 
-   - Email: dampdamp186@gmail.com
-   - Password: M11052004m!
-
-Возможности: бронирование билетов, покупка через PayPal
-
 PayPal Account for pay:
    - Email: sb-kd947526925916@personal.example.com
    - Password: @dr?U7+y
