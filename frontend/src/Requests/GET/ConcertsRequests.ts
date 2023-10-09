@@ -10,7 +10,7 @@ import {
 export const GetAllConcerts = async (): Promise<Concert[]> => {
   let allConcerts: Concert[] = [];
 
-  const response = await fetch("http://api.concert.tw1.su/concerts", {
+  const response = await fetch("https://api.concert.tw1.su/concerts", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
