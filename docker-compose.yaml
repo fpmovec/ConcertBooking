@@ -14,14 +14,7 @@ services:
       - 7235:7235
       - 5207:5207
 
-    command:
-      [
-        "dotnet",
-        "dev-certs https",
-        "&&",
-        "dotnet",
-        "/migration/MigrationsHelper.dll",
-      ]
+    command: ["dotnet", "/migration/MigrationsHelper.dll"]
 
   frontend:
     build: frontend/

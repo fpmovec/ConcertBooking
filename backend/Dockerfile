@@ -21,5 +21,6 @@ RUN dotnet publish "ConcertBackend/ConcertBackend.csproj" -c Release -o /app/bac
 FROM mcr.microsoft.com/dotnet/sdk:7.0
 WORKDIR /app/backend
 COPY --from=publish /app/backend/publish .
+RUN dotnet dev-certs https
 ENTRYPOINT ["dotnet", "ConcertBackend.dll"]
 
