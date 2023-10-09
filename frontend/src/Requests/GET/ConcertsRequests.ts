@@ -10,7 +10,7 @@ import {
 export const GetAllConcerts = async (): Promise<Concert[]> => {
   let allConcerts: Concert[] = [];
 
-  const response = await fetch("http://localhost:5207/concerts", {
+  const response = await fetch("https://localhost:7235/concerts", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -85,16 +85,16 @@ export const GetConcertsByCriteria = async (
   criteria: string | null
 ): Promise<Concert[]> => {
   let response: Response;
-  
-  if (criteria !== null && criteria !== ""){
+
+  if (criteria !== null && criteria !== "") {
     const crit = criteria.trim().toLowerCase();
     response = await fetch(`http://localhost:5207/search/${crit}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-    });}
-  else
+    });
+  } else
     response = await fetch("http://localhost:5207/concerts", {
       method: "GET",
       headers: {
