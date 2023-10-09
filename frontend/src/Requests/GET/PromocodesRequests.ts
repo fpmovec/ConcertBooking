@@ -3,7 +3,7 @@ import { Promocode } from "../../Models/Promocode";
 
 export const GetPromocodes = async (): Promise<Promocode[]> => {
   let promocodes: Promocode[] = [];
-  const response = await fetch("http://localhost:5207/Promocode", {
+  const response = await fetch("https://api.concert.tw1.su/Promocode", {
     method: "GET",
     headers: {
       "Authorization": "Bearer " + `${await getAccessToken()}`,
@@ -16,7 +16,7 @@ export const GetPromocodes = async (): Promise<Promocode[]> => {
 };
 
 export const GetPromocodeById = async (id: number): Promise<Promocode> => {
-  const response = await fetch(`http://localhost:5207/Promocode/${id}`, {
+  const response = await fetch(`https://api.concert.tw1.su/Promocode/${id}`, {
     method: "GET",
     headers: {
         "Authorization": "Bearer " + `${await getAccessToken()}`,

@@ -5,7 +5,7 @@ import { Booking } from "../../Models/BookingModels";
 
 export const GetAllBookingsByEmail = async (email: string) => {
     let bookings: Booking[] = [];
-    const response = await fetch(`http://localhost:5207/Booking/${email}`, {
+    const response = await fetch(`https://api.concert.tw1.su/Booking/${email}`, {
         method: "GET",
         headers: {
             "Authorization": "Bearer " + `${await getAccessToken()}`,

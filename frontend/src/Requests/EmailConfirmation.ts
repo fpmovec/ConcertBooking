@@ -4,7 +4,7 @@ export const SendConfirmationCode = async (email: string) => {
   const emailDto: EmailDto = {
     emailaddress: email,
   };
-  await fetch(`http://localhost:5207/Email`, {
+  await fetch(`https://api.concert.tw1.su/Email`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,7 +15,7 @@ export const SendConfirmationCode = async (email: string) => {
 };
 
 export const GetConfirmationCode = async (): Promise<string> => {
-  const response = await fetch(`http://localhost:5207/Email/confirmation`, {
+  const response = await fetch(`https://api.concert.tw1.su/Email/confirmation`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

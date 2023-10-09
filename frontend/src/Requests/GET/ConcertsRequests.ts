@@ -22,7 +22,7 @@ export const GetAllConcerts = async (): Promise<Concert[]> => {
 };
 
 export const GetConcertById = async (id: number): Promise<Concert> => {
-  const response = await fetch(`http://localhost:5207/concert/${id}`, {
+  const response = await fetch(`https://api.concert.tw1.su/concert/${id}`, {
     method: "GET",
   });
 
@@ -32,7 +32,7 @@ export const GetConcertById = async (id: number): Promise<Concert> => {
 };
 
 export const GetClassicById = async (id: number): Promise<Classic> => {
-  const response = await fetch(`http://localhost:5207/classic/${id}`, {
+  const response = await fetch(`https://api.concert.tw1.su/classic/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export const GetClassicById = async (id: number): Promise<Classic> => {
 };
 
 export const GetPartyById = async (id: number): Promise<Party> => {
-  const response = await fetch(`http://localhost:5207/party/${id}`, {
+  const response = await fetch(`https://api.concert.tw1.su/party/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export const GetPartyById = async (id: number): Promise<Party> => {
 };
 
 export const GetOpenAirById = async (id: number): Promise<OpenAir> => {
-  const response = await fetch(`http://localhost:5207/openair/${id}`, {
+  const response = await fetch(`https://api.concert.tw1.su/openair/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export const GetOpenAirById = async (id: number): Promise<OpenAir> => {
 export const GetCoordinatesByConcertId = async (
   id: number
 ): Promise<Coordinates> => {
-  const response = await fetch(`http://localhost:5207/coordinates/${id}`, {
+  const response = await fetch(`https://api.concert.tw1.su/coordinates/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -88,14 +88,14 @@ export const GetConcertsByCriteria = async (
 
   if (criteria !== null && criteria !== "") {
     const crit = criteria.trim().toLowerCase();
-    response = await fetch(`http://localhost:5207/search/${crit}`, {
+    response = await fetch(`https://api.concert.tw1.su/search/${crit}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
     });
   } else
-    response = await fetch("http://localhost:5207/concerts", {
+    response = await fetch("https://api.concert.tw1.su/concerts", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

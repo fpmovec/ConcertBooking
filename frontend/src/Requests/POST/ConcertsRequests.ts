@@ -38,7 +38,7 @@ export const PostClassic = async (
   dto: ClassicDto,
 
 ) => {
-  await fetch(`http://localhost:5207/classic`, {
+  await fetch(`https://api.concert.tw1.su/classic`, {
     method: "POST",
     headers: {
       'Authorization': "Bearer " + `${await getAccessToken()}`,
@@ -50,7 +50,7 @@ export const PostClassic = async (
 
 
 export const PostParty = async (dto: PartyDto) => {
-    await fetch(`http://localhost:5207/party`, {
+    await fetch(`https://api.concert.tw1.su/party`, {
         method: "POST",
         headers: {
             "Authorization": "Bearer " + `${await getAccessToken()}`,
@@ -62,7 +62,7 @@ export const PostParty = async (dto: PartyDto) => {
 };
 
 export const PostOpenAir = async (dto: OpenAirDto) => {
-    await fetch(`http://localhost:5207/openair`, {
+    await fetch(`https://api.concert.tw1.su/openair`, {
         method: "POST",
         headers: {
             "Authorization": "Bearer " + `${await getAccessToken()}`,
