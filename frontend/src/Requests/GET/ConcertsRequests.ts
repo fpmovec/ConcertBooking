@@ -10,7 +10,7 @@ import {
 export const GetAllConcerts = async (): Promise<Concert[]> => {
   let allConcerts: Concert[] = [];
 
-  const response = await fetch("http://94.198.217.60:5207/concerts", {
+  const response = await fetch("https://localhost:7235/concerts", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
