@@ -17,10 +17,10 @@ services:
     command:
       [
         "dotnet",
-        "/migration/MigrationsHelper.dll",
+        "dev-certs https",
         "&&",
         "dotnet",
-        "dev-certs https",
+        "/migration/MigrationsHelper.dll",
       ]
 
   frontend:
