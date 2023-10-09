@@ -1,7 +1,6 @@
 version: "3.5"
 
 services:
-
   backend:
     build: backend/
     environment:
@@ -9,13 +8,13 @@ services:
       - ASPNETCORE_URLS=https://+:7235;http://+:5207
       - DOTNET_GENERATE_ASPNET_CERTIFICATE=false
     volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ~/.aspnet/https:/root/.aspnet/https:ro
+      - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     ports:
       - 7235:7235
       - 5207:5207
     command: ["dotnet", "/migration/MigrationsHelper.dll"]
-    
+
   frontend:
     build: frontend/
     depends_on:
