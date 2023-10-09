@@ -11,7 +11,7 @@ export interface BookingDto {
 }
 
 export const PostBooking = async (booking: BookingDto) => {
-  await fetch("https://localhost:7235/Booking", {
+  await fetch("http://localhost:5207/Booking", {
     method: "POST",
     headers: {
       "Authorization": "Bearer " + `${await getAccessToken()}`,

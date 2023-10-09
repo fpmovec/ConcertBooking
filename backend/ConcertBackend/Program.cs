@@ -45,8 +45,7 @@ builder.Services.AddCors(options =>
    options.AddPolicy("CorsPolicy", build => 
        build.AllowAnyMethod()
               .AllowAnyHeader()
-              .WithOrigins("http://localhost:5173")
-              .WithOrigins("http://127.0.0.1:5173")));
+              .AllowAnyOrigin()));
 
 var app = builder.Build();
 using (var serviceScope = app.Services
@@ -67,9 +66,9 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-
-}
 app.UseHttpsRedirection();
+}
+
 app.UseRouting();
 app.UseCors("CorsPolicy");
 app.UseAuthentication();

@@ -3,7 +3,7 @@ import { Order } from "../../Models/OrderModels";
 
 export const GetOrdersByEmail = async (email: string) => {
     let orders: Order[] = [];
-    const response = await fetch(`https://localhost:7235/Orders/${email}`, {
+    const response = await fetch(`http://localhost:5207/Orders/${email}`, {
         method: "GET",
         headers: {
             "Authorization": "Bearer " + `${await getAccessToken()}`,

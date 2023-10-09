@@ -6,7 +6,7 @@ interface PromoDto {
 }
 
 export const PostPromocode = async (promo: PromoDto): Promise<void> => {
-  await fetch(`https://localhost:7235/Promocode`, {
+  await fetch(`http://localhost:5207/Promocode`, {
     method: "POST",
     headers: {
       "Authorization": "Bearer " + `${await getAccessToken()}`,
