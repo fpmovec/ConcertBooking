@@ -12,7 +12,7 @@ services:
       - ~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro
     ports:
       - 7235:7235
-      - 80:5207
+      - 8000:5207
 
     command: ["dotnet", "/migration/MigrationsHelper.dll"]
 
