@@ -28,7 +28,7 @@ export const Pay = () => {
       <div className={styles.buttons}>
         <PayPalScriptProvider options={initialOptions}>
           <PayPalButtons
-            createOrder={(data, actions) => {
+            createOrder={(_data, actions) => {
               return actions.order.create({
                 purchase_units: [
                   {
@@ -39,8 +39,9 @@ export const Pay = () => {
                 ],
               });
             }}
-            onApprove={(data, actions) => {
-              return actions.order!.capture().then(async function (details) {
+            onApprove={(_data, actions) => {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+              return actions.order!.capture().then(async function (_details) {
                 await PostOrder({
                   firstName: currentBooking.firstName,
                   lastName: currentBooking.lastName,

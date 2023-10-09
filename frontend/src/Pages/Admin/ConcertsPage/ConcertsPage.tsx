@@ -5,7 +5,6 @@ import { GetAllConcerts } from "../../../Requests/GET/ConcertsRequests";
 import styles from "./ConcertsPage.module.css";
 import React from "react";
 import { setConcerts } from "../../../Redux/Slices";
-import { Modal } from "../../../Components/Modal/Modal";
 
 export const ConcertsPage = () => {
   const dispatch = useAppDispatch();

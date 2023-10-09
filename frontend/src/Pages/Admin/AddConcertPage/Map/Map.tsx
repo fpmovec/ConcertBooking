@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
 
 import { useGlobalContext } from "../../../../Redux/Hooks";
@@ -13,14 +16,15 @@ export const AdminMap = () => {
   const inputRef = React.useRef(null);
   const [addressCoord, setAddressCoord] = useState<number[]>();
   const [inputValue, setInputValue] = useState<string>("");
-  const [savedYMaps, setSavedYMaps] = useState<any>();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  //const [savedYMaps, setSavedYMaps] = useState<any>();
   const { setCoordinates, setLocation } = useGlobalContext();
 
   const onClickAddress = (e: any, ymaps: any) => {
     const name = e.get("item").value as string;
     setInputValue(name);
     setLocation(name);
-    ymaps.geocode(name).then((result) => {
+    ymaps.geocode(name).then((result: any) => {
       const coord = result.geoObjects
         .get(0)
         .geometry.getCoordinates() as number[];
@@ -30,9 +34,9 @@ export const AdminMap = () => {
   };
 
   const onYmapsLoad = (ymaps: any) => {
-    setSavedYMaps(ymaps);
+    //setSavedYMaps(ymaps);
     const suggestView = new ymaps.SuggestView(inputRef.current);
-    suggestView.events.add("select", (e) => {
+    suggestView.events.add("select", (e: any) => {
       return onClickAddress(e, ymaps);
     });
   };

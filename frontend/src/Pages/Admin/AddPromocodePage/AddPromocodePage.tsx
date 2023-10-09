@@ -1,10 +1,9 @@
 import { ErrorField } from "../../../Components/SuccesErrorFields/ErrorField";
 import styles from "./AddPromocodePage.module.css";
 import { useForm } from "react-hook-form";
-import React from "react";
+import React, { useState } from "react";
 import { PostPromocode } from "../../../Requests/POST/PromocodesRequest";
 import { useAppSelector, useAppDispatch } from "../../../Redux/Hooks";
-import { useNavigate } from "react-router-dom";
 import { GetPromocodes } from "../../../Requests/GET/PromocodesRequests";
 import { setPromocodes } from "../../../Redux/Slices";
 
@@ -35,14 +34,14 @@ const dispatch = useAppDispatch();
     doGet();
    }, [dispatch]);
 
-const navigate = useNavigate();
   const IsUnique = (name: string): boolean => {
     return promocodes.some((c) => c.code === name);
   };
-
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const submitForm = (data: PromocodeData) => {
     setIsSuccess(true);
     const add = async () => {
+      setIsButtonDisabled(true);
       await PostPromocode({
         code: data.code,
         total: 1 - data.discount * 0.01,
@@ -105,7 +104,7 @@ const navigate = useNavigate();
             )}
           </div>
 
-          <button type="submit">
+          <button disabled={isButtonDisabled} type="submit">
             Add the promocode
           </button>
           {isSucces && (

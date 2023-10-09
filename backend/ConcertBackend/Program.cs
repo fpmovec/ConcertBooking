@@ -5,6 +5,7 @@ using ConcertBackend.Repositories.Classes;
 using ConcertBackend.Repositories.Interfaces;
 using ConcertBackend.Repositories.Realizations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,8 +49,17 @@ builder.Services.AddCors(options =>
               .WithOrigins("http://127.0.0.1:5173")));
 
 var app = builder.Build();
+using (var serviceScope = app.Services
+    .GetRequiredService<IServiceScopeFactory>()
+    .CreateScope())
+{
+    using (var context = serviceScope.ServiceProvider.GetService<ConcertsDbContext>())
+    {
+        context.Database.Migrate();
+    }
+}
 
- //Configure the HTTP request pipeline.
+//Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -57,9 +67,9 @@ if (app.Environment.IsDevelopment())
 }
 else
 {
-app.UseHttpsRedirection();
-}
 
+}
+app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("CorsPolicy");
 app.UseAuthentication();

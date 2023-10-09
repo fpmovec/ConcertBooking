@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./AddConcertPage.module.css";
 import { Concert } from "../../../Models/ConcertModels";
@@ -24,11 +24,13 @@ export const PartyProps = ({ concert }: Props) => {
 
   const [ageLim, setAgeLim] = React.useState(0);
   const isRadioSelected = (value: number): boolean => ageLim === value;
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const handleRadioClick = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setAgeLim(Number(e.target.value));
   };
 
-  const submitForm = async (data: FormData) => {
+  const submitForm = async () => {
+    setIsButtonDisabled(true);
     await PostParty({
       performer: concert.performer,
       ticketsCount: concert.ticketsCount,
@@ -115,7 +117,7 @@ export const PartyProps = ({ concert }: Props) => {
           </div>
         </fieldset>
       </div>
-      <button type="submit">Add concert</button>
+      <button disabled={isButtonDisabled} type="submit">Add concert</button>
       {isSuccessfully && (
         <div className={styles.success}>The concert is successfully added</div>
       )}

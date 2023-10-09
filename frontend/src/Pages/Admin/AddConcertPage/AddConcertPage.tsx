@@ -9,7 +9,7 @@ import { PartyProps } from "./PartyProps";
 import { Concert } from "../../../Models/ConcertModels";
 import React from "react";
 import { AdminMap } from "./Map/Map";
-import { useAppSelector, useAppDispatch } from "../../../Redux/Hooks";
+import { useAppSelector } from "../../../Redux/Hooks";
 import { MyGlobalContext } from "../../../Redux/Hooks";
 
 type FormData = {

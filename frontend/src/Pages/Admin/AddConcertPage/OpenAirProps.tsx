@@ -17,6 +17,7 @@ type FormData = {
 
 export const OpenAitProps = ({ concert }: Props) => {
   const [isSuccessfully, setIsSuccesfully] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const navigate = useNavigate();
   const {
     register,
@@ -27,6 +28,7 @@ export const OpenAitProps = ({ concert }: Props) => {
   });
 
   const submitForm = async (data: FormData) => {
+    setIsButtonDisabled(true)
     await PostOpenAir(
       {
         performer: concert.performer,
@@ -83,7 +85,7 @@ export const OpenAitProps = ({ concert }: Props) => {
           <ErrorField data="This field must be contained at least 5 characters" />
         )}
       </div>
-      <button type="submit">Add concert</button>
+      <button disabled={isButtonDisabled} type="submit">Add concert</button>
       {isSuccessfully && (
         <div className={styles.success}>The concert is successfully added</div>
       )}
