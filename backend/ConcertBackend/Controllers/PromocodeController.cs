@@ -38,7 +38,7 @@ namespace ConcertBackend.Controllers
 
         [Authorize(Policy = "admin")]
         [HttpPost]
-        public async Task<ActionResult> AddPromocodeAsync([FromBody]PromocodeDto promocode)
+        public async Task<ActionResult> AddPromocodeAsync([FromBody]PromocodeViewModel promocode)
         {
             if (promocode == null)
                 return BadRequest();

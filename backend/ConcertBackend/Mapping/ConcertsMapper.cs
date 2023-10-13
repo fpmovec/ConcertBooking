@@ -7,9 +7,9 @@ namespace ConcertBackend.Mapping
     {
         public ConcertsMapper()
         {
-            CreateMap<ClassicDto, Classic>();
-            CreateMap<PartyDto, Party>();
-            CreateMap<OpenAirDto, OpenAir>();
+            CreateMap<ClassicViewModel, Classic>();
+            CreateMap<PartyViewModel, Party>();
+            CreateMap<OpenAirViewModel, OpenAir>();
         }
     }
 }

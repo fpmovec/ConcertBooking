@@ -35,7 +35,8 @@ namespace ConcertBackend.Controllers
         [AllowAnonymous]
         [HttpGet("classic")]
         public async Task<ActionResult<List<Classic>>> GetAllClassics() {
-            var classics = await _concertRepository.GetClassicsAsync();
+
+            var classics = await _concertRepository.GetConcertsWithTypeAsync<Classic>();
 
             if (classics == null)
                 return NotFound();
@@ -47,7 +48,8 @@ namespace ConcertBackend.Controllers
         [HttpGet("party")]
         public async Task<ActionResult<List<Party>>> GetAllParties()
         {
-            var parties = await _concertRepository.GetPartiesAsync();
+
+            var parties = await _concertRepository.GetConcertsWithTypeAsync<Party>();
 
             if (parties == null)
                 return NotFound();
@@ -59,7 +61,8 @@ namespace ConcertBackend.Controllers
         [HttpGet("openair")]
         public async Task<ActionResult<List<OpenAir>>> GetAllOpenAirs()
         {
-            var openAirs = await _concertRepository.GetOpenAirsAsync();
+
+            var openAirs = await _concertRepository.GetConcertsWithTypeAsync<OpenAir>();
 
             if (openAirs == null)
                 return NotFound();
@@ -80,7 +83,7 @@ namespace ConcertBackend.Controllers
         [HttpGet("classic/{id}")]
         public async Task<ActionResult<Classic>> GetClassicById(int id)
         {
-            var concert = await _concertRepository.GetClassicAsync(id);
+            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<Classic>(id);
 
             if (concert == null)
                 return NotFound();
@@ -103,7 +106,7 @@ namespace ConcertBackend.Controllers
         [HttpGet("party/{id}")]
         public async Task<ActionResult<Party>> GetPartyById(int id)
         {
-            var concert = await _concertRepository.GetPartyAsync(id);
+            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<Party>(id);
 
             if (concert == null)
                 return NotFound();
@@ -115,7 +118,7 @@ namespace ConcertBackend.Controllers
         [HttpGet("openair/{id}")]
         public async Task<ActionResult<OpenAir>> GetOpenAirById(int id)
         {
-            var concert = await _concertRepository.GetOpenAirAsync(id);
+            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<OpenAir>(id);
 
             if (concert == null)
                 return NotFound();
@@ -124,9 +127,8 @@ namespace ConcertBackend.Controllers
         }
 
         [Authorize(Policy = "admin")]
-        //[AllowAnonymous]
         [HttpPost("classic")]
-        public async Task<ActionResult> AddClassic([FromBody] ClassicDto concert)
+        public async Task<ActionResult> AddClassic([FromBody] ClassicViewModel concert)
         {
             if (concert == null)
                 return BadRequest();
@@ -137,13 +139,13 @@ namespace ConcertBackend.Controllers
             var classic = _mapper.Map<Classic>(concert);
             classic.ConcertType = "Classic";
 
-            await _concertRepository.AddClassicAsync(classic);
+            await _concertRepository.AddConcertAsync(classic);
             return Ok();
         }
 
         [Authorize(Policy = "admin")]
         [HttpPost("party")]
-        public async Task<ActionResult> AddParty(PartyDto partyDto)
+        public async Task<ActionResult> AddParty(PartyViewModel partyDto)
         {
             if (partyDto == null)
                 return BadRequest();
@@ -154,14 +156,14 @@ namespace ConcertBackend.Controllers
             var party = _mapper.Map<Party>(partyDto);
             party.ConcertType = "Party";
 
-            await _concertRepository.AddPartyAsync(party);
+            await _concertRepository.AddConcertAsync(party);
             return Ok();
 
         }
 
         [Authorize(Policy = "admin")]
         [HttpPost("openair")]
-        public async Task<ActionResult> AddOpenAir(OpenAirDto openairDto)
+        public async Task<ActionResult> AddOpenAir(OpenAirViewModel openairDto)
         {
             if (openairDto == null)
                 return BadRequest();
@@ -172,7 +174,7 @@ namespace ConcertBackend.Controllers
             var openAir = _mapper.Map<OpenAir>(openairDto);
             openAir.ConcertType = "OpenAir";
 
-            await _concertRepository.AddOpenAirAsync(openAir);
+            await _concertRepository.AddConcertAsync(openAir);
             return Ok();
         }
 
@@ -182,10 +184,10 @@ namespace ConcertBackend.Controllers
         [HttpDelete("classic/{id}")]
         public async Task<ActionResult> DeleteClassic(int id)
         {
-            var concert = await _concertRepository.GetClassicAsync(id);
+            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<Classic>(id);
             if (concert == null) return NotFound();
 
-            await _concertRepository.DeleteClassicAsync(concert);
+            await _concertRepository.DeleteConcertAsync(concert);
             return Ok();
         }
 
@@ -194,10 +196,10 @@ namespace ConcertBackend.Controllers
         [HttpDelete("party/{id}")]
         public async Task<ActionResult> DeleteParty(int id)
         {
-            var concert = await _concertRepository.GetPartyAsync(id);
+            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<Party>(id);
             if (concert == null) return NotFound();
 
-            await _concertRepository.DeletePartyAsync(concert);
+            await _concertRepository.DeleteConcertAsync(concert);
             return Ok();
         }
 
@@ -205,10 +207,10 @@ namespace ConcertBackend.Controllers
         [HttpDelete("openair/{id}")]
         public async Task<ActionResult> DeleteOpenAir(int id)
         {
-            var concert = await _concertRepository.GetOpenAirAsync(id);
+            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<OpenAir>(id);
             if (concert == null) return NotFound();
 
-            await _concertRepository.DeleteOpenAirAsync(concert);
+            await _concertRepository.DeleteConcertAsync(concert);
             return Ok();
         }
 

@@ -3,6 +3,7 @@ using ConcertBackend.Models;
 using ConcertBackend.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 
 namespace ConcertBackend.Repositories.Classes
 {
@@ -14,31 +15,12 @@ namespace ConcertBackend.Repositories.Classes
                 _context = context;
         }
 
-        public async Task AddClassicAsync(Classic classic)
+        public async Task AddConcertAsync(Concert concert)
         {
-             _context.Classics.Add(classic);
+           _context.Set<Concert>().Add(concert);
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddOpenAirAsync(OpenAir openAir)
-        {
-            _context.OpenAirs.Add(openAir);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task AddPartyAsync(Party party)
-        {
-            _context.Parties.Add(party);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteClassicAsync(Classic classic)
-        {
-            if (classic != null)
-               _context.Remove(classic);
-
-            await _context.SaveChangesAsync();
-        }
 
         public async Task DeleteConcertAsync(Concert concert)
         {
@@ -46,21 +28,6 @@ namespace ConcertBackend.Repositories.Classes
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteOpenAirAsync(OpenAir openAir)
-        {
-            if (openAir != null)
-                _context.Remove(openAir);
-
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeletePartyAsync(Party party)
-        {
-            if (party != null)
-                _context.Remove(party);
-
-            await _context.SaveChangesAsync();
-        }
 
         public async Task<Classic?> GetClassicAsync(int id)
         {
@@ -70,15 +37,6 @@ namespace ConcertBackend.Repositories.Classes
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Classic>> GetClassicsAsync()
-        {
-            return await _context.Classics
-              .Include(c => c.Coordinates)
-              .ToListAsync();
-            //var classics = await _context.Classics.Include(c => c.Coordinates).ToListAsync();
-            //return classics.AsQueryable();
-            //return await _context.Classics.Include(c => c.Coordinates).ToListAsync();
-        }
 
         public async Task<IEnumerable<Concert>> GetConcertByCriteriaAsync(string? criteria)
         {
@@ -94,7 +52,7 @@ namespace ConcertBackend.Repositories.Classes
            
         }
 
-        public async Task<Concert> GetConcertByIdAsync(int id)
+        public async Task<Concert?> GetConcertByIdAsync(int id)
         {
            Concert? concert = await _context.Concerts
                 .Where(c => c.Id == id)
@@ -104,18 +62,27 @@ namespace ConcertBackend.Repositories.Classes
             return concert;
         }
 
-        public async Task<IEnumerable<Concert>> GetConcertsAsync()
+        public async Task<T?> GetConcertByIdWithTypeAsync<T>(int id) where T : Concert
+        {
+            return await _context.Set<T>()
+                .Where(c => c.Id == id)
+                .Include(c => c.Coordinates)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<Concert>?> GetConcertsAsync()
         {
             return await _context.Concerts
                 .Include(c => c.Coordinates)
                 .ToListAsync();   
         }
 
-        //public async Task<Coordinates> GetCoordinatesByConcertIdAsync(int id)
-        //{
-        //    Coordinates? coordinates = await _context.Coordinates.Where(c => c.ConcertId == id).FirstOrDefaultAsync();
-        //    return coordinates;
-        //}
+        public async Task<IEnumerable<T>?> GetConcertsWithTypeAsync<T>() where T : Concert
+        {
+            return await _context.Set<T>()
+                .Include(c => c.Coordinates)
+                .ToListAsync();      
+        }
 
         public async Task<OpenAir?> GetOpenAirAsync(int id)
         {
@@ -123,16 +90,6 @@ namespace ConcertBackend.Repositories.Classes
                  .Where(c => c.Id == id)
                  .Include(c => c.Coordinates)
                  .FirstOrDefaultAsync();
-        }
-
-        public async Task<IEnumerable<OpenAir>> GetOpenAirsAsync()
-        {
-            return await _context.OpenAirs.Include(c => c.Coordinates).ToListAsync();
-        }
-
-        public async Task<IEnumerable<Party>> GetPartiesAsync()
-        {
-            return await _context.Parties.Include(c => c.Coordinates).ToListAsync();
         }
 
         public async Task<Party?> GetPartyAsync(int id)

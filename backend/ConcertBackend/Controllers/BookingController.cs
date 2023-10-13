@@ -31,7 +31,7 @@ namespace ConcertBackend.Controllers
 
         [Authorize(Policy = "user")]
         [HttpPost]
-        public async Task<ActionResult> AddBookingAsync([FromBody]BookingDto bookingDto)
+        public async Task<ActionResult> AddBookingAsync([FromBody]BookingViewModel bookingDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

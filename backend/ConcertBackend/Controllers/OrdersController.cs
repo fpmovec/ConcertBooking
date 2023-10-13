@@ -32,7 +32,7 @@ namespace ConcertBackend.Controllers
         //[Authorize]
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult> AddOrderAsync([FromBody]OrderDto orderDto)
+        public async Task<ActionResult> AddOrderAsync([FromBody]OrderViewModel orderDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

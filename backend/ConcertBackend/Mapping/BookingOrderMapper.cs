@@ -7,8 +7,8 @@ namespace ConcertBackend.Mapping
     {
         public BookingOrderMapper()
         {
-            CreateMap<BookingDto, Booking>();
-            CreateMap<OrderDto, Order>()
+            CreateMap<BookingViewModel, Booking>();
+            CreateMap<OrderViewModel, Order>()
                 .ForMember(o => o.FullName, opt => opt
                       .MapFrom(src => $"{src.FirstName} {src.LastName}"));
         }

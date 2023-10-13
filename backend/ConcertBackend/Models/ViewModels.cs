@@ -2,7 +2,7 @@
 
 namespace ConcertBackend.Models
 {
-    public class ClassicDto
+    public class ClassicViewModel
     {
         [Required]
         [MinLength(2), MaxLength(20)]
@@ -24,7 +24,7 @@ namespace ConcertBackend.Models
         public Coordinates? Coordinates { get; set; }
     }
 
-    public class PartyDto
+    public class PartyViewModel
     {
         [Required]
         [MinLength(2), MaxLength(20)]
@@ -42,7 +42,7 @@ namespace ConcertBackend.Models
         public Coordinates? Coordinates { get; set; }
     }
 
-    public class OpenAirDto
+    public class OpenAirViewModel
     {
         [Required]
         [MinLength(2), MaxLength(20)]
@@ -62,7 +62,7 @@ namespace ConcertBackend.Models
         public Coordinates? Coordinates { get; set; }
     }
 
-    public class PromocodeDto
+    public class PromocodeViewModel
     {
         [Required, MinLength(1)]
         public required string Code { get; set; }
@@ -70,13 +70,13 @@ namespace ConcertBackend.Models
         public float Total { get; set; }
     }
 
-    public class EmailDto
+    public class EmailViewModel
     {
         [Required, EmailAddress]
         public required string EmailAddress { get; set; }
     }
 
-    public class BookingDto
+    public class BookingViewModel
     {
         public string FirstName { get; set; } = string.Empty;
         [Required, MinLength(3)]
@@ -92,7 +92,7 @@ namespace ConcertBackend.Models
         public int ConcertId { get; set; }
     }
 
-    public class OrderDto
+    public class OrderViewModel
     {
         [Required]
         public string FirstName { get; set; } = string.Empty;
