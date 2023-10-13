@@ -19,7 +19,6 @@ namespace WebApiTests.BookingControllerTests
             _bookingRepoMock = new Mock<IBookingRepository>();
             _mapperMock = new Mock<IMapper>();
             _fixture = new Fixture();
-            _mapperMock.Setup(b => b.Map<BookingViewModel, Booking>(It.IsAny<BookingViewModel>())).Returns(It.IsAny<Booking>());
         }
 
         [Fact]
@@ -41,9 +40,7 @@ namespace WebApiTests.BookingControllerTests
         [Fact]
         public async Task Add_Booking_ReturnBadRequest()
         {
-            var booking = _fixture.Create<Booking>();
             var bookingVM = _fixture.Create<BookingViewModel>();
-            //_bookingRepoMock.Setup(b => b.AddBookingAsync(booking));
             var bookingController = new BookingController(_bookingRepoMock.Object, _mapperMock.Object);
             bookingController.ModelState.AddModelError("key", "message");
 
@@ -52,7 +49,6 @@ namespace WebApiTests.BookingControllerTests
 
             Assert.NotNull(obj);
             Assert.Equal(400, obj.StatusCode);
-
         }
     }
 }

@@ -34,6 +34,7 @@ namespace ConcertBackend.EmailConfirmation.EmailService
             smtp.Authenticate(_configuration.GetSection("Email").Value, _configuration.GetSection("EmailPassword").Value);
             smtp.Send(email);
             smtp.Disconnect(true);
+
         }
     }
 }
