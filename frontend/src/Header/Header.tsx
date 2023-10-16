@@ -37,33 +37,35 @@ export const Header = () => {
           </button>
         </form>
       </div>
-      {isAuthenticated && (isAdmin(user!.email) ? (
-        <div>
-          <button
-          onClick={() => navigate('/admin')}
-          className={styles.bookedButton}
-          >
-            <span>Admin panel</span>
-          </button>
-        </div>
-      ) : (
-        <>
+      {isAuthenticated &&
+        (isAdmin(user!.email) ? (
           <div>
             <button
-              onClick={() => navigate("/booked")}
+              id="search-button"
+              onClick={() => navigate("/admin")}
               className={styles.bookedButton}
             >
-              🎫 <span>Booked tickets</span>{" "}
-            </button>
-            <button
-              onClick={() => navigate("/purchased")}
-              className={styles.bookedButton}
-            >
-              🎫 <span>Purchased tickets</span>
+              <span>Admin panel</span>
             </button>
           </div>
-        </>
-      ))}
+        ) : (
+          <>
+            <div>
+              <button
+                onClick={() => navigate("/booked")}
+                className={styles.bookedButton}
+              >
+                🎫 <span>Booked tickets</span>{" "}
+              </button>
+              <button
+                onClick={() => navigate("/purchased")}
+                className={styles.bookedButton}
+              >
+                🎫 <span>Purchased tickets</span>
+              </button>
+            </div>
+          </>
+        ))}
 
       {!loading &&
         (isAuthenticated ? (

@@ -11,7 +11,7 @@ export const ConcertList = ({ data }: Props) => {
     <ul className={styles.ul}>
       {data.map((concert) => (
         <li className={styles.li} key={concert.id}>
-          <ConcertComponent data={concert} />
+          <ConcertComponent data-testid="concert-1" data={concert} />
         </li>
       ))}
     </ul>
