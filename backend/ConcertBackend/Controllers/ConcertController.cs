@@ -23,7 +23,7 @@ namespace ConcertBackend.Controllers
         [HttpGet("concerts")]
         public async Task<ActionResult<List<Concert>>> GetAllConcerts()
         {
-            var concerts = await _concertRepository.GetConcertsAsync();
+            var concerts = await _concertRepository.GetConcertsWithTypeAsync<Concert>();
             if (concerts == null)
             {
                 return NotFound();
@@ -95,7 +95,7 @@ namespace ConcertBackend.Controllers
         [HttpGet("concert/{id}")]
         public async Task<ActionResult<Concert>> GetConcertById(int id)
         {
-            var concert = await _concertRepository.GetConcertByIdAsync(id);
+            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<Concert>(id);
             if (concert == null)
                 return NotFound();
 

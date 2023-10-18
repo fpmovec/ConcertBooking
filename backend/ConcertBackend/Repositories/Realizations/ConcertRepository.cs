@@ -29,15 +29,6 @@ namespace ConcertBackend.Repositories.Classes
         }
 
 
-        public async Task<Classic?> GetClassicAsync(int id)
-        {
-            return await _context.Classics
-                .Where(c => c.Id == id)
-                .Include(c => c.Coordinates)
-                .FirstOrDefaultAsync();
-        }
-
-
         public async Task<IEnumerable<Concert>> GetConcertByCriteriaAsync(string? criteria)
         {
             if (criteria.IsNullOrEmpty())
@@ -70,34 +61,18 @@ namespace ConcertBackend.Repositories.Classes
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Concert>?> GetConcertsAsync()
-        {
-            return await _context.Concerts
-                .Include(c => c.Coordinates)
-                .ToListAsync();   
-        }
-
         public async Task<IEnumerable<T>?> GetConcertsWithTypeAsync<T>() where T : Concert
         {
             return await _context.Set<T>()
                 .Include(c => c.Coordinates)
                 .ToListAsync();      
-        }
-
-        public async Task<OpenAir?> GetOpenAirAsync(int id)
+        } 
+        
+        public async Task<IEnumerable<Concert>?> GetConcertsAsync()
         {
-            return await _context.OpenAirs
-                 .Where(c => c.Id == id)
-                 .Include(c => c.Coordinates)
-                 .FirstOrDefaultAsync();
-        }
-
-        public async Task<Party?> GetPartyAsync(int id)
-        {
-            return await _context.Parties
-                .Where(c => c.Id == id)
+            return await _context.Concerts
                 .Include(c => c.Coordinates)
-                .FirstOrDefaultAsync();
+                .ToListAsync();   
         }
     }
 }
