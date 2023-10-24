@@ -39,7 +39,7 @@ namespace ConcertBackend.Repositories.Realizations.Concerts
         public async Task<IEnumerable<TEntity>> GetByCriteriaAsync(string? criteria)
         {
             if (criteria.IsNullOrEmpty())
-                return await _context.Set<TEntity>().ToListAsync();
+                return await _db.ToListAsync();
 
             var searchedConcerts = await _db
                   .Where(c => c.Performer.ToLower().Contains(criteria!))
