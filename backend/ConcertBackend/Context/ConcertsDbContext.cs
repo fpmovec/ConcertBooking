@@ -33,10 +33,10 @@ namespace ConcertBackend.Context
             optionsBuilder.UseNpgsql(_configuration.GetConnectionString("DefaultConnection"));
         }
 
-        public DbSet<Concert> Concerts { get; set; }
-        public DbSet<Classic> Classics { get; set; }
-        public DbSet<Party> Parties { get; set; }
-        public DbSet<OpenAir> OpenAirs { get; set; }    
+        public virtual DbSet<Concert> Concerts { get; set; }
+        public virtual DbSet<Classic> Classics { get; set; }
+        public virtual DbSet<Party> Parties { get; set; }
+        public virtual DbSet<OpenAir> OpenAirs { get; set; }    
         //public DbSet<Coordinates> Coordinates { get; set; }
         public DbSet<Promocode> Promocodes { get; set; }
         public DbSet<Booking> Bookings { get; set; }

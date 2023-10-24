@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ConcertBackend.Models;
 using ConcertBackend.Repositories.Interfaces;
+using ConcertBackend.Repositories.Realizations.Concerts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,19 +12,31 @@ namespace ConcertBackend.Controllers
     [Route("")]
     public class ConcertController : ControllerBase
     {
-        private readonly IConcertRepository _concertRepository;
+        //private readonly IConcertRepository _concertRepository;
+        private readonly ClassicRepository _classicRepository;
+        private readonly PartyRepository _partyRepository;
+        private readonly OpenAirRepository _openAirRepository;
+        private readonly CommonRepository _commonRepository;
         private readonly IMapper _mapper;
-        public ConcertController(IConcertRepository repository, IMapper mapper)
+        public ConcertController(ClassicRepository repository,
+            PartyRepository partyRepository,
+            OpenAirRepository openAirRepository,
+            CommonRepository commonRepository,
+            IMapper mapper)
         {
-            _concertRepository = repository;
+            //_concertRepository = repository;
             _mapper = mapper;
+             _classicRepository = repository;
+            _partyRepository = partyRepository;
+            _openAirRepository = openAirRepository;
+            _commonRepository = commonRepository;
         }
 
         [AllowAnonymous]
         [HttpGet("concerts")]
         public async Task<ActionResult<List<Concert>>> GetAllConcerts()
         {
-            var concerts = await _concertRepository.GetConcertsWithTypeAsync<Concert>();
+            var concerts = await _commonRepository.GetAllAsync();
             if (concerts == null)
             {
                 return NotFound();
@@ -34,10 +47,10 @@ namespace ConcertBackend.Controllers
 
         [AllowAnonymous]
         [HttpGet("classic")]
-        public async Task<ActionResult<List<Classic>>> GetAllClassics() {
+        public async Task<ActionResult<List<Classic>>> GetAllClassics()
+        {
 
-            var classics = await _concertRepository.GetConcertsWithTypeAsync<Classic>();
-
+            var classics = await _classicRepository.GetAllAsync();
             if (classics == null)
                 return NotFound();
 
@@ -49,7 +62,7 @@ namespace ConcertBackend.Controllers
         public async Task<ActionResult<List<Party>>> GetAllParties()
         {
 
-            var parties = await _concertRepository.GetConcertsWithTypeAsync<Party>();
+            var parties = await _partyRepository.GetAllAsync();
 
             if (parties == null)
                 return NotFound();
@@ -62,7 +75,7 @@ namespace ConcertBackend.Controllers
         public async Task<ActionResult<List<OpenAir>>> GetAllOpenAirs()
         {
 
-            var openAirs = await _concertRepository.GetConcertsWithTypeAsync<OpenAir>();
+            var openAirs = await _openAirRepository.GetAllAsync();
 
             if (openAirs == null)
                 return NotFound();
@@ -74,7 +87,7 @@ namespace ConcertBackend.Controllers
         [HttpGet("search/{criteria}")]
         public async Task<ActionResult<List<Concert>>> GetConcertsByCriteria(string? criteria)
         {
-            var searchedConcerts = await _concertRepository.GetConcertByCriteriaAsync(criteria);
+            var searchedConcerts = await _commonRepository.GetByCriteriaAsync(criteria);
             return Ok(searchedConcerts);
         }
 
@@ -83,7 +96,7 @@ namespace ConcertBackend.Controllers
         [HttpGet("classic/{id}")]
         public async Task<ActionResult<Classic>> GetClassicById(int id)
         {
-            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<Classic>(id);
+            var concert = await _classicRepository.GetByIdAsync(id);
 
             if (concert == null)
                 return NotFound();
@@ -95,7 +108,7 @@ namespace ConcertBackend.Controllers
         [HttpGet("concert/{id}")]
         public async Task<ActionResult<Concert>> GetConcertById(int id)
         {
-            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<Concert>(id);
+            var concert = await _commonRepository.GetByIdAsync(id);
             if (concert == null)
                 return NotFound();
 
@@ -106,7 +119,7 @@ namespace ConcertBackend.Controllers
         [HttpGet("party/{id}")]
         public async Task<ActionResult<Party>> GetPartyById(int id)
         {
-            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<Party>(id);
+            var concert = await _partyRepository.GetByIdAsync(id);
 
             if (concert == null)
                 return NotFound();
@@ -118,7 +131,7 @@ namespace ConcertBackend.Controllers
         [HttpGet("openair/{id}")]
         public async Task<ActionResult<OpenAir>> GetOpenAirById(int id)
         {
-            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<OpenAir>(id);
+            var concert = await _openAirRepository.GetByIdAsync(id);
 
             if (concert == null)
                 return NotFound();
@@ -139,7 +152,7 @@ namespace ConcertBackend.Controllers
             var classic = _mapper.Map<Classic>(concert);
             classic.ConcertType = "Classic";
 
-            await _concertRepository.AddConcertAsync(classic);
+            await _classicRepository.AddAsync(classic);
             return Ok();
         }
 
@@ -156,7 +169,7 @@ namespace ConcertBackend.Controllers
             var party = _mapper.Map<Party>(partyDto);
             party.ConcertType = "Party";
 
-            await _concertRepository.AddConcertAsync(party);
+            await _partyRepository.AddAsync(party);
             return Ok();
 
         }
@@ -174,20 +187,20 @@ namespace ConcertBackend.Controllers
             var openAir = _mapper.Map<OpenAir>(openairDto);
             openAir.ConcertType = "OpenAir";
 
-            await _concertRepository.AddConcertAsync(openAir);
+            await _openAirRepository.AddAsync(openAir);
             return Ok();
         }
 
-     
+
 
         [Authorize(Policy = "admin")]
         [HttpDelete("classic/{id}")]
         public async Task<ActionResult> DeleteClassic(int id)
         {
-            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<Classic>(id);
+            var concert = await _classicRepository.GetByIdAsync(id);
             if (concert == null) return NotFound();
 
-            await _concertRepository.DeleteConcertAsync(concert);
+            await _classicRepository.DeleteAsync(concert);
             return Ok();
         }
 
@@ -196,10 +209,10 @@ namespace ConcertBackend.Controllers
         [HttpDelete("party/{id}")]
         public async Task<ActionResult> DeleteParty(int id)
         {
-            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<Party>(id);
+            var concert = await _partyRepository.GetByIdAsync(id);
             if (concert == null) return NotFound();
 
-            await _concertRepository.DeleteConcertAsync(concert);
+            await _partyRepository.DeleteAsync(concert);
             return Ok();
         }
 
@@ -207,10 +220,10 @@ namespace ConcertBackend.Controllers
         [HttpDelete("openair/{id}")]
         public async Task<ActionResult> DeleteOpenAir(int id)
         {
-            var concert = await _concertRepository.GetConcertByIdWithTypeAsync<OpenAir>(id);
+            var concert = await _openAirRepository.GetByIdAsync(id);
             if (concert == null) return NotFound();
 
-            await _concertRepository.DeleteConcertAsync(concert);
+            await _openAirRepository.DeleteAsync(concert);
             return Ok();
         }
 
@@ -218,11 +231,11 @@ namespace ConcertBackend.Controllers
         [HttpDelete("concerts/{id}")]
         public async Task<ActionResult> DeleteConcert(int id)
         {
-            var concert = _concertRepository.GetConcertByIdAsync(id);
+            var concert = _commonRepository.GetByIdAsync(id);
             if (concert == null) return NotFound();
 
-            await _concertRepository.DeleteConcertAsync(concert.Result);
+            await _commonRepository.DeleteAsync(concert.Result);
             return Ok();
         }
     }
-}
+    }

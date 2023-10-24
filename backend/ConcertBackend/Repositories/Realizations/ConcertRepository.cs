@@ -3,11 +3,10 @@ using ConcertBackend.Models;
 using ConcertBackend.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Org.BouncyCastle.Asn1.X509.Qualified;
 
 namespace ConcertBackend.Repositories.Classes
 {
-    public class ConcertRepository : IConcertRepository
+    public class ConcertRepository 
     {
         private readonly ConcertsDbContext _context;
         public ConcertRepository(ConcertsDbContext context)
